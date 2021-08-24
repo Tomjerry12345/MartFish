@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MartFish</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="daftar">Daftar</string>
+    <string name="belum_punya_akun">Belum punya akun ?</string>
+    <string name="sudah_punya_akun">Sudah punya akun ?</string>
+    <string name="jenis_akun">Jenis Akun</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="kecamatan">Kecamatan</string>
+    <string name="alamat">Alamat</string>
+    <string name="kelurahan">Kelurahan</string>
+    <string name="home">Home</string>
+    <string name="my_produk">My Produk</string>
+    <string name="pesanan">Pesanan</string>
+    <string name="transaksi">Transaksi</string>
+</resources>

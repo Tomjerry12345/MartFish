@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nelayan_graph"
+    app:startDestination="@id/homeNelayanFragment">
+
+    <fragment
+        android:id="@+id/homeNelayanFragment"
+        android:name="com.martfish.ui.nelayan.home.HomeNelayanFragment"
+        android:label="Home"
+        tools:layout="@layout/home_nelayan_fragment"/>
+    <fragment
+        android:id="@+id/myProdukNelayanFragment"
+        android:name="com.martfish.ui.nelayan.myProduk.MyProdukNelayanFragment"
+        android:label="MyProduk"
+        tools:layout="@layout/my_produk_nelayan_fragment"/>
+    <fragment
+        android:id="@+id/pesananNelayanFragment"
+        android:name="com.martfish.ui.nelayan.pesanan.PesananNelayanFragment"
+        android:label="Pesanan"
+        tools:layout="@layout/pesanan_nelayan_fragment"/>
+    <fragment
+        android:id="@+id/transaksiNelayanFragment"
+        android:name="com.martfish.ui.nelayan.transaksi.TransaksiNelayanFragment"
+        android:label="Transaksi"
+        tools:layout="@layout/transaksi_nelayan_fragment"/>
+</navigation>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pembeli_graph"
+    app:startDestination="@id/homePembeliFragment">
+
+    <fragment
+        android:id="@+id/homePembeliFragment"
+        android:name="com.martfish.ui.pembeli.home.HomePembeliFragment"
+        android:label="Home"
+        tools:layout="@layout/home_pembeli_fragment"/>
+    <fragment
+        android:id="@+id/pesananPembeliFragment"
+        android:name="com.martfish.ui.pembeli.pesanan.PesananPembeliFragment"
+        android:label="Pesanan"
+        tools:layout="@layout/pesanan_pembeli_fragment"/>
+</navigation>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeNelayanFragment"
+        android:title="@string/home"
+        android:enabled="true" />
+
+    <item
+        android:id="@+id/myProdukNelayanFragment"
+        android:title="@string/my_produk"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/pesananNelayanFragment"
+        android:title="@string/pesanan"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/transaksiNelayanFragment"
+        android:title="@string/transaksi"
+        android:enabled="true"/>
+</menu>
