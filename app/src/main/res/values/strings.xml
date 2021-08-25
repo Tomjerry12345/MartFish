@@ -16,4 +16,16 @@
     <string name="my_produk">My Produk</string>
     <string name="pesanan">Pesanan</string>
     <string name="transaksi">Transaksi</string>
+    <string name="kategori">Kategori</string>
+    <string name="examples_title_produk">Ikan 1</string>
+    <string name="examples_harga">Rp. 10000</string>
+    <string name="exaples_lokasi">Gowa</string>
+    <string name="detail">Detail</string>
+    <string name="nama_produk">Nama Produk</string>
+    <string name="harga">Harga</string>
+    <string name="stok">Stok</string>
+    <string name="tambah_produk">Tambah Produk</string>
+    <string name="edit_produk">Edit Produk</string>
+    <string name="tambah_foto">Tambah Foto</string>
+    <string name="edit_foto">Edit Foto</string>
 </resources>

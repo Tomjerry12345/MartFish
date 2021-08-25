@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "437265894955",
+    "project_id": "martfish-1f3ef",
+    "storage_bucket": "martfish-1f3ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437265894955:android:703fab679f850b8272e46e",
+        "android_client_info": {
+          "package_name": "com.martfish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437265894955-0btj6t8h1odd31a4mm2aejc11hg0b04a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.martfish",
+            "certificate_hash": "550b80792049d2479590dea7b3e0d3db06452e35"
+          }
+        },
+        {
+          "client_id": "437265894955-e0k2a3u17afm8sikhdh26e6vild9dfqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1OerZnIBr44C0NG86RZ1B3TEtcz5nU_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437265894955-e0k2a3u17afm8sikhdh26e6vild9dfqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

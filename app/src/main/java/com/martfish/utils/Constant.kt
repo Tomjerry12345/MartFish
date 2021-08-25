@@ -1,6 +1,9 @@
 package com.martfish.utils
 
 object Constant {
-    val reffNelayan = "nelayan"
-    val reffPembeli = "nelayan"
+    val reffNelayan = "Nelayan"
+    val reffPembeli = "Pelayan"
+
+    // Saved Data Key
+    val users = "users"
 }
