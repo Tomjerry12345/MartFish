@@ -47,7 +47,7 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
                         showLogAssert("succes", "${getUsername.data}")
 
                         if (data.isNotEmpty()) {
-                            val getResponse = firestoreDatabase.saveDataReference("users", users)
+                            val getResponse = firestoreDatabase.saveDataReference("users", users, "Pendaftaran berhasil")
                             showLogAssert("getResponse", "$getResponse")
                             response.postValue(getResponse)
                             dialog.dismiss()

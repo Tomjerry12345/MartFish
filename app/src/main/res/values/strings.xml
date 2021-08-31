@@ -28,4 +28,7 @@
     <string name="edit_produk">Edit Produk</string>
     <string name="tambah_foto">Tambah Foto</string>
     <string name="edit_foto">Edit Foto</string>
+    <string name="stok_tersedia_5">Stok tersedia: 5</string>
+    <string name="detail_lokasi">Detail Lokasi</string>
+    <string name="examples_name_users">Nama Pembeli</string>
 </resources>

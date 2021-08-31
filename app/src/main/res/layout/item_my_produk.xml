@@ -83,18 +83,32 @@
             android:textSize="10sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/icLocation"
-            app:layout_constraintTop_toTopOf="@+id/icLocation"
-            tools:ignore="SmallSp" />
+            app:layout_constraintTop_toTopOf="@+id/icLocation" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbEditProduk"
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginTop="8dp"
-            android:text="@string/detail"
+            android:text="@string/edit_produk"
             android:textSize="8sp"
+            app:backgroundTint="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mtvLokasi"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbDeleteProduk"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:text="Hapus Produk"
+            android:textSize="8sp"
+            app:backgroundTint="@color/red_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mbEditProduk"
             tools:ignore="SmallSp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

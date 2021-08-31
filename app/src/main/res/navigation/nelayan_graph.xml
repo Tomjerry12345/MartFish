@@ -14,7 +14,14 @@
         android:id="@+id/myProdukNelayanFragment"
         android:name="com.martfish.ui.nelayan.myProduk.MyProdukNelayanFragment"
         android:label="MyProduk"
-        tools:layout="@layout/my_produk_nelayan_fragment"/>
+        tools:layout="@layout/my_produk_nelayan_fragment">
+        <action
+            android:id="@+id/action_myProdukNelayanFragment_to_tambahProdukNelayanFragment"
+            app:destination="@id/tambahProdukNelayanFragment" />
+        <action
+            android:id="@+id/action_myProdukNelayanFragment_self"
+            app:destination="@id/myProdukNelayanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pesananNelayanFragment"
         android:name="com.martfish.ui.nelayan.pesanan.PesananNelayanFragment"
@@ -25,4 +32,13 @@
         android:name="com.martfish.ui.nelayan.transaksi.TransaksiNelayanFragment"
         android:label="Transaksi"
         tools:layout="@layout/transaksi_nelayan_fragment"/>
+    <fragment
+        android:id="@+id/tambahProdukNelayanFragment"
+        android:name="com.martfish.ui.nelayan.myProduk.tambahProduk.TambahProdukNelayanFragment"
+        android:label="TambahProdukNelayanFragment"
+        tools:layout="@layout/tambah_produk_nelayan_fragment">
+        <action
+            android:id="@+id/action_tambahProdukNelayanFragment_to_myProdukNelayanFragment"
+            app:destination="@id/myProdukNelayanFragment" />
+    </fragment>
 </navigation>

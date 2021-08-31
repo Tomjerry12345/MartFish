@@ -8,13 +8,11 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.martfish.R
 import com.martfish.databinding.HomeNelayanFragmentBinding
 import com.martfish.model.ModelProduk
-import com.martfish.ui.nelayan.home.adapter.ProdukAdapter
+import com.martfish.ui.adapter.ProdukAdapter
 import com.martfish.utils.showLogAssert
-import com.martfish.utils.showSnackbar
 
 class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
 
@@ -28,18 +26,18 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        val listProduk = listOf(
-            ModelProduk("", "", 0, "", 0f),
-            ModelProduk("", "", 0, "", 0f),
-            ModelProduk("", "", 0, "", 0f),
-        )
+//        val listProduk = listOf(
+//            ModelProduk("", "Ikan 1", 200000, "Kecamatan 1", 50f),
+//            ModelProduk("", "Ikan 2", 100000, "", 30f),
+//            ModelProduk("", "Ikan 3", 300000, "", 40f),
+//        )
 
-        val produkAdapter = ProdukAdapter(listProduk)
+//        val produkAdapter = ProdukAdapter(listProduk)
 
-        binding.rvListProduk.apply {
-            layoutManager = GridLayoutManager(requireActivity(), 2)
-            adapter = produkAdapter
-        }
+//        binding.rvListProduk.apply {
+//            layoutManager = GridLayoutManager(requireActivity(), 2)
+//            adapter = produkAdapter
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

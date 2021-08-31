@@ -1,4 +1,4 @@
-package com.martfish.ui.nelayan.home.adapter
+package com.martfish.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -43,8 +43,8 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .into(imgProduk);
         mtvTitle.text = produk.nama
         mtvHarga.text = "Rp. ${produk.harga}"
-        mtvLokasi.text = produk.lokasi
-        ratingProduk.rating = produk.rating
+//        mtvLokasi.text = produk.lokasi
+//        ratingProduk.rating = produk.rating
 
     }
 }

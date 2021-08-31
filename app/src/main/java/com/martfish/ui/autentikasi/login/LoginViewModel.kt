@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObjects
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.model.ModelUsers
@@ -46,8 +48,8 @@ class LoginViewModel(
         viewModelScope.launch {
             when (val response1 = firestoreDatabase.getReferenceByQuery("users", "username", username)) {
                 is Response.Changed -> {
-                    val data: ArrayList<ModelUsers> = response1.data as ArrayList<ModelUsers>
-                    showLogAssert("succes", "${response1.data}")
+                    val myResponse = response1.data as QuerySnapshot
+                    val data: List<ModelUsers> = myResponse.toObjects()
 
                     if (data.isNotEmpty()) {
                         if (data[0].password == password) {

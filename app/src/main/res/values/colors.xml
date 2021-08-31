@@ -10,4 +10,6 @@
 
     <color name="blue_light">#77B8DC</color>
     <color name="blue_dark">#4480A1</color>
+    <color name="green_light">#75D8A8</color>
+    <color name="red_light">#B9514B</color>
 </resources>
