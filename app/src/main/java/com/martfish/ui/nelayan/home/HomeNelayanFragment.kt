@@ -1,5 +1,6 @@
 package com.martfish.ui.nelayan.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -8,36 +9,33 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObjects
 import com.martfish.R
+import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.HomeNelayanFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.ui.adapter.ProdukAdapter
+import com.martfish.ui.nelayan.myProduk.adapter.MyProdukAdapter
+import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
+import com.martfish.utils.showSnackbar
 
 class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
 
+    private val viewModel: HomeNelayanViewModel by viewModels {
+        HomeNelayanViewModel.Factory(FirestoreDatabase())
+    }
 
-    private val viewModel: HomeNelayanViewModel by viewModels()
+    private lateinit var binding: HomeNelayanFragmentBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        val binding = HomeNelayanFragmentBinding.bind(view)
+        binding = HomeNelayanFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-
-//        val listProduk = listOf(
-//            ModelProduk("", "Ikan 1", 200000, "Kecamatan 1", 50f),
-//            ModelProduk("", "Ikan 2", 100000, "", 30f),
-//            ModelProduk("", "Ikan 3", 300000, "", 40f),
-//        )
-
-//        val produkAdapter = ProdukAdapter(listProduk)
-
-//        binding.rvListProduk.apply {
-//            layoutManager = GridLayoutManager(requireActivity(), 2)
-//            adapter = produkAdapter
-//        }
+        getAllDataProduk(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -58,6 +56,30 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
                 return true
             }
 
+        })
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getAllDataProduk(view: View) {
+        viewModel.data.observe(viewLifecycleOwner, { result ->
+            when(result) {
+                is Response.Success -> {}
+                is Response.Error -> {
+                    showLogAssert("error", result.error)
+                    showSnackbar(view, result.error, "error")
+                }
+                is Response.Changed -> {
+                    val data = result.data as QuerySnapshot
+                    showLogAssert("data", "$data")
+                    val dataProduk: List<ModelProduk> = data.toObjects()
+                    val produkAdapter = ProdukAdapter(dataProduk)
+                    binding.rvListProduk.apply {
+                        layoutManager = GridLayoutManager(requireActivity(), 2)
+                        adapter = produkAdapter
+                    }
+                    produkAdapter.notifyDataSetChanged()
+                }
+            }
         })
     }
 

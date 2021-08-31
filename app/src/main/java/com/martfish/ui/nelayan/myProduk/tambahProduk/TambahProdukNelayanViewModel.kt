@@ -13,6 +13,7 @@ import com.martfish.utils.*
 import kotlinx.coroutines.launch
 
 class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatabase) : ViewModel() {
+
     val imageUri = MutableLiveData<Uri>()
     val namaProduk = MutableLiveData<String>()
     val hargaProduk = MutableLiveData<String>()
@@ -32,20 +33,15 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
         dialog = showDialog(view.context, "Sedang di proses...")
         dialog.show()
         try {
+            val imageProduk = imageUri.value ?: throw Exception("Image tidak boleh kosong")
             val namaProduk = namaProduk.value ?: throw Exception("Nama Produk tidak boleh kosong")
             val hargaProduk = hargaProduk.value ?: throw Exception("Harga tidak boleh kosong")
             val stok = stok.value ?: throw Exception("Stok tidak boleh kosong")
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
 
             viewModelScope.launch {
-                val getUrlImage = imageUri.value?.let {
-                    firestoreDatabase.uploadPhoto(
-                        it,
-                        System.currentTimeMillis().toString()
-                    )
-                }
 
-                when (getUrlImage) {
+                when (val getUrlImage = firestoreDatabase.uploadPhoto(imageProduk, "images/produk/")) {
                     is Response.Changed -> {
                         val urlImage = getUrlImage.data as String
                         val produk = ModelProduk(
@@ -89,7 +85,6 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
         when (val getResponse =
             firestoreDatabase.saveDataReference("produk", produk, "Tambah Produk Berhasil")) {
             is Response.Changed -> {
-                showLogAssert("id", "${getResponse.data}")
                 response.value = firestoreDatabase.updateReferenceCollection1(
                     "produk",
                     getResponse.data.toString(),

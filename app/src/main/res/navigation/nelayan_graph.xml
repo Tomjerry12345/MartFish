@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nelayan_graph"
-    app:startDestination="@id/homeNelayanFragment">
+    app:startDestination="@id/detailProdukFragment">
 
     <fragment
         android:id="@+id/homeNelayanFragment"
         android:name="com.martfish.ui.nelayan.home.HomeNelayanFragment"
         android:label="Home"
-        tools:layout="@layout/home_nelayan_fragment"/>
+        tools:layout="@layout/home_nelayan_fragment">
+        <action
+            android:id="@+id/action_homeNelayanFragment_to_detailProdukFragment"
+            app:destination="@id/detailProdukFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myProdukNelayanFragment"
         android:name="com.martfish.ui.nelayan.myProduk.MyProdukNelayanFragment"
@@ -21,6 +25,9 @@
         <action
             android:id="@+id/action_myProdukNelayanFragment_self"
             app:destination="@id/myProdukNelayanFragment" />
+        <action
+            android:id="@+id/action_myProdukNelayanFragment_to_editProdukNelayanFragment"
+            app:destination="@id/editProdukNelayanFragment" />
     </fragment>
     <fragment
         android:id="@+id/pesananNelayanFragment"
@@ -35,10 +42,24 @@
     <fragment
         android:id="@+id/tambahProdukNelayanFragment"
         android:name="com.martfish.ui.nelayan.myProduk.tambahProduk.TambahProdukNelayanFragment"
-        android:label="TambahProdukNelayanFragment"
+        android:label="Tambah Produk"
         tools:layout="@layout/tambah_produk_nelayan_fragment">
         <action
             android:id="@+id/action_tambahProdukNelayanFragment_to_myProdukNelayanFragment"
             app:destination="@id/myProdukNelayanFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editProdukNelayanFragment"
+        android:name="com.martfish.ui.nelayan.myProduk.editProduk.EditProdukNelayanFragment"
+        android:label="Edit Produk"
+        tools:layout="@layout/edit_produk_nelayan_fragment">
+        <action
+            android:id="@+id/action_editProdukNelayanFragment_to_myProdukNelayanFragment"
+            app:destination="@id/myProdukNelayanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProdukFragment"
+        android:name="com.martfish.ui.fragment.detail.DetailProdukFragment"
+        android:label="Detail Produk"
+        tools:layout="@layout/detail_produk_fragment"/>
 </navigation>

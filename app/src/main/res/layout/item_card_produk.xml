@@ -87,6 +87,7 @@
             tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbDetail"
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginTop="8dp"

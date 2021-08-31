@@ -1,5 +1,7 @@
 package com.martfish.model
 
+import java.io.Serializable
+
 data class ModelProduk(
     val idProduk: String? = null,
     val image: String? = null,
@@ -13,4 +15,4 @@ data class ModelProduk(
     val rating: Float? = null,
     val namaPenjual: String? = null,
     val usernamePenjual: String? = null
-)
+): Serializable

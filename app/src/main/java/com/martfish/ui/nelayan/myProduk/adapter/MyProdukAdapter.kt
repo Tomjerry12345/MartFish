@@ -1,11 +1,14 @@
 package com.martfish.ui.nelayan.myProduk.adapter
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRatingBar
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
@@ -48,14 +51,18 @@ class MyProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .load(produk.image)
             .centerCrop()
             .placeholder(R.mipmap.ic_image_placeholder)
-            .into(imgProduk);
+            .into(imgProduk)
         mtvTitle.text = produk.nama
         mtvHarga.text = "Rp. ${produk.harga}"
 //        mtvLokasi.text = produk.lokasi
 //        ratingProduk.rating = produk.rating
 
+        mbEdit.setOnClickListener {
+            val bundleProduk = bundleOf("produk" to produk)
+            it.findNavController().navigate(R.id.action_myProdukNelayanFragment_to_editProdukNelayanFragment, bundleProduk)
+        }
+
         mbDelete.setOnClickListener {
-            showLogAssert("produk", "$produk")
             viewModel.btnDelete(produk.idProduk)
         }
 

@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.findNavController
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObjects
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.model.ModelUsers
@@ -43,11 +45,16 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
             viewModelScope.launch {
                 when (val getUsername = firestoreDatabase.getReferenceByQuery("users", "username", username)) {
                     is Response.Changed -> {
-                        val data: ArrayList<ModelUsers> = getUsername.data as ArrayList<ModelUsers>
-                        showLogAssert("succes", "${getUsername.data}")
+                        val responseQuery = getUsername.data as QuerySnapshot
+                        val data: List<ModelUsers> = responseQuery.toObjects()
+                        showLogAssert("succes", "$data")
 
                         if (data.isNotEmpty()) {
-                            val getResponse = firestoreDatabase.saveDataReference("users", users, "Pendaftaran berhasil")
+                            val getResponse = firestoreDatabase.saveDataReference(
+                                "users",
+                                users,
+                                "Pendaftaran berhasil"
+                            )
                             showLogAssert("getResponse", "$getResponse")
                             response.postValue(getResponse)
                             dialog.dismiss()

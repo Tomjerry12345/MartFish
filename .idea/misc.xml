@@ -5,10 +5,12 @@
       <map>
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2890625" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.15885416666666666" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_fragment.xml" value="0.6661466458658346" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/chat_fragment.xml" value="0.14322916666666666" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/data_pembeli_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_fragment.xml" value="0.577639751552795" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_nelayan_fragment.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/dropdown_list.xml" value="0.14990942028985507" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/edit_produk_nelayan_fragment.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/edit_produk_nelayan_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/home_nelayan_fragment.xml" value="0.14" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_card_produk.xml" value="0.25" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_komentar.xml" value="0.46345811051693403" />

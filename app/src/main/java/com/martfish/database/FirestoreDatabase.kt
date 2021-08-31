@@ -43,7 +43,6 @@ class FirestoreDatabase {
     }
 
     suspend fun getReferenceByQuery(reference: String, query: String, value: Any): Response {
-        showLogAssert("value", "$value")
         return try {
             val data = dbFireStore.collection(reference)
                 .whereEqualTo(query, value)
@@ -59,7 +58,6 @@ class FirestoreDatabase {
     }
 
     suspend fun deleteReferenceCollection1(reference: String, colection: String): Response {
-        showLogAssert("value", colection)
         return try {
              dbFireStore.collection(reference)
                 .document(colection)
@@ -74,13 +72,19 @@ class FirestoreDatabase {
         }
     }
 
-    suspend fun updateReferenceCollection1(reference: String, colection: String, update: String, data: Any): Response {
-        showLogAssert("value", colection)
+    suspend fun updateReferenceCollection1(reference: String, colection: String, update: String?, data: Any): Response {
         return try {
-            dbFireStore.collection(reference)
-                .document(colection)
-                .update(update, data)
-                .await()
+            if (update != null) {
+                dbFireStore.collection(reference)
+                    .document(colection)
+                    .update(update, data)
+                    .await()
+            } else {
+                dbFireStore.collection(reference)
+                    .document(colection)
+                    .set(data)
+                    .await()
+            }
 
             Response.Success("Update Data Berhasil")
 
@@ -89,8 +93,6 @@ class FirestoreDatabase {
             Response.Error("${e.message}")
         }
     }
-
-
 
     fun getReferenceByQueryListener(reference: String, query: String, value: Any): LiveData<Response> {
         val data = MutableLiveData<Response>()
@@ -125,13 +127,10 @@ class FirestoreDatabase {
         }
     }
 
-    suspend fun uploadPhoto(file: Uri, name: String): Response {
-        showLogAssert("file", "$file")
-        showLogAssert("name", name)
-
+    suspend fun uploadPhoto(file: Uri, path: String): Response {
         return try {
             val storageRef = storage.reference
-            val fileRef = storageRef.child("images/produk/${file.lastPathSegment}")
+            val fileRef = storageRef.child("$path${file.lastPathSegment}")
             val urlTask = fileRef.putFile(file)
 
             val response = urlTask.await().storage.downloadUrl.await().toString()

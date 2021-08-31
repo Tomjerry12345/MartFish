@@ -13,32 +13,32 @@
         android:padding="8dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView9"
+            android:id="@+id/mtvNama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/examples_name_users"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView3"
+            android:id="@+id/imgImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/images"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView9"
+            app:layout_constraintTop_toBottomOf="@+id/mtvNama"
             tools:layout_editor_absoluteX="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView10"
+            android:id="@+id/mtvKomentar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Komentar pembeli"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3" />
+            app:layout_constraintTop_toBottomOf="@+id/imgImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
