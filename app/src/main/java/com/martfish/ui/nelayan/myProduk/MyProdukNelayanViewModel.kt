@@ -25,7 +25,7 @@ class MyProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatabase)
     fun btnDelete(idProduk: String?) {
         showLogAssert("terklik btnDelete", "$idProduk")
         viewModelScope.launch {
-            val result = firestoreDatabase.deleteReferenceCollection1("produk", idProduk!!)
+            val result = firestoreDatabase.deleteReferenceCollectionOne("produk", idProduk!!)
             response.value = result
         }
     }

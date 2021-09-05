@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgProduk"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="#000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvNamaPemesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama pemesan"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/imgProduk"
+            app:layout_constraintTop_toTopOf="@+id/imgProduk" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvNamaProduk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Nama produk"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvNamaPemesan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvJumlahPesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Jumlah pesan"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvNamaProduk" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Harga"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvJumlahPesan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvJumlahBayar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Jumlah Bayar"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvHarga" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icLocation"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/mtvJumlahBayar"
+            app:layout_constraintTop_toBottomOf="@id/mtvJumlahBayar"
+            app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvKecamatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kecamatan: samata"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/icLocation"
+            app:layout_constraintTop_toTopOf="@+id/icLocation" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvKelurahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Kelurahan: turungan beru"
+            app:layout_constraintStart_toStartOf="@+id/mtvKecamatan"
+            app:layout_constraintTop_toBottomOf="@+id/mtvKecamatan" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Alamat: cambaya"
+            app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
+            app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbPesan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pesan"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imgProduk"
+            app:layout_constraintStart_toStartOf="@+id/imgProduk"
+            app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbPesananTerkirim"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pesanan Terkirim"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imgProduk"
+            app:layout_constraintStart_toStartOf="@+id/imgProduk"
+            app:layout_constraintTop_toBottomOf="@+id/mbPesan" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

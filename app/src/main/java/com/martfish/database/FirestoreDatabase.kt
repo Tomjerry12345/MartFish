@@ -3,24 +3,12 @@ package com.martfish.database
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.tasks.Continuation
-import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageMetadata
-import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
-import com.martfish.model.ModelProduk
-import com.martfish.model.ModelUsers
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class FirestoreDatabase {
 
@@ -57,9 +45,31 @@ class FirestoreDatabase {
         }
     }
 
-    suspend fun deleteReferenceCollection1(reference: String, colection: String): Response {
+    suspend fun getReferenceByTwoQuery(
+        reference: String,
+        query: String,
+        value: Any,
+        query1: String,
+        value1: Any
+    ): Response {
         return try {
-             dbFireStore.collection(reference)
+            val data = dbFireStore.collection(reference)
+                .whereEqualTo(query, value)
+                .whereEqualTo(query1, value1)
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun deleteReferenceCollectionOne(reference: String, colection: String): Response {
+        return try {
+            dbFireStore.collection(reference)
                 .document(colection)
                 .delete()
                 .await()
@@ -72,7 +82,12 @@ class FirestoreDatabase {
         }
     }
 
-    suspend fun updateReferenceCollection1(reference: String, colection: String, update: String?, data: Any): Response {
+    suspend fun updateReferenceCollectionOne(
+        reference: String,
+        colection: String,
+        update: String?,
+        data: Any
+    ): Response {
         return try {
             if (update != null) {
                 dbFireStore.collection(reference)

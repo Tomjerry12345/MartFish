@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatRatingBar
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.martfish.R
 import com.martfish.model.ModelProduk
+import com.martfish.utils.Constant
 
 class ProdukAdapter(private val produk: List<ModelProduk>) : RecyclerView.Adapter<ProdukHolder>() {
 
@@ -49,7 +51,8 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
         ratingProduk.rating = produk.rating!!
 
         mbDetail.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment)
+            val bundle = bundleOf(Constant.produkBundle to produk)
+            it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment, bundle)
         }
     }
 }

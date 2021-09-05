@@ -47,7 +47,9 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
                     showLogAssert("error", result.error)
                     showSnackbar(view, result.error, "error")
                 }
-                is Response.Changed -> TODO()
+                is Response.Changed -> {
+                    view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                }
             }
         })
     }

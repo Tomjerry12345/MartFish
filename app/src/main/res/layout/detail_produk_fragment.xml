@@ -25,7 +25,7 @@
                 android:id="@+id/materialTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/examples_title_produk"
+                android:text="@{viewModel.namaProduk}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
                 android:id="@+id/materialTextView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Stok tersedia: 5"
+                android:text="@{`Stok tersedia: ` + viewModel.stok}"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ratingProduk" />
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/examples_harga"
+                android:text="@{viewModel.hargaProduk}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/kecamatan"
+                android:text="@{viewModel.kecamatan}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView5"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView5" />
@@ -109,7 +109,7 @@
                 android:id="@+id/materialTextView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/kelurahan"
+                android:text="@{viewModel.kelurahan}"
                 android:textSize="18sp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView5"
@@ -119,13 +119,13 @@
                 android:id="@+id/materialTextView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/alamat"
+                android:text="@{viewModel.alamat}"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView5"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView7" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView2"
+                android:id="@+id/imageProduk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -134,7 +134,7 @@
                 tools:layout_editor_absoluteX="8dp" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton"
+                android:id="@+id/mbKomentar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -142,7 +142,7 @@
                 android:textSize="12sp"
                 android:text="Beri Komentar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/imageProduk" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/materialTextView10"
@@ -151,8 +151,8 @@
                 android:text="Komentar"
                 android:layout_marginTop="8dp"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/materialButton"
-                app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+                app:layout_constraintStart_toStartOf="@+id/mbKomentar"
+                app:layout_constraintTop_toBottomOf="@+id/mbKomentar" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvKomentar"

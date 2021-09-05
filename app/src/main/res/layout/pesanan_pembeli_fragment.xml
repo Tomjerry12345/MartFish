@@ -14,10 +14,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.pembeli.pesanan.PesananPembeliFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListPemesanan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            tools:listitem="@layout/item_pesanan"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

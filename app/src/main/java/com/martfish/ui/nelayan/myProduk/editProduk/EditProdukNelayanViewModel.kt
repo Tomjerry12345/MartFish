@@ -60,7 +60,7 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
                         )
 
                         response.value = produk.value?.idProduk?.let {
-                            firestoreDatabase.updateReferenceCollection1(
+                            firestoreDatabase.updateReferenceCollectionOne(
                                 "produk",
                                 it, null, produk1
                             )

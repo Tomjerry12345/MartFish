@@ -35,7 +35,7 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
         binding = HomeNelayanFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        getAllDataProduk(view)
+        getAllDataProduk()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,14 +59,13 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
         })
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun getAllDataProduk(view: View) {
+    private fun getAllDataProduk() {
         viewModel.data.observe(viewLifecycleOwner, { result ->
             when(result) {
                 is Response.Success -> {}
                 is Response.Error -> {
                     showLogAssert("error", result.error)
-                    showSnackbar(view, result.error, "error")
+                    showSnackbar(requireView(), result.error, "error")
                 }
                 is Response.Changed -> {
                     val data = result.data as QuerySnapshot
@@ -77,7 +76,6 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
                         layoutManager = GridLayoutManager(requireActivity(), 2)
                         adapter = produkAdapter
                     }
-                    produkAdapter.notifyDataSetChanged()
                 }
             }
         })

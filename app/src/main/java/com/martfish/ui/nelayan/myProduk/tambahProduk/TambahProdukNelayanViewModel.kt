@@ -40,7 +40,6 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
 
             viewModelScope.launch {
-
                 when (val getUrlImage = firestoreDatabase.uploadPhoto(imageProduk, "images/produk/")) {
                     is Response.Changed -> {
                         val urlImage = getUrlImage.data as String
@@ -85,7 +84,7 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
         when (val getResponse =
             firestoreDatabase.saveDataReference("produk", produk, "Tambah Produk Berhasil")) {
             is Response.Changed -> {
-                response.value = firestoreDatabase.updateReferenceCollection1(
+                response.value = firestoreDatabase.updateReferenceCollectionOne(
                     "produk",
                     getResponse.data.toString(),
                     "idProduk",

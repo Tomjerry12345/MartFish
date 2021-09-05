@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nelayan_graph"
-    app:startDestination="@id/detailProdukFragment">
+    app:startDestination="@id/homeNelayanFragment">
 
     <fragment
         android:id="@+id/homeNelayanFragment"
@@ -33,7 +33,11 @@
         android:id="@+id/pesananNelayanFragment"
         android:name="com.martfish.ui.nelayan.pesanan.PesananNelayanFragment"
         android:label="Pesanan"
-        tools:layout="@layout/pesanan_nelayan_fragment"/>
+        tools:layout="@layout/pesanan_nelayan_fragment">
+        <action
+            android:id="@+id/action_pesananNelayanFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/transaksiNelayanFragment"
         android:name="com.martfish.ui.nelayan.transaksi.TransaksiNelayanFragment"
@@ -61,5 +65,26 @@
         android:id="@+id/detailProdukFragment"
         android:name="com.martfish.ui.fragment.detail.DetailProdukFragment"
         android:label="Detail Produk"
-        tools:layout="@layout/detail_produk_fragment"/>
+        tools:layout="@layout/detail_produk_fragment">
+        <action
+            android:id="@+id/action_detailProdukFragment_to_dataPembeliFragment"
+            app:destination="@id/dataPembeliFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataPembeliFragment"
+        android:name="com.martfish.ui.fragment.dataPembeli.DataPembeliFragment"
+        android:label="Data Pembeli"
+        tools:layout="@layout/data_pembeli_fragment"/>
+    <fragment
+        android:id="@+id/belumTerkirimFragment"
+        android:name="com.martfish.ui.nelayan.pesanan.belumTerkirim.BelumTerkirimFragment"
+        android:label="BelumTerkirimFragment" >
+        <action
+            android:id="@+id/action_belumTerkirimFragment_to_pesananNelayanFragment"
+            app:destination="@id/pesananNelayanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.martfish.ui.fragment.chat.ChatFragment"
+        android:label="ChatFragment" />
 </navigation>

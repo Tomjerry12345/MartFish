@@ -47,9 +47,9 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
                     is Response.Changed -> {
                         val responseQuery = getUsername.data as QuerySnapshot
                         val data: List<ModelUsers> = responseQuery.toObjects()
-                        showLogAssert("succes", "$data")
+                        showLogAssert("data", "$data")
 
-                        if (data.isNotEmpty()) {
+                        if (data.isEmpty()) {
                             val getResponse = firestoreDatabase.saveDataReference(
                                 "users",
                                 users,

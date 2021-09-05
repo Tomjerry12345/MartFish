@@ -11,14 +11,22 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/blue_dark</item>
-        <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_light</item>
+        <item name="colorPrimaryVariant">@color/blue_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
     <style name="CustomAlertDialog" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogSpotColor">@color/blue_light</item>
         <item name="DialogSpotCount">4</item>
     </style>
-    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar" >
+
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:numStars">5</item>
         <item name="android:stepSize">1.0</item>
         <item name="android:layout_width">wrap_content</item>
@@ -27,4 +35,8 @@
         <item name="android:layout_marginLeft">4dp</item>
         <item name="android:layout_marginTop">4dp</item>
     </style>
+
+    <style name="Theme.MartFish.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MartFish.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
