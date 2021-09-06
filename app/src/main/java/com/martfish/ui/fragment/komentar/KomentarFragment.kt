@@ -9,6 +9,7 @@ import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.KomentarFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.utils.Constant
+import com.martfish.utils.SavedData
 import com.martfish.utils.showLogAssert
 
 class KomentarFragment : Fragment(R.layout.komentar_fragment) {
@@ -26,11 +27,12 @@ class KomentarFragment : Fragment(R.layout.komentar_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        val argument = arguments?.getSerializable(Constant.produkBundle) as ModelProduk
+        val argument = SavedData.getDataProduk()
         viewModel.modelProduk = argument
 
         binding.acRatingBar.setOnRatingBarChangeListener { ratingBar, fl, b ->
             showLogAssert("rating value", "$fl")
+            viewModel.rating = fl.toDouble()
         }
     }
 

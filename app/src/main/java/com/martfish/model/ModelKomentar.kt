@@ -7,4 +7,5 @@ data class ModelKomentar(
     val image: String? = null,
     val nama: String? = null,
     val komentar: String? = null,
+    val rating: Double? = null
 ): Serializable

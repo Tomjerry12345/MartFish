@@ -36,7 +36,7 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        argument = arguments?.getSerializable(Constant.produkBundle) as ModelProduk
+        argument = SavedData.getDataProduk()!!
 
         viewModel.namaPenerima.value = dataUsers?.namaLengkap
         viewModel.kecamatan.value = dataUsers?.kecamatan

@@ -35,6 +35,7 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
     private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
     private val mtvLokasi = view.findViewById<MaterialTextView>(R.id.mtvLokasi)
+    private val mtvRating = view.findViewById<MaterialTextView>(R.id.mtvRating)
     private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
     private val mbDetail = view.findViewById<MaterialButton>(R.id.mbDetail)
 
@@ -51,15 +52,17 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvTitle.text = produk.nama
         mtvHarga.text = "Rp. ${produk.harga}"
         mtvLokasi.text = produk.kecamatan
+        mtvRating.text = "(${produk.rating!!})"
         ratingProduk.rating = produk.rating!!
 
         mbDetail.setOnClickListener {
-            val bundle = bundleOf(Constant.produkBundle to produk)
 
             if (dataUsers?.jenisAkun == "Nelayan")
-                it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment, bundle)
+                it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment)
             else
-                it.findNavController().navigate(R.id.action_homePembeliFragment_to_detailProdukFragment2, bundle)
+                it.findNavController().navigate(R.id.action_homePembeliFragment_to_detailProdukFragment2)
+
+            SavedData.saveDataProduk(produk)
         }
     }
 }

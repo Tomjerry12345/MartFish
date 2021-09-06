@@ -33,12 +33,12 @@ class KomentarHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvKomentar = view.findViewById<MaterialTextView>(R.id.mtvKomentar)
 
     fun bindKomentar(komentar: ModelKomentar) {
-        Glide
-            .with(view.context)
-            .load(komentar.image)
-            .centerCrop()
-            .placeholder(R.mipmap.ic_image_placeholder)
-            .into(imgProduk);
+        if (komentar.image != null)
+            Glide
+                .with(view.context)
+                .load(komentar.image)
+                .centerCrop()
+                .into(imgProduk)
         mtvNama.text = komentar.nama
         mtvKomentar.text = komentar.komentar
     }

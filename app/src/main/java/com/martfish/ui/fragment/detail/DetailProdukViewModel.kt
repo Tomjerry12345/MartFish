@@ -1,13 +1,8 @@
 package com.martfish.ui.fragment.detail
 
-import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.*
-import androidx.navigation.findNavController
-import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.model.ModelProduk
-import com.martfish.utils.Constant
 import com.martfish.utils.Response
 
 class DetailProdukViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
@@ -18,11 +13,12 @@ class DetailProdukViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMode
     val kelurahan = MutableLiveData<String>()
     val alamat = MutableLiveData<String>()
     val stok = MutableLiveData<String>()
+    val rating = MutableLiveData<String>()
 
     var modelProduk: ModelProduk? = null
 
     val getKomentar: LiveData<Response> = liveData {
-        val response = firestoreDatabase.getReferenceDocumentOne(
+        val response = firestoreDatabase.getReferenceDocumentOneCollection(
             "komentar",
             modelProduk?.idProduk.toString()
         )

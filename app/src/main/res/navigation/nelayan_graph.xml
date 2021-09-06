@@ -95,5 +95,11 @@
     <fragment
         android:id="@+id/komentarFragment"
         android:name="com.martfish.ui.fragment.komentar.KomentarFragment"
-        android:label="KomentarFragment" />
+        android:label="KomentarFragment" >
+        <action
+            android:id="@+id/action_komentarFragment_to_detailProdukFragment"
+            app:destination="@id/detailProdukFragment"
+            app:popUpTo="@id/komentarFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

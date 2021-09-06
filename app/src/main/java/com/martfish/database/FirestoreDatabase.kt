@@ -78,7 +78,7 @@ class FirestoreDatabase {
         }
     }
 
-    suspend fun getReferenceDocumentOne(
+    suspend fun getReferenceDocumentOneCollection(
         reference: String,
         document: String
     ): Response {
@@ -87,6 +87,25 @@ class FirestoreDatabase {
                 .collection(reference)
                 .document(document)
                 .collection("komentar")
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun getReferenceDocumentOne(
+        reference: String,
+        document: String
+    ): Response {
+        return try {
+            val data = dbFireStore
+                .collection(reference)
+                .document(document)
                 .get()
                 .await()
 

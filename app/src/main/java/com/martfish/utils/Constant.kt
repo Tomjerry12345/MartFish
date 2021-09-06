@@ -8,6 +8,7 @@ object Constant {
     // Saved Data Key
     val users = "users"
     val pemesanan = "pemesanan"
+    val produk = "produk"
 
     // key parameters bundle
     val produkBundle = "produkBundle"

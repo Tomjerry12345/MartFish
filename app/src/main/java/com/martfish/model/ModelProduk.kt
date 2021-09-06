@@ -12,7 +12,7 @@ data class ModelProduk(
     val kecamatan: String? = null,
     val kelurahan: String? = null,
     val alamat: String? = null,
-    val rating: Float? = null,
+    var rating: Float? = null,
     val namaPenjual: String? = null,
     val usernamePenjual: String? = null
 ): Serializable

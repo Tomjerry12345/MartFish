@@ -51,9 +51,9 @@
             android:layout_height="wrap_content"
             android:text="@string/stok_tersedia_5"
             android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/mtvTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/mtvTitle"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/icLocation"
+            app:layout_constraintTop_toBottomOf="@+id/mtvLokasi"
             tools:ignore="SmallSp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -89,13 +89,13 @@
             android:id="@+id/mbEditProduk"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_marginTop="8dp"
             android:text="@string/edit_produk"
             android:textSize="8sp"
+            android:layout_marginTop="16dp"
             app:backgroundTint="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvLokasi"
+            app:layout_constraintTop_toBottomOf="@+id/mtvStok"
             tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton

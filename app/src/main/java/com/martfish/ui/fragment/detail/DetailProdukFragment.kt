@@ -34,28 +34,28 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val argument = arguments?.getSerializable(Constant.produkBundle) as ModelProduk
+        val argument = SavedData.getDataProduk()
 
         viewModel.modelProduk = argument
 
-        val bundle = bundleOf(Constant.produkBundle to argument)
-
-        setInitValue(argument)
+        if (argument != null) {
+            setInitValue(argument)
+        }
 
         getKomentar()
 
         binding.mbBeli.setOnClickListener {
             if (dataUsers?.jenisAkun == "Nelayan")
                 view.findNavController()
-                    .navigate(R.id.action_detailProdukFragment_to_dataPembeliFragment, bundle)
+                    .navigate(R.id.action_detailProdukFragment_to_dataPembeliFragment)
             else
                 view.findNavController()
-                    .navigate(R.id.action_detailProdukFragment2_to_dataPembeliFragment2, bundle)
+                    .navigate(R.id.action_detailProdukFragment2_to_dataPembeliFragment2)
         }
 
         binding.mbKomentar.setOnClickListener {
             view.findNavController()
-                .navigate(R.id.action_detailProdukFragment_to_komentarFragment, bundle)
+                .navigate(R.id.action_detailProdukFragment_to_komentarFragment)
         }
 
     }
@@ -67,6 +67,9 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
         viewModel.kelurahan.value = argument.kelurahan
         viewModel.alamat.value = argument.alamat
         viewModel.stok.value = argument.stok.toString()
+        viewModel.rating.value = "(${argument.rating})"
+
+        binding.ratingProduk.rating = argument.rating!!
 
         Glide
             .with(requireActivity())
@@ -83,12 +86,12 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
                 is Response.Success -> {
                 }
                 is Response.Error -> {
-                    showLogAssert("error", result.error)
+                    showLogAssert("error detail produk", result.error)
                     showSnackbar(requireView(), result.error, "error")
                 }
                 is Response.Changed -> {
                     val data = result.data as QuerySnapshot
-                    showLogAssert("data", "$data")
+                    showLogAssert("data detail produk", "$data")
                     val dataKomentar: List<ModelKomentar> = data.toObjects()
                     val komentarAdapter = KomentarAdapter(
                         dataKomentar
