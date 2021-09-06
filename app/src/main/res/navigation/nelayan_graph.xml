@@ -36,7 +36,12 @@
         tools:layout="@layout/pesanan_nelayan_fragment">
         <action
             android:id="@+id/action_pesananNelayanFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_pesananNelayanFragment_self"
+            app:destination="@id/pesananNelayanFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/transaksiNelayanFragment"
@@ -69,6 +74,9 @@
         <action
             android:id="@+id/action_detailProdukFragment_to_dataPembeliFragment"
             app:destination="@id/dataPembeliFragment" />
+        <action
+            android:id="@+id/action_detailProdukFragment_to_komentarFragment"
+            app:destination="@id/komentarFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataPembeliFragment"
@@ -76,15 +84,16 @@
         android:label="Data Pembeli"
         tools:layout="@layout/data_pembeli_fragment"/>
     <fragment
-        android:id="@+id/belumTerkirimFragment"
-        android:name="com.martfish.ui.nelayan.pesanan.belumTerkirim.BelumTerkirimFragment"
-        android:label="BelumTerkirimFragment" >
-        <action
-            android:id="@+id/action_belumTerkirimFragment_to_pesananNelayanFragment"
-            app:destination="@id/pesananNelayanFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/chatFragment"
         android:name="com.martfish.ui.fragment.chat.ChatFragment"
-        android:label="ChatFragment" />
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_self"
+            app:destination="@id/chatFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/komentarFragment"
+        android:name="com.martfish.ui.fragment.komentar.KomentarFragment"
+        android:label="KomentarFragment" />
 </navigation>

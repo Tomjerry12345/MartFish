@@ -15,6 +15,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.martfish.R
 import com.martfish.model.ModelProduk
 import com.martfish.utils.Constant
+import com.martfish.utils.SavedData
 
 class ProdukAdapter(private val produk: List<ModelProduk>) : RecyclerView.Adapter<ProdukHolder>() {
 
@@ -37,6 +38,8 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
     private val mbDetail = view.findViewById<MaterialButton>(R.id.mbDetail)
 
+    val dataUsers = SavedData.getDataUsers()
+
     @SuppressLint("SetTextI18n")
     fun bindProduk(produk: ModelProduk) {
         Glide
@@ -52,7 +55,11 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         mbDetail.setOnClickListener {
             val bundle = bundleOf(Constant.produkBundle to produk)
-            it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment, bundle)
+
+            if (dataUsers?.jenisAkun == "Nelayan")
+                it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment, bundle)
+            else
+                it.findNavController().navigate(R.id.action_homePembeliFragment_to_detailProdukFragment2, bundle)
         }
     }
 }

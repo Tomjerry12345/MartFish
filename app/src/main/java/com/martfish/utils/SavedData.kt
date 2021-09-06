@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
+import com.martfish.model.ModelPemesanan
 import com.martfish.model.ModelUsers
 
 
@@ -26,5 +27,18 @@ object SavedData {
     fun getDataUsers(): ModelUsers? {
         val json: String? = sharedPref.getString(Constant.users, "")
         return gson.fromJson(json, ModelUsers::class.java)
+    }
+
+    fun saveDataPemesanan(data: ModelPemesanan) {
+        val json = gson.toJson(data)
+        with (sharedPref.edit()) {
+            putString(Constant.pemesanan, json)
+            commit()
+        }
+    }
+
+    fun getDataPemesanan(): ModelPemesanan? {
+        val json: String? = sharedPref.getString(Constant.pemesanan, "")
+        return gson.fromJson(json, ModelPemesanan::class.java)
     }
 }

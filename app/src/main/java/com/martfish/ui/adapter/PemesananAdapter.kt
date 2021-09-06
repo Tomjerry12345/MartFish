@@ -17,6 +17,7 @@ import com.martfish.ui.nelayan.pesanan.belumTerkirim.BelumTerkirimViewModel
 import com.martfish.ui.nelayan.pesanan.terkirim.TerkirimViewModel
 import com.martfish.ui.pembeli.pesanan.PesananPembeliViewModel
 import com.martfish.utils.Constant
+import com.martfish.utils.SavedData
 
 class PemesananAdapter(
     private val pemesanan: List<ModelPemesanan>,
@@ -51,6 +52,8 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mbPesananTerkirim = view.findViewById<MaterialButton>(R.id.mbPesananTerkirim)
     private val mbPesan = view.findViewById<MaterialButton>(R.id.mbPesan)
 
+    val dataUsers = SavedData.getDataUsers()
+
     @SuppressLint("SetTextI18n")
     fun bindProduk(
         pemesanan: ModelPemesanan,
@@ -72,13 +75,20 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvKelurahan.text = pemesanan.kelurahan
         mtvAlamat.text = pemesanan.alamat
 
+        if (dataUsers?.jenisAkun == "Pembeli")
+            mbPesananTerkirim.visibility = View.GONE
+
         mbPesananTerkirim.setOnClickListener {
             belumTerkirimViewModel?.onPesananTerkirim(pemesanan.idPemesan, view)
         }
 
         mbPesan.setOnClickListener {
-            val bundle = bundleOf(Constant.pemesananBundle to pemesanan)
-            it.findNavController().navigate(R.id.action_pesananNelayanFragment_to_chatFragment, bundle)
+            if (dataUsers?.jenisAkun == "Nelayan")
+                it.findNavController().navigate(R.id.action_pesananNelayanFragment_to_chatFragment)
+            else
+                it.findNavController().navigate(R.id.action_pesananPembeliFragment_to_chatFragment2)
+
+            SavedData.saveDataPemesanan(pemesanan)
         }
     }
 }

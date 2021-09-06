@@ -1,6 +1,5 @@
 package com.martfish.ui.nelayan.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,7 +15,6 @@ import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.HomeNelayanFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.ui.adapter.ProdukAdapter
-import com.martfish.ui.nelayan.myProduk.adapter.MyProdukAdapter
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar

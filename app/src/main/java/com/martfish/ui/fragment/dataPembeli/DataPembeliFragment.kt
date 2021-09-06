@@ -13,6 +13,7 @@ import com.martfish.databinding.DataPembeliFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.ui.activity.succes.SuccesActivity
 import com.martfish.utils.Constant
+import com.martfish.utils.SavedData
 import com.martfish.utils.showSnackbar
 
 class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
@@ -27,6 +28,8 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
     private val listKecamatan = listOf("Somba Opu", "Samata")
     private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
 
+    val dataUsers = SavedData.getDataUsers()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DataPembeliFragmentBinding.bind(view)
@@ -35,10 +38,10 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
 
         argument = arguments?.getSerializable(Constant.produkBundle) as ModelProduk
 
-        viewModel.namaPenerima.value = argument.namaPenjual
-        viewModel.kecamatan.value = argument.kecamatan
-        viewModel.kelurahan.value = argument.kelurahan
-        viewModel.alamat.value = argument.alamat
+        viewModel.namaPenerima.value = dataUsers?.namaLengkap
+        viewModel.kecamatan.value = dataUsers?.kecamatan
+        viewModel.kelurahan.value = dataUsers?.kelurahan
+        viewModel.alamat.value = dataUsers?.alamat
         viewModel.jumlahBeli.value = 1.toString()
         viewModel.harga.value ="harga: ${argument.harga.toString()}"
         viewModel.namaProduk.value = argument.nama

@@ -125,8 +125,15 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    startActivity(intent)
-                    finish()
+                    lifecycleScope.launch {
+                        withContext(Dispatchers.Default) {
+                            saveDataFirestore(dataPemesan)
+                        }
+
+                        startActivity(intent)
+                        finish()
+                    }
+
                 }
                 TransactionResult.STATUS_PENDING -> {
                     showLogAssert("Transaction Pending. ID: ", result.response.transactionId)

@@ -3,6 +3,7 @@ package com.martfish.database
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -23,12 +24,104 @@ class FirestoreDatabase {
 
             Response.Success(responseSucces)
             Response.Changed(getRef.id)
-            
+
         } catch (e: Exception) {
             showLogAssert("error", "${e.message}")
             Response.Error("${e.message}")
         }
     }
+
+    suspend fun saveDataReferenceDocumentOne(
+        collection: String,
+        document: String,
+        data: Any
+    ): Response {
+        return try {
+            val getRef = dbFireStore
+                .collection(collection)
+                .document(document)
+                .collection("komentar")
+                .add(data)
+                .await()
+
+            Response.Success("")
+            Response.Changed(getRef.id)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun saveDataReferenceDocumentThree(
+        collection: String,
+        document: String,
+        document1: String,
+        document2: String,
+        data: Any
+    ): Response {
+        return try {
+            dbFireStore
+                .collection(collection)
+                .document(document)
+                .collection(document1)
+                .document(document2)
+                .collection("messages")
+                .add(data)
+                .await()
+
+            Response.Success("")
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun getReferenceDocumentOne(
+        reference: String,
+        document: String
+    ): Response {
+        return try {
+            val data = dbFireStore
+                .collection(reference)
+                .document(document)
+                .collection("komentar")
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun getReferenceDocumentThree(
+        reference: String,
+        document: String,
+        document1: String,
+        document2: String
+    ): Response {
+        return try {
+            val data = dbFireStore.collection(reference)
+                .document(document)
+                .collection(document1)
+                .document(document2)
+                .collection("messages")
+                .orderBy("timeStamp")
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
 
     suspend fun getReferenceByQuery(reference: String, query: String, value: Any): Response {
         return try {
@@ -98,6 +191,30 @@ class FirestoreDatabase {
                 dbFireStore.collection(reference)
                     .document(colection)
                     .set(data)
+                    .await()
+            }
+
+            Response.Success("Update Data Berhasil")
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun updateReferenceCollectionTwo(
+        colection: String,
+        document: String,
+        update: String?,
+        data: Any
+    ): Response {
+        return try {
+            if (update != null) {
+                dbFireStore.collection(colection)
+                    .document(document)
+                    .collection("komentar")
+                    .document(data as String)
+                    .set(update, data as SetOptions)
                     .await()
             }
 

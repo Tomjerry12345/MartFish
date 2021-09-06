@@ -9,10 +9,38 @@
         android:id="@+id/homePembeliFragment"
         android:name="com.martfish.ui.pembeli.home.HomePembeliFragment"
         android:label="Home"
-        tools:layout="@layout/home_pembeli_fragment"/>
+        tools:layout="@layout/home_pembeli_fragment">
+        <action
+            android:id="@+id/action_homePembeliFragment_to_detailProdukFragment2"
+            app:destination="@id/detailProdukFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/pesananPembeliFragment"
         android:name="com.martfish.ui.pembeli.pesanan.PesananPembeliFragment"
         android:label="Pesanan"
-        tools:layout="@layout/pesanan_pembeli_fragment"/>
+        tools:layout="@layout/pesanan_pembeli_fragment">
+        <action
+            android:id="@+id/action_pesananPembeliFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProdukFragment2"
+        android:name="com.martfish.ui.fragment.detail.DetailProdukFragment"
+        android:label="Detail" >
+        <action
+            android:id="@+id/action_detailProdukFragment2_to_dataPembeliFragment2"
+            app:destination="@id/dataPembeliFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataPembeliFragment2"
+        android:name="com.martfish.ui.fragment.dataPembeli.DataPembeliFragment"
+        android:label="DataPembeliFragment" />
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.martfish.ui.fragment.chat.ChatFragment"
+        android:label="Chat" >
+        <action
+            android:id="@+id/action_chatFragment2_self"
+            app:destination="@id/chatFragment2" />
+    </fragment>
 </navigation>

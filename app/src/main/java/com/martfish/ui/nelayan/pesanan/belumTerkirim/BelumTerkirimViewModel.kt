@@ -7,6 +7,7 @@ import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.utils.Response
 import com.martfish.utils.SavedData
+import com.martfish.utils.showLogAssert
 import kotlinx.coroutines.launch
 
 class BelumTerkirimViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
@@ -26,12 +27,13 @@ class BelumTerkirimViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMod
     }
 
     fun onPesananTerkirim(idPemesan: String?, view: View) {
+        showLogAssert("idPemesan", "$idPemesan")
         viewModelScope.launch {
             if (idPemesan != null) {
                 firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPengiriman", true)
+                view.findNavController().navigate(R.id.action_pesananNelayanFragment_self)
             }
 
-            view.findNavController().navigate(R.id.action_belumTerkirimFragment_to_pesananNelayanFragment)
         }
     }
 
