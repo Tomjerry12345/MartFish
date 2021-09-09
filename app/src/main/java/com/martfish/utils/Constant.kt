@@ -16,4 +16,7 @@ object Constant {
     val pemesananBundle = "pemesananBundle"
 
     val typeAccount = "typeAccount"
+
+    const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    const val PERMISSIONS_REQUEST_ACCESS_READ_PHONE_STATE = 101
 }

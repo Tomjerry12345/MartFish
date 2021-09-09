@@ -13,26 +13,33 @@ import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.ActivityPembayaranBinding
 import com.martfish.model.ModelPemesanan
 import com.martfish.ui.activity.succes.SuccesActivity
-import com.martfish.utils.ConfigMidtrans
-import com.martfish.utils.Constant
-import com.martfish.utils.Response
-import com.martfish.utils.showLogAssert
+import com.martfish.ui.nelayan.NelayanActivity
+import com.martfish.ui.pembeli.PembeliActivity
+import com.martfish.utils.*
+import com.martfish.utils.Constant.PERMISSIONS_REQUEST_ACCESS_READ_PHONE_STATE
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
 import com.midtrans.sdk.corekit.core.MidtransSDK
 import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.core.UIKitCustomSetting
 import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
-import com.midtrans.sdk.corekit.models.*
+import com.midtrans.sdk.corekit.models.CustomerDetails
+import com.midtrans.sdk.corekit.models.ShippingAddress
 import com.midtrans.sdk.corekit.models.snap.TransactionResult
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
+import kotlin.properties.Delegates
 
 class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
     private lateinit var binding: ActivityPembayaranBinding
     private lateinit var dataPemesan: ModelPemesanan
+    private var latitude by Delegates.notNull<Double>()
+    private var longitude by Delegates.notNull<Double>()
+
+    private val dataUser = SavedData.getDataUsers()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,32 +52,66 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.READ_PHONE_STATE),
-                101
+                PERMISSIONS_REQUEST_ACCESS_READ_PHONE_STATE
             )
         }
 
         binding = ActivityPembayaranBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
+        Maps.initMaps(this)
+        Maps.getLocationPermission()
 
+        Maps.getDeviceLocation().observe(this, {
+            if (it != null) {
+                latitude = it["latitude"]!!
+                longitude = it["longitude"]!!
+                showLogAssert("latitude", "$latitude")
+                showLogAssert("longitude", "$longitude")
 
-        initMidtrans()
+            dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
 //
-        val transactionRequest =
-            dataPemesan.totalBayar?.let { totalBayar ->
-                TransactionRequest(
-                    System.currentTimeMillis().toString(),
-                    totalBayar
-                )
+            initMidtrans()
+//
+            val transactionRequest =
+                dataPemesan.totalBayar?.let { totalBayar ->
+                    TransactionRequest(
+                        System.currentTimeMillis().toString(),
+                        totalBayar
+                    )
+                }
+//
+            transactionRequest?.customerDetails = customerDetails()
+            MidtransSDK.getInstance().transactionRequest = transactionRequest
+            MidtransSDK.getInstance().startPaymentUiFlow(this)
+
+            } else {
+                showLogAssert("null maps.location", "null maps.location")
+                showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
             }
-//
-        transactionRequest?.customerDetails = customerDetails()
-        MidtransSDK.getInstance().transactionRequest = transactionRequest
-        MidtransSDK.getInstance().startPaymentUiFlow(this)
+        })
+
 
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        Maps.locationPermissionGranted = false
+        when (requestCode) {
+            Constant.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
+                if (grantResults.isNotEmpty() &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Maps.locationPermissionGranted = true
+                }
+            }
+        }
+
+    }
 
     private fun initMidtrans() {
         SdkUIFlowBuilder.init()
@@ -113,7 +154,11 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
     override fun onTransactionFinished(result: TransactionResult) {
 
         val intent = Intent(this, SuccesActivity::class.java)
-        intent.putExtra(Constant.typeAccount, "nelayan")
+
+        val intentTo: Intent = if(dataUser?.jenisAkun.equals("Nelayan"))
+            Intent(this, NelayanActivity::class.java)
+        else
+            Intent(this, PembeliActivity::class.java)
 
         if (result.response != null) {
             when (result.status) {
@@ -127,6 +172,12 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
                     lifecycleScope.launch {
                         withContext(Dispatchers.Default) {
+                            dataPemesan.idTransaction = result.response.orderId
+                            dataPemesan.statusPembayaran = result.response.transactionStatus
+                            dataPemesan.transactionTime = result.response.transactionTime
+                            dataPemesan.week = getOfWeeks()
+                            dataPemesan.latitude = latitude
+                            dataPemesan.longitude = longitude
                             saveDataFirestore(dataPemesan)
                         }
 
@@ -136,7 +187,9 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
                 }
                 TransactionResult.STATUS_PENDING -> {
+                    showLogAssert("Transaction Pending. orderId: ", result.response.orderId)
                     showLogAssert("Transaction Pending. ID: ", result.response.transactionId)
+                    showLogAssert("Transaction Pending. transactionTime: ", result.response.transactionTime)
                     Toast.makeText(
                         this,
                         "Transaction Pending. ID: " + result.response.transactionId,
@@ -145,6 +198,12 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
                     lifecycleScope.launch {
                         withContext(Dispatchers.Default) {
+                            dataPemesan.idTransaction = result.response.orderId
+                            dataPemesan.statusPembayaran = result.response.transactionStatus
+                            dataPemesan.transactionTime = result.response.transactionTime
+                            dataPemesan.week = getOfWeeks()
+                            dataPemesan.latitude = latitude
+                            dataPemesan.longitude = longitude
                             saveDataFirestore(dataPemesan)
                         }
 
@@ -154,15 +213,10 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
                 }
                 TransactionResult.STATUS_FAILED -> {
+                    showSnackbar(binding.root.rootView, result.response.statusMessage, "error")
 
-                    lifecycleScope.launch {
-                        withContext(Dispatchers.Default) {
-                            saveDataFirestore(dataPemesan)
-                        }
-
-                        startActivity(intent)
-                        finish()
-                    }
+                    startActivity(intentTo)
+                    finish()
 
                     Toast.makeText(
                         this,
@@ -175,14 +229,9 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
             result.response.validationMessages
 
         } else if (result.isTransactionCanceled) {
-            lifecycleScope.launch {
-                withContext(Dispatchers.Default) {
-                    saveDataFirestore(dataPemesan)
-                }
 
-                startActivity(intent)
-                finish()
-            }
+            startActivity(intentTo)
+            finish()
 
             Toast.makeText(this, "Transaction Canceled", Toast.LENGTH_LONG).show()
 
@@ -219,6 +268,11 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
             is Response.Success -> {
             }
         }
+    }
+
+    private fun getOfWeeks(): Int {
+        val calender: Calendar = Calendar.getInstance()
+        return calender.get(Calendar.WEEK_OF_MONTH)
     }
 
 }

@@ -27,6 +27,7 @@ class BelumTerkirimFragment : Fragment(R.layout.belum_terkirim_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BelumTerkirimFragmentBinding.bind(view)
+        viewModel.getIdTransaction()
         getPemesanan()
     }
 

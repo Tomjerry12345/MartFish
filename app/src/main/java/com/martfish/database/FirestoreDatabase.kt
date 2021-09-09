@@ -157,6 +157,22 @@ class FirestoreDatabase {
         }
     }
 
+    suspend fun getReferenceByQueryOrderBy(reference: String, query: String, value: Any, field: String): Response {
+        return try {
+            val data = dbFireStore.collection(reference)
+                .whereEqualTo(query, value)
+                .orderBy(field)
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
     suspend fun getReferenceByTwoQuery(
         reference: String,
         query: String,

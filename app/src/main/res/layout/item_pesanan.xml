@@ -104,16 +104,25 @@
             app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvStatusPembayaran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/imgProduk"
+            app:layout_constraintStart_toStartOf="@+id/imgProduk"
+            app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbPesan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Pesan"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgProduk"
             app:layout_constraintStart_toStartOf="@+id/imgProduk"
-            app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
+            app:layout_constraintTop_toBottomOf="@+id/mtvStatusPembayaran" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbPesananTerkirim"
@@ -125,6 +134,16 @@
             app:layout_constraintEnd_toEndOf="@+id/imgProduk"
             app:layout_constraintStart_toStartOf="@+id/imgProduk"
             app:layout_constraintTop_toBottomOf="@+id/mbPesan" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbLokasi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Lihat lokasi"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

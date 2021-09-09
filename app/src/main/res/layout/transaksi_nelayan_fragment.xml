@@ -12,12 +12,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="70dp"
         tools:context=".ui.nelayan.transaksi.TransaksiNelayanFragment">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTransaksi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Transaksi Nelayan Fragment" />
+            tools:listitem="@layout/item_root_transaksi" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barchart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

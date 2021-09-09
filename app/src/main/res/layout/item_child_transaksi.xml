@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvNamaPemesan"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="Baco" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvNamaProduk"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Ikan 1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Rp. 20000" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -35,7 +35,14 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         binding = DataPembeliFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        setInitValue()
+        dropdown()
+        totalBayar()
+        radioMetodePembayaran()
 
+    }
+
+    fun setInitValue() {
         argument = SavedData.getDataProduk()!!
 
         viewModel.namaPenerima.value = dataUsers?.namaLengkap
@@ -52,11 +59,6 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
 
         binding.kecamatan.editText?.setText(viewModel.kecamatan.value)
         binding.kelurahan.editText?.setText(viewModel.kelurahan.value)
-
-        dropdown()
-        totalBayar()
-        radioMetodePembayaran()
-
     }
 
     private fun dropdown() {
