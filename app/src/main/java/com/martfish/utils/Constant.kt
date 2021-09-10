@@ -17,6 +17,8 @@ object Constant {
 
     val typeAccount = "typeAccount"
 
-    const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+    const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 102
     const val PERMISSIONS_REQUEST_ACCESS_READ_PHONE_STATE = 101
+    const val PICK_IMAGE_REQUEST = 1
+    const val PICK_CAMERA_REQUEST = 2
 }
