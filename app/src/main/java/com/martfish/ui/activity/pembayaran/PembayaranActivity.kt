@@ -5,9 +5,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.ActivityPembayaranBinding
@@ -41,75 +43,69 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
     private val dataUser = SavedData.getDataUsers()
 
+    private val permissionMaps = MutableLiveData<Boolean>()
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions())
+        { permissions ->
+            permissions.entries.forEach {
+                val permissionName = it.key
+                val isGranted = it.value
+                showLogAssert("permissionName", permissionName)
+                showLogAssert("isGranted", "$isGranted")
+                if (permissionName == Manifest.permission.ACCESS_FINE_LOCATION)
+                    permissionMaps.value = isGranted
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_PHONE_STATE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_PHONE_STATE),
-                PERMISSIONS_REQUEST_ACCESS_READ_PHONE_STATE
-            )
-        }
+        activityResultLauncher.launch(
+            arrayOf(Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+        )
 
         binding = ActivityPembayaranBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Maps.initMaps(this)
-        Maps.getLocationPermission()
+        permissionMaps.observe(this, { permission ->
+            Maps.initMaps(this)
+            Maps.getDeviceLocation(permission).observe(this, {
+                if (it != null) {
+                    latitude = it["latitude"]!!
+                    longitude = it["longitude"]!!
+                    showLogAssert("latitude", "$latitude")
+                    showLogAssert("longitude", "$longitude")
 
-        Maps.getDeviceLocation().observe(this, {
-            if (it != null) {
-                latitude = it["latitude"]!!
-                longitude = it["longitude"]!!
-                showLogAssert("latitude", "$latitude")
-                showLogAssert("longitude", "$longitude")
+                    dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
 
-            dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
-//
-            initMidtrans()
-//
-            val transactionRequest =
-                dataPemesan.totalBayar?.let { totalBayar ->
-                    TransactionRequest(
-                        System.currentTimeMillis().toString(),
-                        totalBayar
-                    )
+                    initMidtrans()
+
+                    val transactionRequest =
+                        dataPemesan.totalBayar?.let { totalBayar ->
+                            TransactionRequest(
+                                System.currentTimeMillis().toString(),
+                                totalBayar
+                            )
+                        }
+
+                    transactionRequest?.customerDetails = customerDetails()
+                    MidtransSDK.getInstance().transactionRequest = transactionRequest
+                    MidtransSDK.getInstance().startPaymentUiFlow(this)
+
+                } else {
+                    showLogAssert("null maps.location", "null maps.location")
+                    showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
                 }
-//
-            transactionRequest?.customerDetails = customerDetails()
-            MidtransSDK.getInstance().transactionRequest = transactionRequest
-            MidtransSDK.getInstance().startPaymentUiFlow(this)
-
-            } else {
-                showLogAssert("null maps.location", "null maps.location")
-                showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
-            }
+            })
         })
 
 
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        Maps.locationPermissionGranted = false
-        when (requestCode) {
-            Constant.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-                if (grantResults.isNotEmpty() &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Maps.locationPermissionGranted = true
-                }
-            }
-        }
+
 
     }
 

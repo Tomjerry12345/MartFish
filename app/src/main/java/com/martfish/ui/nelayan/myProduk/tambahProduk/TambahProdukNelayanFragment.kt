@@ -2,12 +2,14 @@ package com.martfish.ui.nelayan.myProduk.tambahProduk
 
 import android.Manifest.permission.CAMERA
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,7 +20,6 @@ import com.martfish.BuildConfig
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.TambahProdukNelayanFragmentBinding
-import com.martfish.utils.RequestPermission
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -37,37 +38,52 @@ class TambahProdukNelayanFragment : Fragment(R.layout.tambah_produk_nelayan_frag
     private val getFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         viewModel.imageUri.value = uri
 
-        try {
-            val bitmap = MediaStore.Images.Media.getBitmap(
-                activity?.contentResolver,
-                viewModel.imageUri.value
-            )
-            binding.viewImage.setImageBitmap(bitmap)
-        } catch (e: IOException) {
-            e.printStackTrace()
+        if (viewModel.imageUri.value != null) {
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(
+                    activity?.contentResolver,
+                    viewModel.imageUri.value
+                )
+                binding.viewImage.setImageBitmap(bitmap)
+            } catch (e: IOException) {
+                showLogAssert("error", "${e.message}")
+            }
+
         }
+
     }
 
-    private val takeImageResult = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-        if (isSuccess) {
-            latestTmpUri?.let { uri ->
-                viewModel.imageUri.value
-                binding.viewImage.setImageURI(uri)
+    private val takeImageResult =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                latestTmpUri?.let { uri ->
+                    viewModel.imageUri.value = uri
+                    binding.viewImage.setImageURI(uri)
+                }
             }
         }
-    }
 
-    private val cameraAcces = RequestPermission(requireActivity(), CAMERA,
-        onDenied = { showSnackbar(requireView(), "Permission Denied", "error") },
-        onShowRationale = {showSnackbar(requireView(), "Should show Rationale", "error") })
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                showSnackbar(requireView(), "isGranted", "succes")
+            } else {
+                showSnackbar(requireView(), "denied", "error")
+            }
+        }
 
     private var latestTmpUri: Uri? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = TambahProdukNelayanFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        activityResultLauncher.launch(CAMERA)
 
         binding.mbTambahImage.setOnClickListener {
             showDialogPick()
@@ -108,6 +124,7 @@ class TambahProdukNelayanFragment : Fragment(R.layout.tambah_produk_nelayan_frag
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun showDialogPick() {
         val items = arrayOf("Camera", "Gallery")
 
@@ -122,13 +139,12 @@ class TambahProdukNelayanFragment : Fragment(R.layout.tambah_produk_nelayan_frag
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun capturePhoto() {
-        cameraAcces.runWithPermission {
-            lifecycleScope.launchWhenStarted {
-                getTmpFileUri().let { uri ->
-                    latestTmpUri = uri
-                    takeImageResult.launch(uri)
-                }
+        lifecycleScope.launchWhenStarted {
+            getTmpFileUri().let { uri ->
+                latestTmpUri = uri
+                takeImageResult.launch(uri)
             }
         }
     }

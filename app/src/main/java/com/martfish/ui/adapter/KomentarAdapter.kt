@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.textview.MaterialTextView
@@ -31,6 +32,7 @@ class KomentarHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val imgProduk = view.findViewById<AppCompatImageView>(R.id.imgProduk)
     private val mtvNama = view.findViewById<MaterialTextView>(R.id.mtvNama)
     private val mtvKomentar = view.findViewById<MaterialTextView>(R.id.mtvKomentar)
+    private val rating = view.findViewById<AppCompatRatingBar>(R.id.rating)
 
     fun bindKomentar(komentar: ModelKomentar) {
         if (komentar.image != null)
@@ -41,5 +43,6 @@ class KomentarHolder(val view: View) : RecyclerView.ViewHolder(view) {
                 .into(imgProduk)
         mtvNama.text = komentar.nama
         mtvKomentar.text = komentar.komentar
+        rating.rating = komentar.rating?.toFloat()!!
     }
 }
