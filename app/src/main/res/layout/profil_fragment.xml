@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.martfish.ui.fragment.profil.ProfilViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/materialTextView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200"
+            android:background="@drawable/bubble_green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginTop="32dp"
+            android:theme="@style/cardView"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="8dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgImage"
+                    android:layout_width="@dimen/_100"
+                    android:layout_height="@dimen/_100"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="luffy"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imgImage"
+                    app:layout_constraintStart_toStartOf="@+id/imgImage"
+                    app:layout_constraintTop_toBottomOf="@id/imgImage" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvNomor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="085753845575"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/mtvUsername"
+                    app:layout_constraintStart_toStartOf="@+id/mtvUsername"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvUsername" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvJenisAkun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Nelayan"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/mtvNomor"
+                    app:layout_constraintStart_toStartOf="@+id/mtvNomor"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvNomor" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnEditUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/ic_baseline_edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/labelInformasiLainnya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/h2"
+                    android:layout_marginTop="16dp"
+                    android:text="Informasi lainnya"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvJenisAkun" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvNamaLengkap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/h2"
+                    android:layout_marginTop="14dp"
+                    android:text="Nama lengkap: Monkey D Luffy"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelInformasiLainnya" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvKecamatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/h2"
+                    android:layout_marginTop="8dp"
+                    android:text="Kecamatan : Somba Opu"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvNamaLengkap" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvKelurahan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/h2"
+                    android:layout_marginTop="8dp"
+                    android:text="Kelurahan : Kelurahan 1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvKecamatan" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/h2"
+                    android:layout_marginTop="8dp"
+                    android:text="Alamat : Alamat 1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableTop="@drawable/ic_baseline_logout"
+                    android:text="Logout"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

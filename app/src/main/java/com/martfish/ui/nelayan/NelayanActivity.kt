@@ -20,7 +20,7 @@ class NelayanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nelayan_activity)
         val bottomNelayan = findViewById<BottomNavigationView>(R.id.bottomNavNelayan)
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeNelayanFragment, R.id.myProdukNelayanFragment, R.id.pesananNelayanFragment, R.id.transaksiNelayanFragment))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeNelayanFragment, R.id.myProdukNelayanFragment, R.id.pesananNelayanFragment, R.id.transaksiNelayanFragment, R.id.profileFragment))
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nelayan_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)

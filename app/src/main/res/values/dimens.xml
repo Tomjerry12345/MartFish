@@ -1,3 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="_100">100dp</dimen>
+    <dimen name="_150">150dp</dimen>
+    <dimen name="_200">200dp</dimen>
+
+    <dimen name="h1">4dp</dimen>
+    <dimen name="h2">8dp</dimen>
+
 </resources>

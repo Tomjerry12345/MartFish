@@ -21,4 +21,10 @@
         android:id="@+id/transaksiNelayanFragment"
         android:title="@string/transaksi"
         android:enabled="true"/>
+
+    <item
+        android:id="@+id/profileFragment"
+        android:title="Profile"
+        android:enabled="true"/>
+
 </menu>

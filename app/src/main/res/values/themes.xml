@@ -39,4 +39,11 @@
     <style name="Theme.MartFish.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MartFish.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="cardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">@dimen/h1</item>
+        <item name="cardElevation">@dimen/h2</item>
+    </style>
+
 </resources>

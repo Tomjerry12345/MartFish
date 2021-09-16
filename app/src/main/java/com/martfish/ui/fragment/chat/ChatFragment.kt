@@ -44,14 +44,24 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
         }
     }
 
-    private val cameraAcces = RequestPermission(requireActivity(), Manifest.permission.CAMERA,
-        onDenied = { showSnackbar(requireView(), "Permission Denied", "error") },
-        onShowRationale = {showSnackbar(requireView(), "Should show Rationale", "error") })
-
     private var latestTmpUri: Uri? = null
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted ->
+            if (isGranted) {
+                showSnackbar(requireView(), "isGranted", "succes")
+            } else {
+                showSnackbar(requireView(), "denied", "error")
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activityResultLauncher.launch(Manifest.permission.CAMERA)
+
         binding = ChatFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -104,14 +114,12 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
     }
 
     private fun capturePhoto() {
-        cameraAcces.runWithPermission {
             lifecycleScope.launchWhenStarted {
                 getTmpFileUri().let { uri ->
                     latestTmpUri = uri
                     takeImageResult.launch(uri)
                 }
             }
-        }
     }
 
     private fun getTmpFileUri(): Uri {
