@@ -1,20 +1,24 @@
 package com.martfish.ui.fragment.dataPembeli
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.DataPembeliFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.ui.activity.succes.SuccesActivity
-import com.martfish.utils.Constant
-import com.martfish.utils.SavedData
-import com.martfish.utils.showSnackbar
+import com.martfish.utils.*
+import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.midtrans.sdk.corekit.core.TransactionRequest
+import kotlin.properties.Delegates
 
 class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
 
@@ -30,11 +34,34 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
 
     val dataUsers = SavedData.getDataUsers()
 
+    private val permissionMaps = MutableLiveData<Boolean>()
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions())
+        { permissions ->
+            permissions.entries.forEach {
+                val permissionName = it.key
+                val isGranted = it.value
+                showLogAssert("permissionName", permissionName)
+                showLogAssert("isGranted", "$isGranted")
+                if (permissionName == Manifest.permission.ACCESS_FINE_LOCATION)
+                    permissionMaps.value = isGranted
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DataPembeliFragmentBinding.bind(view)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        activityResultLauncher.launch(
+            arrayOf(Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+        )
+
+        getLokasi()
         setInitValue()
         dropdown()
         totalBayar()
@@ -42,7 +69,24 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
 
     }
 
-    fun setInitValue() {
+    private fun getLokasi() {
+        permissionMaps.observe(viewLifecycleOwner, { permission ->
+            Maps.initMaps(requireActivity())
+            Maps.getDeviceLocation(permission).observe(viewLifecycleOwner, {
+                if (it != null) {
+                    viewModel.latitude.value = it["latitude"]!!
+                    viewModel.longitude.value = it["longitude"]!!
+                    showLogAssert("latitude", "${viewModel.latitude.value}")
+                    showLogAssert("longitude", "${viewModel.longitude.value}")
+                } else {
+                    showLogAssert("null maps.location", "null maps.location")
+                    showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
+                }
+            })
+        })
+    }
+
+    private fun setInitValue() {
         argument = SavedData.getDataProduk()!!
 
         viewModel.namaPenerima.value = dataUsers?.namaLengkap
@@ -84,15 +128,11 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         binding.radioGroupPembayaran.setOnCheckedChangeListener { radioGroup, i ->
             when(i) {
                 R.id.cod -> {
-                    showSnackbar(requireView(), "cod", "succes")
                     viewModel.metodePembayaran = "cod"
-                    val intent = Intent(requireActivity(), SuccesActivity::class.java)
-                    startActivity(intent)
                 }
 
                 R.id.lainnya -> {
                     viewModel.metodePembayaran = "lainnya"
-                    showSnackbar(requireView(), "lainnya", "succes")
                 }
             }
         }

@@ -3,18 +3,18 @@ package com.martfish.ui.fragment.dataPembeli
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.martfish.database.FirestoreDatabase
 import com.martfish.model.ModelPemesanan
 import com.martfish.ui.activity.pembayaran.PembayaranActivity
 import com.martfish.ui.activity.succes.SuccesActivity
-import com.martfish.utils.Constant
-import com.martfish.utils.SavedData
-import com.martfish.utils.showSnackbar
+import com.martfish.utils.*
+import kotlinx.coroutines.launch
+import java.util.*
 
 @SuppressLint("StaticFieldLeak")
 class DataPembeliViewModel(
@@ -30,6 +30,8 @@ class DataPembeliViewModel(
     val harga = MutableLiveData<String>()
     val totalBayar = MutableLiveData<String>()
     val namaProduk = MutableLiveData<String>()
+    val longitude = MutableLiveData<Double>()
+    val latitude = MutableLiveData<Double>()
 
     var total = 0
     var hargaProduk = 0
@@ -63,10 +65,17 @@ class DataPembeliViewModel(
                 image,
                 null,
                 idProduk,
-                null
+                null,
+                week = getOfWeeks(),
+                longitude = longitude.value,
+                latitude = latitude.value
             )
 
             if (metodePembayaran1 == "cod") {
+                viewModelScope.launch {
+                    saveDataFirestore(pemesan)
+                }
+
                 val intent = Intent(activity, SuccesActivity::class.java)
                 activity.startActivity(intent)
                 activity.finish()
@@ -80,6 +89,34 @@ class DataPembeliViewModel(
             showSnackbar(view, "${e.message}", "error")
         }
 
+    }
+
+    private suspend fun saveDataFirestore(dataPemesan: ModelPemesanan) {
+        val db = FirestoreDatabase()
+        val response = db.saveDataReference("pemesanan", dataPemesan, "")
+        showLogAssert("response", "$response")
+        when (response) {
+            is Response.Changed -> {
+                db.updateReferenceCollectionOne(
+                    "pemesanan",
+                    response.data.toString(),
+                    "idPemesan",
+                    response.data.toString()
+                )
+            }
+
+            is Response.Error -> {
+                showLogAssert("error", response.error)
+            }
+
+            is Response.Success -> {
+            }
+        }
+    }
+
+    private fun getOfWeeks(): Int {
+        val calender: Calendar = Calendar.getInstance()
+        return calender.get(Calendar.WEEK_OF_MONTH)
     }
 
     fun onTambah() {

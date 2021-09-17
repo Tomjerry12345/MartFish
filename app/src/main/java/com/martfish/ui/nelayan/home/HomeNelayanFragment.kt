@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +29,8 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
 
     private lateinit var binding: HomeNelayanFragmentBinding
 
+    private val listKategori = listOf("Kategori 1", "Kategori 2")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -34,6 +38,8 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         getAllDataProduk()
+        getDataSearching()
+        dropdown()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -46,11 +52,11 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let { showLogAssert("onQueryTextSubmit", it) }
                 searchView.clearFocus()
+                viewModel.onSearching(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { showLogAssert("onQueryTextChange", it) }
                 return true
             }
 
@@ -77,6 +83,39 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
                 }
             }
         })
+    }
+
+    private fun getDataSearching() {
+        viewModel.resultSearching.observe(viewLifecycleOwner, { result ->
+            when(result) {
+                is Response.Success -> {}
+                is Response.Error -> {
+                    showLogAssert("error", result.error)
+                    showSnackbar(requireView(), result.error, "error")
+                }
+                is Response.Changed -> {
+                    val data = result.data as QuerySnapshot
+                    showLogAssert("data", "$data")
+                    val dataProduk: List<ModelProduk> = data.toObjects()
+                    val produkAdapter = ProdukAdapter(dataProduk)
+                    binding.rvListProduk.apply {
+                        layoutManager = GridLayoutManager(requireActivity(), 2)
+                        adapter = produkAdapter
+                    }
+                }
+            }
+        })
+    }
+
+    private fun dropdown() {
+        val dropdownKategori =  (binding.kategori.editText as? AutoCompleteTextView)
+        val kategoriAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKategori)
+        dropdownKategori?.setAdapter(kategoriAdapter)
+        dropdownKategori?.setOnItemClickListener { adapterView, _, i, _ ->
+            val getItem = adapterView.getItemAtPosition(i)
+            viewModel.onByKategory(getItem as String)
+        }
+
     }
 
 }

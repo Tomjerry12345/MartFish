@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.martfish.ui.fragment.profil.ProfilFragment"
-        android:label="Profile"
+        android:label="Profil"
         tools:layout="@layout/profil_fragment">
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
@@ -116,5 +116,8 @@
         android:name="com.martfish.ui.fragment.profil.editProfil.EditProfilFragment"
         android:label="Edit Profile"
         tools:layout="@layout/edit_profil_fragment">
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

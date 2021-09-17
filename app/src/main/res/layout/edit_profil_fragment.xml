@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.martfish.ui.fragment.profil.editProfil.EditProfilViewModel" />
 
     </data>
 
@@ -60,7 +63,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@={viewModel.namaLengkap}"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +115,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@={viewModel.alamat}"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,17 +133,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
+            android:text="@={viewModel.noHp}"
           />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mbLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Simpan perubahan"
-        app:layout_constraintTop_toBottomOf="@+id/mtvNomor"
-        android:layout_marginTop="8dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mbEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="70dp"
+            android:text="Simpan perubahan"
+            android:onClick="@{(view) -> viewModel.onEdit(view)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mtvNomor"
+            app:layout_constraintVertical_bias="0.21"
+            tools:layout_editor_absoluteX="8dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

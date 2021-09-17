@@ -9,5 +9,6 @@ data class ModelUsers(
     val kelurahan: String? = null,
     val alamat: String? = null,
     val noHp: String? = null,
-    val image: String? = null
+    val image: String? = null,
+    val idUsers: String? = null
 )

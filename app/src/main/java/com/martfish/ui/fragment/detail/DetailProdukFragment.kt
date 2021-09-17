@@ -54,8 +54,13 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
         }
 
         binding.mbKomentar.setOnClickListener {
-            view.findNavController()
-                .navigate(R.id.action_detailProdukFragment_to_komentarFragment)
+            if (dataUsers?.jenisAkun == "Nelayan")
+                view.findNavController()
+                    .navigate(R.id.action_detailProdukFragment_to_komentarFragment)
+            else
+                view.findNavController()
+                    .navigate(R.id.action_detailProdukFragment2_to_komentarFragment2)
+
         }
 
     }

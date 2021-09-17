@@ -82,6 +82,7 @@ class ChatViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
     private suspend fun saveChat(modelChat: ModelChat, view: View) {
         firestoreDatabase.saveDataReferenceDocumentThree(
             "chat",
+            "cmessages",
             modelPemesanan?.idProduk.toString(),
             modelPemesanan?.usernamePenjual.toString(),
             modelPemesanan?.usernamePemesan.toString(),

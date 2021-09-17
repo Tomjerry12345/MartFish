@@ -33,6 +33,7 @@ class FirestoreDatabase {
 
     suspend fun saveDataReferenceDocumentOne(
         collection: String,
+        collection1: String,
         document: String,
         data: Any
     ): Response {
@@ -40,7 +41,7 @@ class FirestoreDatabase {
             val getRef = dbFireStore
                 .collection(collection)
                 .document(document)
-                .collection("komentar")
+                .collection(collection1)
                 .add(data)
                 .await()
 
@@ -55,6 +56,7 @@ class FirestoreDatabase {
 
     suspend fun saveDataReferenceDocumentThree(
         collection: String,
+        collection1: String,
         document: String,
         document1: String,
         document2: String,
@@ -66,7 +68,7 @@ class FirestoreDatabase {
                 .document(document)
                 .collection(document1)
                 .document(document2)
-                .collection("messages")
+                .collection(collection1)
                 .add(data)
                 .await()
 
@@ -239,6 +241,7 @@ class FirestoreDatabase {
 
     suspend fun updateReferenceCollectionTwo(
         colection: String,
+        colection1: String,
         document: String,
         update: String?,
         data: Any
@@ -247,7 +250,7 @@ class FirestoreDatabase {
             if (update != null) {
                 dbFireStore.collection(colection)
                     .document(document)
-                    .collection("komentar")
+                    .collection(colection1)
                     .document(data as String)
                     .set(update, data as SetOptions)
                     .await()

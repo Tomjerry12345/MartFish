@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,14 +15,14 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.martfish.BuildConfig
 
 object Maps {
-    private lateinit var activity: AppCompatActivity
+    private lateinit var activity: ComponentActivity
     private lateinit var placesClient: PlacesClient
     @SuppressLint("StaticFieldLeak")
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     val locationPermissionGranted = MutableLiveData<Boolean>()
 
-    fun initMaps(activity: AppCompatActivity){
+    fun initMaps(activity: ComponentActivity){
         this.activity = activity
         Places.initialize(activity, BuildConfig.MAPS_API_KEY)
         placesClient = Places.createClient(activity)

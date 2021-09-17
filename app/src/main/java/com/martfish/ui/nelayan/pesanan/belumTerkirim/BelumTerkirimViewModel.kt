@@ -57,12 +57,15 @@ class BelumTerkirimViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMod
 
     private fun updateStatusPembayaran(idTransaction: String?, idPemesan: String?) {
         viewModelScope.launch {
-            val response = webServices.getStatusTransaction(idTransaction!!)
-            val transactionStatus = response.body()?.transactionStatus
-            showLogAssert("response status pembayaran", "$transactionStatus")
-            if (idPemesan != null) {
-                firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus!!)
+            if (idTransaction != null) {
+                val response = webServices.getStatusTransaction(idTransaction)
+                val transactionStatus = response.body()?.transactionStatus
+                showLogAssert("response status pembayaran", "$transactionStatus")
+                if (idPemesan != null) {
+                    firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus!!)
+                }
             }
+
         }
     }
 

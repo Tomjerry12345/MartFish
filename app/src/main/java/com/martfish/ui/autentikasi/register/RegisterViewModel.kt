@@ -112,15 +112,12 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
                     noHp,
                     urlImage
                 )
-                val getResponse = firestoreDatabase.saveDataReference(
-                    "users",
-                    users,
-                    "Pendaftaran berhasil"
-                )
-                showLogAssert("getResponse", "$getResponse")
-                response.postValue(getResponse)
-                dialog.dismiss()
-
+//                val getResponse = firestoreDatabase.saveDataReference(
+//                    "users",
+//                    users,
+//                    "Pendaftaran berhasil"
+//                )
+                saveUsers(users)
             }
 
             is Response.Error -> {
@@ -130,6 +127,32 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
             is Response.Success -> {
             }
         }
+    }
+
+    private suspend fun saveUsers(users: ModelUsers) {
+        val getResponse =
+            firestoreDatabase.saveDataReference("users", users, "Pendaftaran berhasil")
+        when (getResponse) {
+            is Response.Changed -> {
+                response.value = firestoreDatabase.updateReferenceCollectionOne(
+                    "users",
+                    getResponse.data.toString(),
+                    "idUsers",
+                    getResponse.data.toString()
+                )
+            }
+
+            is Response.Error -> {
+                showLogAssert("error", getResponse.error)
+            }
+
+            is Response.Success -> {
+            }
+        }
+
+        showLogAssert("getResponse", "$getResponse")
+        response.postValue(getResponse)
+        dialog.dismiss()
     }
 
     fun onLogin(view: View) {

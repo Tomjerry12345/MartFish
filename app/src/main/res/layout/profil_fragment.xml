@@ -105,52 +105,69 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mtvJenisAkun" />
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icPerson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_person_24"
+                    app:layout_constraintStart_toStartOf="@+id/labelInformasiLainnya"
+                    app:layout_constraintTop_toBottomOf="@+id/labelInformasiLainnya" />
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mtvNamaLengkap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/h2"
-                    android:layout_marginTop="14dp"
-                    android:text="Nama lengkap: Monkey D Luffy"
+                    android:layout_marginStart="8dp"
+                    android:text="Monkey D Luffy"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/labelInformasiLainnya" />
+                    app:layout_constraintBottom_toBottomOf="@+id/icPerson"
+                    app:layout_constraintStart_toEndOf="@+id/icPerson"
+                    app:layout_constraintTop_toTopOf="@+id/icPerson" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_location_on_24"
+                    app:layout_constraintStart_toStartOf="@+id/icPerson"
+                    app:layout_constraintTop_toBottomOf="@+id/icPerson" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mtvKecamatan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/h2"
-                    android:layout_marginTop="8dp"
                     android:text="Kecamatan : Somba Opu"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mtvNamaLengkap" />
+                    app:layout_constraintBottom_toBottomOf="@+id/icLocation"
+                    app:layout_constraintStart_toStartOf="@+id/mtvNamaLengkap"
+                    app:layout_constraintTop_toTopOf="@+id/icLocation" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mtvKelurahan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/h2"
                     android:layout_marginTop="8dp"
                     android:text="Kelurahan : Kelurahan 1"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/mtvKecamatan"
                     app:layout_constraintTop_toBottomOf="@+id/mtvKecamatan" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/mtvAlamat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/h2"
                     android:layout_marginTop="8dp"
                     android:text="Alamat : Alamat 1"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
                     app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
 
                 <androidx.appcompat.widget.AppCompatButton

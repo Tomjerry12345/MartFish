@@ -126,10 +126,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbPesananTerkirim"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Pesanan Terkirim"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgProduk"
             app:layout_constraintStart_toStartOf="@+id/imgProduk"
@@ -137,13 +137,12 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbLokasi"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Lihat lokasi"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat" />
+            android:text="Lihat lokasi"
+            app:layout_constraintBottom_toBottomOf="@+id/mbPesananTerkirim"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
 package com.martfish.ui.fragment.profil
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -16,6 +17,7 @@ import com.martfish.databinding.ProfilFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.model.ModelUsers
 import com.martfish.ui.adapter.ProdukAdapter
+import com.martfish.ui.autentikasi.AutentikasiActivity
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -38,6 +40,12 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
 
         binding.btnEditUser.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val intent = Intent(requireContext(), AutentikasiActivity::class.java)
+            requireActivity().startActivity(intent)
+            requireActivity().finish()
         }
     }
 
@@ -65,10 +73,10 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
                     binding.mtvUsername.text = users.namaLengkap
                     binding.mtvNomor.text = users.noHp
                     binding.mtvJenisAkun.text = users.jenisAkun
-                    binding.mtvNamaLengkap.text = "Nama lengkap: ${users.namaLengkap}"
-                    binding.mtvKecamatan.text = "Kecamatan: ${users.kecamatan}"
-                    binding.mtvKelurahan.text = "Kelurahan: ${users.kelurahan}"
-                    binding.mtvAlamat.text = "Alamat: ${users.alamat}"
+                    binding.mtvNamaLengkap.text = users.namaLengkap
+                    binding.mtvKecamatan.text = users.kecamatan
+                    binding.mtvKelurahan.text = users.kelurahan
+                    binding.mtvAlamat.text = users.alamat
                 }
             }
         })

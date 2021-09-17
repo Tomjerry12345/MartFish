@@ -70,42 +70,53 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
         binding = ActivityPembayaranBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        permissionMaps.observe(this, { permission ->
-            Maps.initMaps(this)
-            Maps.getDeviceLocation(permission).observe(this, {
-                if (it != null) {
-                    latitude = it["latitude"]!!
-                    longitude = it["longitude"]!!
-                    showLogAssert("latitude", "$latitude")
-                    showLogAssert("longitude", "$longitude")
+        dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
 
-                    dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
+        initMidtrans()
 
-                    initMidtrans()
+        val transactionRequest =
+            dataPemesan.totalBayar?.let { totalBayar ->
+                TransactionRequest(
+                    System.currentTimeMillis().toString(),
+                    totalBayar
+                )
+            }
 
-                    val transactionRequest =
-                        dataPemesan.totalBayar?.let { totalBayar ->
-                            TransactionRequest(
-                                System.currentTimeMillis().toString(),
-                                totalBayar
-                            )
-                        }
+        transactionRequest?.customerDetails = customerDetails()
+        MidtransSDK.getInstance().transactionRequest = transactionRequest
+        MidtransSDK.getInstance().startPaymentUiFlow(this)
 
-                    transactionRequest?.customerDetails = customerDetails()
-                    MidtransSDK.getInstance().transactionRequest = transactionRequest
-                    MidtransSDK.getInstance().startPaymentUiFlow(this)
-
-                } else {
-                    showLogAssert("null maps.location", "null maps.location")
-                    showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
-                }
-            })
-        })
-
-
-
-
-
+//        permissionMaps.observe(this, { permission ->
+//            Maps.initMaps(this)
+//            Maps.getDeviceLocation(permission).observe(this, {
+//                if (it != null) {
+//                    latitude = it["latitude"]!!
+//                    longitude = it["longitude"]!!
+//                    showLogAssert("latitude", "$latitude")
+//                    showLogAssert("longitude", "$longitude")
+//
+//                    dataPemesan = intent.getParcelableExtra(Constant.listDataPembeliBundle)!!
+//
+//                    initMidtrans()
+//
+//                    val transactionRequest =
+//                        dataPemesan.totalBayar?.let { totalBayar ->
+//                            TransactionRequest(
+//                                System.currentTimeMillis().toString(),
+//                                totalBayar
+//                            )
+//                        }
+//
+//                    transactionRequest?.customerDetails = customerDetails()
+//                    MidtransSDK.getInstance().transactionRequest = transactionRequest
+//                    MidtransSDK.getInstance().startPaymentUiFlow(this)
+//
+//                } else {
+//                    showLogAssert("null maps.location", "null maps.location")
+//                    showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
+//                }
+//            })
+//        })
 
     }
 

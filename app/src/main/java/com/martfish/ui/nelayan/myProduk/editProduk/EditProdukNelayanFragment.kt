@@ -38,8 +38,6 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
 
     private val listKategori = listOf("Kategori 1", "Kategori 2")
 
-//    private val PICK_IMAGE_REQUEST = 1
-
     private lateinit var binding: EditProdukNelayanFragmentBinding
 
     private val getFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -70,6 +68,8 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
             }
         }
 
+    private var latestTmpUri: Uri? = null
+
     private val activityResultLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
@@ -80,8 +80,6 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
                 showSnackbar(requireView(), "denied", "error")
             }
         }
-
-    private var latestTmpUri: Uri? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -103,23 +101,6 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
         }
 
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-//            if(data == null || data.data == null){
-//                return
-//            }
-//
-//            viewModel.imageUri.value = data.data
-//            try {
-//                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, viewModel.imageUri.value)
-//                binding.viewImage.setImageBitmap(bitmap)
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
 
     private fun setValueEditText(produk: ModelProduk) {
         viewModel.namaProduk.value = produk.nama
@@ -202,12 +183,5 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
     private fun getImageFromStorage() {
         getFromGallery.launch("image/*")
     }
-
-//    private fun getImageFromStorage() {
-//        val intent = Intent()
-//        intent.type = "image/*"
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
-//    }
 
 }
