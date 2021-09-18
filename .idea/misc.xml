@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/bubble_green.xml" value="0.45784543325526933" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2890625" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.3911007025761124" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.3911007025761124" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_logout.xml" value="0.44379391100702575" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_baseline_person_24_black.xml" value="0.3911007025761124" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/rounded_bg.xml" value="0.31733021077283374" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/drawable/rounded_bg_failed.xml" value="0.31733021077283374" />
@@ -15,25 +18,27 @@
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/belum_terkirim_fragment.xml" value="0.2736784140969163" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/chat_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/data_pembeli_fragment.xml" value="0.6347826086956522" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_fragment.xml" value="0.4142705005324814" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_fragment.xml" value="0.75" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/detail_produk_nelayan_fragment.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/dropdown_list.xml" value="0.14990942028985507" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/edit_produk_nelayan_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/edit_profil_fragment.xml" value="0.4166666666666667" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/home_nelayan_fragment.xml" value="0.14" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/home_pembeli_fragment.xml" value="0.24107142857142858" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_card_produk.xml" value="1.1" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_chat_diterima.xml" value="0.28854625550660795" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_chat_terkirim.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_card_produk.xml" value="0.785876993166287" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_chat_diterima.xml" value="0.67" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_chat_terkirim.xml" value="0.67" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_child_transaksi.xml" value="0.67" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_komentar.xml" value="0.46345811051693403" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_my_produk.xml" value="0.7487179487179487" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_pesanan.xml" value="0.67" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/item_root_transaksi.xml" value="0.75" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/komentar_fragment.xml" value="0.3583916083916084" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/login_fragment.xml" value="0.29156908665105385" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/my_produk_nelayan_fragment.xml" value="0.5" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/nelayan_activity.xml" value="0.28854625550660795" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/pembayaran_fragment.xml" value="0.4583333333333333" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/pembeli_activity.xml" value="0.1" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/pesanan_nelayan_fragment.xml" value="0.2490079365079365" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/pesanan_pembeli_fragment.xml" value="0.24107142857142858" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/layout/profil_fragment.xml" value="0.67" />
@@ -45,7 +50,7 @@
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/menu/menu_toolbar.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/menu/menu_transaksi.xml" value="0.2716627634660422" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/menu/nelayan_bottom_nav.xml" value="0.4215456674473068" />
-        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/menu/pembeli_bottom_nav.xml" value="0.265807962529274" />
+        <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/menu/pembeli_bottom_nav.xml" value="0.1" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/mipmap-anydpi-v26/ic_image_placeholder.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15885416666666666" />

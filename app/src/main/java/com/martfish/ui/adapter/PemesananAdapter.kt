@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,7 +16,6 @@ import com.martfish.model.ModelPemesanan
 import com.martfish.ui.nelayan.pesanan.belumTerkirim.BelumTerkirimViewModel
 import com.martfish.ui.nelayan.pesanan.terkirim.TerkirimViewModel
 import com.martfish.ui.pembeli.pesanan.PesananPembeliViewModel
-import com.martfish.utils.Constant
 import com.martfish.utils.Maps
 import com.martfish.utils.SavedData
 
@@ -70,14 +68,14 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .centerCrop()
             .placeholder(R.mipmap.ic_image_placeholder)
             .into(imgProduk);
-        mtvNamaPemesan.text = pemesanan.namaPemesan
-        mtvNamaProduk.text = pemesanan.namaProduk
-        mtvJumlahPesan.text = pemesanan.jumlah.toString()
-        mtvHarga.text = pemesanan.harga.toString()
-        mtvJumlahBayar.text = pemesanan.jumlah.toString()
-        mtvKecamatan.text = pemesanan.kecamatan
-        mtvKelurahan.text = pemesanan.kelurahan
-        mtvAlamat.text = pemesanan.alamat
+        mtvNamaPemesan.text = "Nama pemesan : ${pemesanan.namaPemesan}"
+        mtvNamaProduk.text = "Nama produk : ${pemesanan.namaProduk}"
+        mtvJumlahPesan.text = "Jumlah : ${pemesanan.jumlah.toString()}"
+        mtvHarga.text = "Harga : ${pemesanan.harga.toString()}"
+        mtvJumlahBayar.text = "Jumlah bayar : ${pemesanan.totalBayar.toString()}"
+        mtvKecamatan.text = "Kecamatan : ${pemesanan.kecamatan}"
+        mtvKelurahan.text = "Kelurahan : ${pemesanan.kelurahan}"
+        mtvAlamat.text = "Alamat : ${pemesanan.alamat}"
         mtvStatusPembayaran.text = pemesanan.statusPembayaran
 
         when(pemesanan.statusPembayaran) {
@@ -93,16 +91,17 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         }
 
         mbPesananTerkirim.setOnClickListener {
-            belumTerkirimViewModel?.onPesananTerkirim(pemesanan.idPemesan, view)
+            val newStok = pemesanan.stok?.minus(pemesanan.jumlah!!)
+            belumTerkirimViewModel?.onPesananTerkirim(pemesanan.idPemesan, view, pemesanan.idProduk, newStok)
         }
 
         mbPesan.setOnClickListener {
+            SavedData.saveDataPemesanan(pemesanan)
+
             if (dataUsers?.jenisAkun == "Nelayan")
                 it.findNavController().navigate(R.id.action_pesananNelayanFragment_to_chatFragment)
             else
                 it.findNavController().navigate(R.id.action_pesananPembeliFragment_to_chatFragment2)
-
-            SavedData.saveDataPemesanan(pemesanan)
         }
 
         mbLokasi.setOnClickListener {

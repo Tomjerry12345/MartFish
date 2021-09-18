@@ -143,7 +143,6 @@ class FirestoreDatabase {
         }
     }
 
-
     suspend fun getReferenceByQuery(reference: String, query: String, value: Any): Response {
         return try {
             val data = dbFireStore.collection(reference)
@@ -180,12 +179,35 @@ class FirestoreDatabase {
         query: String,
         value: Any,
         query1: String,
-        value1: Any
+        value1: Any?
     ): Response {
         return try {
             val data = dbFireStore.collection(reference)
                 .whereEqualTo(query, value)
                 .whereEqualTo(query1, value1)
+                .get()
+                .await()
+
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
+    suspend fun getReferenceByTwoQueryThreeValue(
+        reference: String,
+        query: String,
+        value: Any,
+        query1: String,
+        value1: Any,
+        value2: Any?
+    ): Response {
+        return try {
+            val data = dbFireStore.collection(reference)
+                .whereEqualTo(query, value)
+                .whereIn(query1, listOf(value1, value2))
                 .get()
                 .await()
 

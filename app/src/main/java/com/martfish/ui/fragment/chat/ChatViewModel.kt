@@ -23,6 +23,11 @@ class ChatViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
     lateinit var dialog: AlertDialog
 
+    init {
+        showLogAssert("usernamePenjual", modelPemesanan?.usernamePenjual.toString())
+        showLogAssert("usernamePemesan", modelPemesanan?.usernamePemesan.toString())
+    }
+
     val getPesan: LiveData<Response> = liveData {
         val response = firestoreDatabase.getReferenceDocumentThree(
             "chat",
@@ -51,9 +56,11 @@ class ChatViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
 
     fun uploadImage(uri: Uri, view: View) {
+        dialog = showDialog(view.context, "Sedang di proses...")
+        dialog.show()
         viewModelScope.launch {
             when (val getUrlImage =
-                firestoreDatabase.uploadPhoto(uri, "images/produk/")) {
+                firestoreDatabase.uploadPhoto(uri, "images/chats/")) {
                 is Response.Changed -> {
                     val urlImage = getUrlImage.data as String
                     val modelChat = ModelChat(
@@ -82,7 +89,7 @@ class ChatViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
     private suspend fun saveChat(modelChat: ModelChat, view: View) {
         firestoreDatabase.saveDataReferenceDocumentThree(
             "chat",
-            "cmessages",
+            "messages",
             modelPemesanan?.idProduk.toString(),
             modelPemesanan?.usernamePenjual.toString(),
             modelPemesanan?.usernamePemesan.toString(),

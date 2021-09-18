@@ -69,16 +69,24 @@ class BelumTerkirimViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMod
         }
     }
 
-    fun onPesananTerkirim(idPemesan: String?, view: View) {
+    fun onPesananTerkirim(idPemesan: String?, view: View, idProduk: String?, newStok: Int?) {
         showLogAssert("idPemesan", "$idPemesan")
         viewModelScope.launch {
-            if (idPemesan != null) {
+            if (idPemesan != null && idProduk != null && newStok != null) {
                 firestoreDatabase.updateReferenceCollectionOne(
                     "pemesanan",
                     idPemesan,
                     "statusPengiriman",
                     true
                 )
+
+                firestoreDatabase.updateReferenceCollectionOne(
+                    "produk",
+                    idProduk,
+                    "stok",
+                    newStok
+                )
+
                 view.findNavController().navigate(R.id.action_pesananNelayanFragment_self)
             }
 

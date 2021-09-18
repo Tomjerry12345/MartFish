@@ -15,8 +15,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgProduk"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="#000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +26,9 @@
             android:id="@+id/mtvNamaPemesan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama pemesan"
+            android:text="Nama pemesan: Pembeli"
             android:layout_marginStart="8dp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/imgProduk"
             app:layout_constraintTop_toTopOf="@+id/imgProduk" />
 
@@ -36,7 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Nama produk"
+            android:textSize="12sp"
+            android:text="Nama produk: Produk 1"
             app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
             app:layout_constraintTop_toBottomOf="@id/mtvNamaPemesan" />
 
@@ -45,7 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Jumlah pesan"
+            android:textSize="12sp"
+            android:text="Jumlah pesan: 5"
             app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
             app:layout_constraintTop_toBottomOf="@id/mtvNamaProduk" />
 
@@ -54,7 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Harga"
+            android:textSize="12sp"
+            android:text="Harga: 5000"
             app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
             app:layout_constraintTop_toBottomOf="@id/mtvJumlahPesan" />
 
@@ -63,10 +67,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Jumlah Bayar"
+            android:textSize="12sp"
+            android:text="Jumlah Bayar: 50000"
             app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
             app:layout_constraintTop_toBottomOf="@id/mtvHarga" />
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icLocation"
@@ -82,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kecamatan: samata"
+            android:textSize="12sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/icLocation"
             app:layout_constraintTop_toTopOf="@+id/icLocation" />
@@ -91,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="12sp"
             android:text="Kelurahan: turungan beru"
             app:layout_constraintStart_toStartOf="@+id/mtvKecamatan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKecamatan" />
@@ -100,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="12sp"
             android:text="Alamat: cambaya"
             app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
@@ -126,20 +133,21 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbPesananTerkirim"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pesanan Terkirim"
             android:layout_marginTop="16dp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgProduk"
-            app:layout_constraintStart_toStartOf="@+id/imgProduk"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mbPesan" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbLokasi"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:textSize="10sp"
             android:text="Lihat lokasi"
             app:layout_constraintBottom_toBottomOf="@+id/mbPesananTerkirim"
             app:layout_constraintEnd_toEndOf="parent" />

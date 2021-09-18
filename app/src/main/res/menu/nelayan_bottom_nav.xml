@@ -5,26 +5,31 @@
     <item
         android:id="@+id/homeNelayanFragment"
         android:title="@string/home"
+        android:icon="@drawable/ic_baseline_home_24"
         android:enabled="true" />
 
     <item
         android:id="@+id/myProdukNelayanFragment"
         android:title="@string/my_produk"
+        android:icon="@drawable/ic_baseline_shop_24"
         android:enabled="true"/>
 
     <item
         android:id="@+id/pesananNelayanFragment"
         android:title="@string/pesanan"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:enabled="true"/>
 
     <item
         android:id="@+id/transaksiNelayanFragment"
         android:title="@string/transaksi"
+        android:icon="@drawable/ic_baseline_point_of_sale_24"
         android:enabled="true"/>
 
     <item
         android:id="@+id/profileFragment"
         android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"
         android:enabled="true"/>
 
 </menu>

@@ -32,11 +32,15 @@ class ProdukAdapter(private val produk: List<ModelProduk>) : RecyclerView.Adapte
 
 class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val imgProduk = view.findViewById<AppCompatImageView>(R.id.imgProduk)
-    private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
-    private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
-    private val mtvLokasi = view.findViewById<MaterialTextView>(R.id.mtvLokasi)
     private val mtvRating = view.findViewById<MaterialTextView>(R.id.mtvRating)
     private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
+    private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
+    private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
+    private val mtvKategori = view.findViewById<MaterialTextView>(R.id.mtvKategori)
+    private val mtvStok = view.findViewById<MaterialTextView>(R.id.mtvStok)
+    private val mtvKecamatan = view.findViewById<MaterialTextView>(R.id.mtvKecamatan)
+    private val mtvKelurahan = view.findViewById<MaterialTextView>(R.id.mtvKelurahan)
+    private val mtvAlamat = view.findViewById<MaterialTextView>(R.id.mtvAlamat)
     private val mbDetail = view.findViewById<MaterialButton>(R.id.mbDetail)
 
     val dataUsers = SavedData.getDataUsers()
@@ -49,11 +53,15 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .centerCrop()
             .placeholder(R.mipmap.ic_image_placeholder)
             .into(imgProduk);
-        mtvTitle.text = produk.nama
-        mtvHarga.text = "Rp. ${produk.harga}"
-        mtvLokasi.text = produk.kecamatan
         mtvRating.text = "(${produk.rating!!})"
         ratingProduk.rating = produk.rating!!
+        mtvTitle.text = produk.nama
+        mtvHarga.text = "Rp. ${produk.harga}"
+        mtvKategori.text = produk.kategori
+        mtvStok.text = "Stok tersedia : ${produk.stok}"
+        mtvKecamatan.text = "${produk.kecamatan}"
+        mtvKelurahan.text = "${produk.kelurahan}"
+        mtvAlamat.text = "${produk.alamat}"
 
         mbDetail.setOnClickListener {
 

@@ -5,16 +5,19 @@
     <item
         android:id="@+id/homePembeliFragment"
         android:title="@string/home"
+        android:icon="@drawable/ic_baseline_home_24"
         android:enabled="true" />
 
     <item
         android:id="@+id/pesananPembeliFragment"
         android:title="@string/pesanan"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:enabled="true"/>
 
     <item
         android:id="@+id/profileFragment"
         android:title="Profil"
+        android:icon="@drawable/ic_baseline_person_24"
         android:enabled="true"/>
 
 </menu>

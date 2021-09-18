@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textview.MaterialTextView
 import com.martfish.R
 import com.martfish.model.ModelChat
@@ -56,6 +57,7 @@ class ModelHolder(val view: View) : RecyclerView.ViewHolder(view) {
         Glide
             .with(view.context)
             .load(chat.image)
+            .apply(RequestOptions().override(200, 200))
             .centerCrop()
             .into(imgProduk);
         mtvNama.text = chat.nama

@@ -35,11 +35,17 @@ class MyProdukAdapter(
 }
 
 class MyProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
+    private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
+    private val mtvRating = view.findViewById<MaterialTextView>(R.id.mtvRating)
     private val imgProduk = view.findViewById<AppCompatImageView>(R.id.imgProduk)
     private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
     private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
-    private val mtvLokasi = view.findViewById<MaterialTextView>(R.id.mtvLokasi)
-    private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
+    private val mtvKategori = view.findViewById<MaterialTextView>(R.id.mtvKategori)
+    private val mtvStok = view.findViewById<MaterialTextView>(R.id.mtvStok)
+    private val mtvKecamatan = view.findViewById<MaterialTextView>(R.id.mtvKecamatan)
+    private val mtvKelurahan = view.findViewById<MaterialTextView>(R.id.mtvKelurahan)
+    private val mtvAlamat = view.findViewById<MaterialTextView>(R.id.mtvAlamat)
     private val mbDelete = view.findViewById<MaterialButton>(R.id.mbDeleteProduk)
     private val mbEdit = view.findViewById<MaterialButton>(R.id.mbEditProduk)
 
@@ -52,10 +58,15 @@ class MyProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .centerCrop()
             .placeholder(R.mipmap.ic_image_placeholder)
             .into(imgProduk)
+        mtvRating.text = "(${produk.rating!!})"
+        ratingProduk.rating = produk.rating!!
         mtvTitle.text = produk.nama
         mtvHarga.text = "Rp. ${produk.harga}"
-//        mtvLokasi.text = produk.lokasi
-//        ratingProduk.rating = produk.rating
+        mtvKategori.text = produk.kategori
+        mtvStok.text = "Stok tersedia : ${produk.stok}"
+        mtvKecamatan.text = "${produk.kecamatan}"
+        mtvKelurahan.text = "${produk.kelurahan}"
+        mtvAlamat.text = "${produk.alamat}"
 
         mbEdit.setOnClickListener {
             val bundleProduk = bundleOf("produk" to produk)

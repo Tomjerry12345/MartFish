@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/ic_baseline_person_24"
+                    android:background="@drawable/ic_baseline_person_24_black"
                     app:layout_constraintStart_toStartOf="@+id/labelInformasiLainnya"
                     app:layout_constraintTop_toBottomOf="@+id/labelInformasiLainnya" />
 

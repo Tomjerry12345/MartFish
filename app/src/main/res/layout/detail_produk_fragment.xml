@@ -40,18 +40,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RatingBar
+            <androidx.appcompat.widget.AppCompatRatingBar
                 android:id="@+id/ratingProduk"
-                style="?android:attr/ratingBarStyleIndicator"
+                style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
                 android:max="5"
-                android:scaleX="0.3"
-                android:scaleY="0.3"
-                android:transformPivotX="110dp"
-                android:transformPivotY="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/labelRating"
                 app:layout_constraintTop_toBottomOf="@+id/labelRating" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -61,7 +57,7 @@
                 android:text="@{viewModel.rating}"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/labelRating"
+                app:layout_constraintStart_toEndOf="@+id/ratingProduk"
                 app:layout_constraintTop_toBottomOf="@+id/labelRating" />
 
             <com.google.android.material.textview.MaterialTextView

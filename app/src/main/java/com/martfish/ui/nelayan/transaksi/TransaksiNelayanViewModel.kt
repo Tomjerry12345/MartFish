@@ -14,13 +14,30 @@ class TransaksiNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : View
 
     val data: LiveData<Response> = liveData {
         val response = dataUsers?.username?.let {
-            firestoreDatabase.getReferenceByTwoQuery("pemesanan", "usernamePenjual", it, "statusPembayaran", "settlement")
+            firestoreDatabase.getReferenceByTwoQueryThreeValue(
+                "pemesanan",
+                "usernamePenjual",
+                it,
+                "statusPembayaran",
+                "settlement",
+                ""
+            )
         }
 
         if (response != null) {
             emit(response)
         }
     }
+
+//    val data1: LiveData<Response> = liveData {
+//        val response = dataUsers?.username?.let {
+//            firestoreDatabase.getReferenceByTwoQuery("pemesanan", "usernamePenjual", it, "statusPembayaran", null)
+//        }
+//
+//        if (response != null) {
+//            emit(response)
+//        }
+//    }
 
     class Factory(private val firestoreDatabase: FirestoreDatabase) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")

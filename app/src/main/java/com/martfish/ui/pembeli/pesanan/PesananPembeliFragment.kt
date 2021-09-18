@@ -29,6 +29,8 @@ class PesananPembeliFragment : Fragment(R.layout.pesanan_pembeli_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        viewModel.getIdTransaction()
+
         getPemesanan()
     }
 

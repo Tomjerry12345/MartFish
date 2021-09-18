@@ -38,8 +38,8 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
     private lateinit var binding: ActivityPembayaranBinding
     private lateinit var dataPemesan: ModelPemesanan
-    private var latitude by Delegates.notNull<Double>()
-    private var longitude by Delegates.notNull<Double>()
+//    private var latitude by Delegates.notNull<Double>()
+//    private var longitude by Delegates.notNull<Double>()
 
     private val dataUser = SavedData.getDataUsers()
 
@@ -183,8 +183,8 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
                             dataPemesan.statusPembayaran = result.response.transactionStatus
                             dataPemesan.transactionTime = result.response.transactionTime
                             dataPemesan.week = getOfWeeks()
-                            dataPemesan.latitude = latitude
-                            dataPemesan.longitude = longitude
+//                            dataPemesan.latitude = latitude
+//                            dataPemesan.longitude = longitude
                             saveDataFirestore(dataPemesan)
                         }
 
@@ -209,8 +209,8 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
                             dataPemesan.statusPembayaran = result.response.transactionStatus
                             dataPemesan.transactionTime = result.response.transactionTime
                             dataPemesan.week = getOfWeeks()
-                            dataPemesan.latitude = latitude
-                            dataPemesan.longitude = longitude
+//                            dataPemesan.latitude = latitude
+//                            dataPemesan.longitude = longitude
                             saveDataFirestore(dataPemesan)
                         }
 

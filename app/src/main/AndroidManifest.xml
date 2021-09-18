@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/ic_app"
         android:supportsRtl="true"
         android:theme="@style/VeritransAppTheme">
 

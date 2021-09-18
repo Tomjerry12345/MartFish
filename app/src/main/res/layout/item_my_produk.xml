@@ -15,75 +15,118 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgProduk"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RatingBar
+        <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/ratingProduk"
-            style="?android:attr/ratingBarStyleIndicator"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:isIndicator="true"
             android:max="5"
-            android:scaleX="0.3"
-            android:scaleY="0.3"
-            android:transformPivotX="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
+            android:numStars="5"
+            app:layout_constraintTop_toBottomOf="@+id/imgProduk"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="(0.0)"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/ratingProduk"
+            app:layout_constraintTop_toTopOf="@+id/ratingProduk" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/examples_title_produk"
-            android:textSize="12sp"
-            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvStok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stok_tersedia_5"
-            android:textSize="10sp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/icLocation"
-            app:layout_constraintTop_toBottomOf="@+id/mtvLokasi"
-            tools:ignore="SmallSp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvHarga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/examples_harga"
-            android:textSize="10sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/mtvTitle"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvKategori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kategori 1"
+            android:textSize="14sp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mtvTitle" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvStok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stok_tersedia_5"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/mtvKategori"
+            app:layout_constraintTop_toBottomOf="@+id/mtvKategori"
+            tools:ignore="SmallSp" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icLocation"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mtvHarga"
+            app:layout_constraintTop_toBottomOf="@id/mtvStok"
             app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvLokasi"
+            android:id="@+id/mtvKecamatan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exaples_lokasi"
-            android:textSize="10sp"
+            android:text="Kecamatan"
+            android:textSize="14sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/icLocation"
-            app:layout_constraintTop_toTopOf="@+id/icLocation" />
+            app:layout_constraintTop_toTopOf="@+id/icLocation"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvKelurahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kelurahan"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/mtvKecamatan"
+            app:layout_constraintTop_toBottomOf="@+id/mtvKecamatan"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alamat"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
+            app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan"
+            tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbEditProduk"
@@ -95,7 +138,7 @@
             app:backgroundTint="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvStok"
+            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat"
             tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton

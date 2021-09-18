@@ -51,7 +51,7 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
             if (isGranted) {
-                showSnackbar(requireView(), "isGranted", "succes")
+                showLogAssert("permission", "isGranted")
             } else {
                 showSnackbar(requireView(), "denied", "error")
             }
@@ -68,7 +68,7 @@ class ChatFragment : Fragment(R.layout.chat_fragment) {
 
         getPesan()
 
-        binding.setImage.setOnClickListener {
+        binding.imageButton.setOnClickListener {
             showDialogPick()
         }
     }

@@ -38,6 +38,8 @@ class HomePembeliFragment : Fragment(R.layout.home_pembeli_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        setHasOptionsMenu(true)
+
         getAllDataProduk()
         getDataSearching()
         dropdown()

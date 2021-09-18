@@ -41,6 +41,7 @@ class DataPembeliViewModel(
     var idProduk = ""
 
     private val dataUser = SavedData.getDataUsers()
+    private val dataProduk = SavedData.getDataProduk()
 
     fun onKonfirmasi(view: View) {
         try {
@@ -68,22 +69,26 @@ class DataPembeliViewModel(
                 null,
                 week = getOfWeeks(),
                 longitude = longitude.value,
-                latitude = latitude.value
+                latitude = latitude.value,
+                stok = dataProduk?.stok
             )
 
-            if (metodePembayaran1 == "cod") {
-                viewModelScope.launch {
-                    saveDataFirestore(pemesan)
-                }
-
-                val intent = Intent(activity, SuccesActivity::class.java)
-                activity.startActivity(intent)
-                activity.finish()
+            if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {
+                showSnackbar(view, "Jumlah beli melebihi stok yang tersedia", "error")
             } else {
-                val intent = Intent(activity, PembayaranActivity::class.java)
-                intent.putExtra(Constant.listDataPembeliBundle, pemesan)
-                activity.startActivity(intent)
+                if (metodePembayaran1 == "cod") {
+                    viewModelScope.launch {
+                        saveDataFirestore(pemesan)
+                    }
+                } else {
+                    val intent = Intent(activity, PembayaranActivity::class.java)
+                    intent.putExtra(Constant.listDataPembeliBundle, pemesan)
+                    activity.startActivity(intent)
+                }
             }
+
+
+
 
         } catch (e: Exception) {
             showSnackbar(view, "${e.message}", "error")
@@ -92,17 +97,20 @@ class DataPembeliViewModel(
     }
 
     private suspend fun saveDataFirestore(dataPemesan: ModelPemesanan) {
-        val db = FirestoreDatabase()
-        val response = db.saveDataReference("pemesanan", dataPemesan, "")
+        val response = firestoreDatabase.saveDataReference("pemesanan", dataPemesan, "")
         showLogAssert("response", "$response")
         when (response) {
             is Response.Changed -> {
-                db.updateReferenceCollectionOne(
+                firestoreDatabase.updateReferenceCollectionOne(
                     "pemesanan",
                     response.data.toString(),
                     "idPemesan",
                     response.data.toString()
                 )
+
+                val intent = Intent(activity, SuccesActivity::class.java)
+                activity.startActivity(intent)
+                activity.finish()
             }
 
             is Response.Error -> {

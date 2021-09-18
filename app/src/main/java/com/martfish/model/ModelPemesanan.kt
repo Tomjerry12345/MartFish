@@ -20,9 +20,10 @@ data class ModelPemesanan(
     val idPemesan: String? = null,
     val idProduk: String? = null,
     var idTransaction: String? = null,
-    var statusPembayaran: String? = null,
+    var statusPembayaran: String = "",
     var transactionTime: String? = null,
     var week: Int? = null,
     var latitude: Double? = null,
-    var longitude: Double? = null
+    var longitude: Double? = null,
+    var stok: Int? = null
 ): Parcelable

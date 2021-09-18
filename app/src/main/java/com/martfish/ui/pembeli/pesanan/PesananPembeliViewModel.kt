@@ -1,12 +1,15 @@
 package com.martfish.ui.pembeli.pesanan
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.toObjects
 import com.martfish.database.FirestoreDatabase
+import com.martfish.model.ModelPemesanan
+import com.martfish.services.webServices
 import com.martfish.utils.Response
 import com.martfish.utils.SavedData
+import com.martfish.utils.showLogAssert
+import kotlinx.coroutines.launch
 
 class PesananPembeliViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
@@ -21,6 +24,45 @@ class PesananPembeliViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMo
 
         if (response != null) {
             emit(response)
+        }
+    }
+
+    fun getIdTransaction() {
+
+        viewModelScope.launch {
+            val response = firestoreDatabase.getReferenceByTwoQuery(
+                "pemesanan", "statusPengiriman", false, "usernamePemesan",
+                dataUsers?.username!!
+            )
+
+            when (response) {
+                is Response.Changed -> {
+                    val data = response.data as QuerySnapshot
+                    val data1 = data.toObjects<ModelPemesanan>()
+                    data1.forEach {
+                        updateStatusPembayaran(it.idTransaction, it.idPemesan)
+                    }
+                }
+                is Response.Error -> {
+                }
+                is Response.Success -> {
+                }
+            }
+        }
+
+    }
+
+    private fun updateStatusPembayaran(idTransaction: String?, idPemesan: String?) {
+        viewModelScope.launch {
+            if (idTransaction != null) {
+                val response = webServices.getStatusTransaction(idTransaction)
+                val transactionStatus = response.body()?.transactionStatus
+                showLogAssert("response status pembayaran", "$transactionStatus")
+                if (idPemesan != null) {
+                    firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus!!)
+                }
+            }
+
         }
     }
 
