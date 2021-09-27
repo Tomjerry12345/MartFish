@@ -143,10 +143,14 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
                 is Response.Success -> {
                     showLogAssert("succes", result.succes)
 
-                    if (dataUsers?.jenisAkun == "Nelayan")
+                    if (dataUsers?.jenisAkun == "Nelayan") {
+                        showLogAssert("msg", "Nelayan")
                         findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-                    else
+                    }
+                    else {
+                        showLogAssert("msg", "Petani")
                         findNavController().navigate(R.id.action_editProfilFragment2_to_profileFragment)
+                    }
                 }
                 is Response.Error -> {
                     showLogAssert("error", result.error)

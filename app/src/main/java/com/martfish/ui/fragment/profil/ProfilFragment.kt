@@ -42,10 +42,14 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
         getUsers()
 
         binding.btnEditUser.setOnClickListener {
-            if (dataUsers?.jenisAkun == "Nelayan")
+            if (dataUsers?.jenisAkun == "Nelayan") {
+                showLogAssert("msg", "Nelayan")
                 findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
-            else
+            }
+            else {
+                showLogAssert("msg", "Pembeli")
                 findNavController().navigate(R.id.action_profileFragment_to_editProfilFragment2)
+            }
         }
 
         binding.btnLogout.setOnClickListener {
