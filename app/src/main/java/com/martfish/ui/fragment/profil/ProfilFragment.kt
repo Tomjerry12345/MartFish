@@ -19,6 +19,7 @@ import com.martfish.model.ModelUsers
 import com.martfish.ui.adapter.ProdukAdapter
 import com.martfish.ui.autentikasi.AutentikasiActivity
 import com.martfish.utils.Response
+import com.martfish.utils.SavedData
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
 
@@ -30,6 +31,8 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
         ProfilViewModel.Factory(FirestoreDatabase())
     }
 
+    private val dataUsers = SavedData.getDataUsers()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = ProfilFragmentBinding.bind(view)
@@ -39,7 +42,10 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
         getUsers()
 
         binding.btnEditUser.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            if (dataUsers?.jenisAkun == "Nelayan")
+                findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+            else
+                findNavController().navigate(R.id.action_profileFragment_to_editProfilFragment2)
         }
 
         binding.btnLogout.setOnClickListener {

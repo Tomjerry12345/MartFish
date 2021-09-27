@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/pesananNelayanFragment"
         android:name="com.martfish.ui.nelayan.pesanan.PesananNelayanFragment"
-        android:label="Pesanan"
+        android:label="My Pesanan"
         tools:layout="@layout/pesanan_nelayan_fragment">
         <action
             android:id="@+id/action_pesananNelayanFragment_to_chatFragment"

@@ -80,7 +80,6 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
             .with(requireActivity())
             .load(argument.image)
             .centerCrop()
-            .placeholder(R.mipmap.ic_image_placeholder)
             .into(binding.imageProduk)
 
     }

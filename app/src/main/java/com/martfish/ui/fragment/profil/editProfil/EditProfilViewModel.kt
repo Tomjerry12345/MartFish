@@ -35,7 +35,6 @@ class EditProfilViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel(
         dialog.show()
 
         try {
-            val image = imageUri.value ?: throw Exception("Image tidak boleh kosong")
             val namaLengkap =
                 namaLengkap.value ?: throw Exception("Nama Lengkap tidak boleh kosong")
             val kecamatan = kecamatan.value ?: throw Exception("Kecamatan tidak boleh kosong")
@@ -48,38 +47,58 @@ class EditProfilViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel(
 
 
             viewModelScope.launch {
-                when (val getUrlImage =
-                    firestoreDatabase.uploadPhoto(image, "images/users/")) {
-                    is Response.Changed -> {
-                        val urlImage = getUrlImage.data as String
+                if (imageUri.value == null) {
+                    val users = ModelUsers(
+                        dataUsers.username,
+                        dataUsers.password,
+                        namaLengkap,
+                        dataUsers.jenisAkun,
+                        kecamatan,
+                        kelurahan,
+                        alamat,
+                        noHp,
+                        dataUsers.image,
+                        dataUsers.idUsers,
+                    )
 
-                        val users = ModelUsers(
-                            dataUsers.username,
-                            dataUsers.password,
-                            namaLengkap,
-                            dataUsers.jenisAkun,
-                            kecamatan,
-                            kelurahan,
-                            alamat,
-                            noHp,
-                            urlImage,
-                            dataUsers.idUsers,
-                        )
+                    editUsers(users)
 
-                        editUsers(users)
+                    dialog.dismiss()
+                } else {
+                    when (val getUrlImage =
+                        firestoreDatabase.uploadPhoto(imageUri.value!!, "images/users/")) {
+                        is Response.Changed -> {
+                            val urlImage = getUrlImage.data as String
 
-                        dialog.dismiss()
+                            val users = ModelUsers(
+                                dataUsers.username,
+                                dataUsers.password,
+                                namaLengkap,
+                                dataUsers.jenisAkun,
+                                kecamatan,
+                                kelurahan,
+                                alamat,
+                                noHp,
+                                urlImage,
+                                dataUsers.idUsers,
+                            )
 
-                    }
+                            editUsers(users)
 
-                    is Response.Error -> {
-                        showLogAssert("error", getUrlImage.error)
-                        dialog.dismiss()
-                    }
+                            dialog.dismiss()
 
-                    is Response.Success -> {
+                        }
+
+                        is Response.Error -> {
+                            showLogAssert("error", getUrlImage.error)
+                            dialog.dismiss()
+                        }
+
+                        is Response.Success -> {
+                        }
                     }
                 }
+
             }
 
         } catch (e: Exception) {

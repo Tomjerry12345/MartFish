@@ -33,51 +33,77 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
         dialog = showDialog(view.context, "Sedang di proses...")
         dialog.show()
         try {
-            val imageProduk = imageUri.value ?: throw Exception("Image tidak boleh kosong")
             val namaProduk = namaProduk.value ?: throw Exception("Nama Produk tidak boleh kosong")
             val hargaProduk = hargaProduk.value ?: throw Exception("Harga tidak boleh kosong")
             val stok = stok.value ?: throw Exception("Stok tidak boleh kosong")
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
 
             viewModelScope.launch {
-                when (val getUrlImage =
-                    firestoreDatabase.uploadPhoto(imageProduk, "images/produk/")) {
-                    is Response.Changed -> {
-                        val urlImage = getUrlImage.data as String
-                        val produk1 = ModelProduk(
-                            produk.value?.idProduk,
-                            urlImage,
-                            namaProduk,
-                            hargaProduk.toInt(),
-                            stok.toInt(),
-                            kategori,
-                            produk.value?.kecamatan,
-                            produk.value?.kelurahan,
-                            produk.value?.alamat,
-                            0f,
-                            produk.value?.namaPenjual,
-                            produk.value?.usernamePenjual
-                        )
+                if (imageUri.value == null) {
+                    val produk1 = ModelProduk(
+                        produk.value?.idProduk,
+                        produk.value?.image,
+                        namaProduk,
+                        hargaProduk.toInt(),
+                        stok.toInt(),
+                        kategori,
+                        produk.value?.kecamatan,
+                        produk.value?.kelurahan,
+                        produk.value?.alamat,
+                        0f,
+                        produk.value?.namaPenjual,
+                        produk.value?.usernamePenjual
+                    )
 
-                        response.value = produk.value?.idProduk?.let {
-                            firestoreDatabase.updateReferenceCollectionOne(
-                                "produk",
-                                it, null, produk1
+                    response.value = produk.value?.idProduk?.let {
+                        firestoreDatabase.updateReferenceCollectionOne(
+                            "produk",
+                            it, null, produk1
+                        )
+                    }
+
+                    dialog.dismiss()
+                } else {
+                    when (val getUrlImage =
+                        firestoreDatabase.uploadPhoto(imageUri.value!!, "images/produk/")) {
+                        is Response.Changed -> {
+                            val urlImage = getUrlImage.data as String
+                            val produk1 = ModelProduk(
+                                produk.value?.idProduk,
+                                urlImage,
+                                namaProduk,
+                                hargaProduk.toInt(),
+                                stok.toInt(),
+                                kategori,
+                                produk.value?.kecamatan,
+                                produk.value?.kelurahan,
+                                produk.value?.alamat,
+                                0f,
+                                produk.value?.namaPenjual,
+                                produk.value?.usernamePenjual
                             )
+
+                            response.value = produk.value?.idProduk?.let {
+                                firestoreDatabase.updateReferenceCollectionOne(
+                                    "produk",
+                                    it, null, produk1
+                                )
+                            }
+
+                            dialog.dismiss()
+
                         }
 
-                        dialog.dismiss()
+                        is Response.Error -> {
+                            showLogAssert("error", getUrlImage.error)
+                            dialog.dismiss()
+                        }
 
-                    }
-
-                    is Response.Error -> {
-                        showLogAssert("error", getUrlImage.error)
-                        dialog.dismiss()
-                    }
-
-                    is Response.Success -> {
+                        is Response.Success -> {
+                        }
                     }
                 }
+
             }
 
         } catch (e: Exception) {

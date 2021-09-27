@@ -17,6 +17,7 @@ import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.HomeNelayanFragmentBinding
 import com.martfish.model.ModelProduk
 import com.martfish.ui.adapter.ProdukAdapter
+import com.martfish.utils.Constant.listKategori
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -28,8 +29,6 @@ class HomeNelayanFragment : Fragment(R.layout.home_nelayan_fragment) {
     }
 
     private lateinit var binding: HomeNelayanFragmentBinding
-
-    private val listKategori = listOf("Kategori 1", "Kategori 2")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -111,6 +111,8 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
         viewModel.namaLengkap.value = dataUsers?.namaLengkap
         binding.kecamatan.editText?.setText(dataUsers?.kecamatan)
         binding.kelurahan.editText?.setText(dataUsers?.kelurahan)
+        viewModel.kecamatan.value = dataUsers?.kecamatan
+        viewModel.kelurahan.value = dataUsers?.kelurahan
         viewModel.alamat.value = dataUsers?.alamat
         viewModel.noHp.value = dataUsers?.noHp
         viewModel.dataUsers.value = dataUsers
@@ -140,7 +142,11 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
             when(result) {
                 is Response.Success -> {
                     showLogAssert("succes", result.succes)
-                    findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+
+                    if (dataUsers?.jenisAkun == "Nelayan")
+                        findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+                    else
+                        findNavController().navigate(R.id.action_editProfilFragment2_to_profileFragment)
                 }
                 is Response.Error -> {
                     showLogAssert("error", result.error)

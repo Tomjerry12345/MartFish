@@ -112,11 +112,6 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
                     noHp,
                     urlImage
                 )
-//                val getResponse = firestoreDatabase.saveDataReference(
-//                    "users",
-//                    users,
-//                    "Pendaftaran berhasil"
-//                )
                 saveUsers(users)
             }
 
@@ -131,14 +126,15 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
 
     private suspend fun saveUsers(users: ModelUsers) {
         val getResponse =
-            firestoreDatabase.saveDataReference("users", users, "Pendaftaran berhasil")
+            firestoreDatabase.saveDataReference("users", users, "")
         when (getResponse) {
             is Response.Changed -> {
                 response.value = firestoreDatabase.updateReferenceCollectionOne(
                     "users",
                     getResponse.data.toString(),
                     "idUsers",
-                    getResponse.data.toString()
+                    getResponse.data.toString(),
+                    "Pendaftaran berhasil"
                 )
             }
 

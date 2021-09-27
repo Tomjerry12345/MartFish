@@ -124,8 +124,10 @@
             android:text="Alamat"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan"
+            app:layout_constraintBottom_toTopOf="@id/mbEditProduk"
             tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton
@@ -138,7 +140,7 @@
             app:backgroundTint="@color/green_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat"
+            app:layout_constraintBottom_toTopOf="@id/mbDeleteProduk"
             tools:ignore="SmallSp" />
 
         <com.google.android.material.button.MaterialButton
@@ -151,7 +153,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mbEditProduk"
             tools:ignore="SmallSp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

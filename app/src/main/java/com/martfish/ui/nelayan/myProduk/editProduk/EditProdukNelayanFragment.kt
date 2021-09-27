@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -24,6 +25,7 @@ import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.EditProdukNelayanFragmentBinding
 import com.martfish.model.ModelProduk
+import com.martfish.utils.Constant.listKategori
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -35,8 +37,6 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
     private val viewModel: EditProdukNelayanViewModel by viewModels {
         EditProdukNelayanViewModel.Factory(FirestoreDatabase())
     }
-
-    private val listKategori = listOf("Kategori 1", "Kategori 2")
 
     private lateinit var binding: EditProdukNelayanFragmentBinding
 

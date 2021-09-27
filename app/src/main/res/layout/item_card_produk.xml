@@ -121,9 +121,11 @@
             android:id="@+id/mtvAlamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alamat"
-            android:textSize="14sp"
             android:layout_marginTop="8dp"
+            android:text="Alamat"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/mbDetail"
             app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan"
             tools:ignore="SmallSp" />
@@ -134,10 +136,9 @@
             android:layout_height="34dp"
             android:text="@string/detail"
             android:textSize="8sp"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="SmallSp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

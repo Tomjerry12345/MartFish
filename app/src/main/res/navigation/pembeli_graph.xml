@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/pesananPembeliFragment"
         android:name="com.martfish.ui.pembeli.pesanan.PesananPembeliFragment"
-        android:label="Pesanan"
+        android:label="My Pesanan"
         tools:layout="@layout/pesanan_pembeli_fragment">
         <action
             android:id="@+id/action_pesananPembeliFragment_to_chatFragment2"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/dataPembeliFragment2"
         android:name="com.martfish.ui.fragment.dataPembeli.DataPembeliFragment"
-        android:label="DataPembeliFragment" />
+        android:label="Data Pembeli" />
     <fragment
         android:id="@+id/chatFragment2"
         android:name="com.martfish.ui.fragment.chat.ChatFragment"
@@ -47,29 +47,28 @@
             app:destination="@id/chatFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.martfish.ui.fragment.profil.ProfilFragment"
-        android:label="Profile"
-        tools:layout="@layout/profil_fragment">
-        <action
-            android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.martfish.ui.fragment.profil.editProfil.EditProfilFragment"
-        android:label="Edit Profile"
-        tools:layout="@layout/edit_profil_fragment">
-        <action
-            android:id="@+id/action_editProfileFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/komentarFragment2"
         android:name="com.martfish.ui.fragment.komentar.KomentarFragment"
         android:label="Komentar" >
         <action
             android:id="@+id/action_komentarFragment2_to_detailProdukFragment2"
             app:destination="@id/detailProdukFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.martfish.ui.fragment.profil.ProfilFragment"
+        android:label="Profile"
+        tools:layout="@layout/profil_fragment">
+        <action
+            android:id="@+id/action_profileFragment_to_editProfilFragment2"
+            app:destination="@id/editProfilFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfilFragment2"
+        android:name="com.martfish.ui.fragment.profil.editProfil.EditProfilFragment"
+        android:label="Edit Profil" >
+        <action
+            android:id="@+id/action_editProfilFragment2_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

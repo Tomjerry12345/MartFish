@@ -20,6 +20,7 @@ import com.martfish.BuildConfig
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.TambahProdukNelayanFragmentBinding
+import com.martfish.utils.Constant.listKategori
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -33,7 +34,6 @@ class TambahProdukNelayanFragment : Fragment(R.layout.tambah_produk_nelayan_frag
     }
 
     private lateinit var binding: TambahProdukNelayanFragmentBinding
-    private val listKategori = listOf("Kategori 1", "Kategori 2")
 
     private val getFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         viewModel.imageUri.value = uri

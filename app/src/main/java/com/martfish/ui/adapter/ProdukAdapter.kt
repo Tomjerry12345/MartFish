@@ -51,7 +51,6 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .with(view.context)
             .load(produk.image)
             .centerCrop()
-            .placeholder(R.mipmap.ic_image_placeholder)
             .into(imgProduk);
         mtvRating.text = "(${produk.rating!!})"
         ratingProduk.rating = produk.rating!!
@@ -64,7 +63,6 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvAlamat.text = "${produk.alamat}"
 
         mbDetail.setOnClickListener {
-
             if (dataUsers?.jenisAkun == "Nelayan")
                 it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment)
             else

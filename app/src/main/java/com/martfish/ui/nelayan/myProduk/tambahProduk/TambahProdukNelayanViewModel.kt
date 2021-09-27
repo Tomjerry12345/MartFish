@@ -82,13 +82,14 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
 
     private suspend fun saveProduk(produk: ModelProduk) {
         when (val getResponse =
-            firestoreDatabase.saveDataReference("produk", produk, "Tambah Produk Berhasil")) {
+            firestoreDatabase.saveDataReference("produk", produk)) {
             is Response.Changed -> {
                 response.value = firestoreDatabase.updateReferenceCollectionOne(
                     "produk",
                     getResponse.data.toString(),
                     "idProduk",
-                    getResponse.data.toString()
+                    getResponse.data.toString(),
+                    "Tambah Produk Berhasil"
                 )
             }
 

@@ -16,7 +16,7 @@ class FirestoreDatabase {
     private val dbFireStore = Firebase.firestore
     private val storage = Firebase.storage
 
-    suspend fun saveDataReference(reference: String, data: Any, responseSucces: String): Response {
+    suspend fun saveDataReference(reference: String, data: Any, responseSucces: String = ""): Response {
         return try {
             val getRef = dbFireStore.collection(reference)
                 .add(data)
@@ -238,7 +238,8 @@ class FirestoreDatabase {
         reference: String,
         colection: String,
         update: String?,
-        data: Any
+        data: Any,
+        msg: String = ""
     ): Response {
         return try {
             if (update != null) {
@@ -253,7 +254,7 @@ class FirestoreDatabase {
                     .await()
             }
 
-            Response.Success("Update Data Berhasil")
+            Response.Success(msg)
 
         } catch (e: Exception) {
             showLogAssert("error", "${e.message}")
