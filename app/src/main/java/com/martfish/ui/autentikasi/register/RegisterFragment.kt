@@ -5,14 +5,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -20,6 +21,7 @@ import com.martfish.BuildConfig
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.RegisterFragmentBinding
+import com.martfish.utils.Constant
 import com.martfish.utils.Response
 import com.martfish.utils.showLogAssert
 import com.martfish.utils.showSnackbar
@@ -28,31 +30,30 @@ import java.io.IOException
 
 class RegisterFragment : Fragment(R.layout.register_fragment) {
 
-    private val listJenisAkun = listOf("Pembeli", "Nelayan")
-    private val listKecamatan = listOf("Somba Opu", "Samata")
-    private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
-
     private val viewModel: RegisterViewModel by viewModels {
         RegisterViewModel.Factory(FirestoreDatabase())
     }
 
+    private val kelurahan = MutableLiveData<List<String>>()
+
     lateinit var binding: RegisterFragmentBinding
 
-    private val getFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        viewModel.imageUri.value = uri
+    private val getFromGallery =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            viewModel.imageUri.value = uri
 
-        if (viewModel.imageUri.value != null) {
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(
-                    activity?.contentResolver,
-                    viewModel.imageUri.value
-                )
-                binding.viewImage.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                showLogAssert("error", "${e.message}")
+            if (viewModel.imageUri.value != null) {
+                try {
+                    val bitmap = MediaStore.Images.Media.getBitmap(
+                        activity?.contentResolver,
+                        viewModel.imageUri.value
+                    )
+                    binding.viewImage.setImageBitmap(bitmap)
+                } catch (e: IOException) {
+                    showLogAssert("error", "${e.message}")
+                }
+
             }
-
-        }
 
     }
 
@@ -114,30 +115,60 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
     }
 
     private fun dropdown() {
-        val dropdownJenisAkun =  (binding.jenisAkun.editText as? AutoCompleteTextView)
-        val dropdownKecamatan =  (binding.kecamatan.editText as? AutoCompleteTextView)
-        val dropdownKelurahan =  (binding.kelurahan.editText as? AutoCompleteTextView)
+        val dropdownJenisAkun = (binding.jenisAkun.editText as? AutoCompleteTextView)
+        val dropdownKecamatan = (binding.kecamatan.editText as? AutoCompleteTextView)
+        val dropdownKelurahan = (binding.kelurahan.editText as? AutoCompleteTextView)
 
-        val jenisAkunAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listJenisAkun)
+        binding.kelurahan.isEnabled = false
+
+        val jenisAkunAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listJenisAkun)
         dropdownJenisAkun?.setAdapter(jenisAkunAdapter)
         dropdownJenisAkun?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.jenisAkun.value = getItem as String?
         }
 
-        val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKecamatan)
+        val kecamatanAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listKecamatan)
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
         dropdownKecamatan?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.kecamatan.value = getItem as String?
+            when (viewModel.kecamatan.value) {
+                "Bajeng" -> kelurahan.value = Constant.kelurahanBajeng
+                "Barombong" -> kelurahan.value = Constant.kelurahanBarombong
+                "Biringbulu" -> kelurahan.value = Constant.kelurahanBiringbulu
+                "Bontomarannu" -> kelurahan.value = Constant.kelurahanBontomarannu
+                "Bontonompo" -> kelurahan.value = Constant.kelurahanBontonompo
+                "Bontonompo Selatan" -> kelurahan.value = Constant.kelurahanBontonompoSelatan
+                "Bungaya" -> kelurahan.value = Constant.kelurahanBungaya
+                "Pallangga" -> kelurahan.value = Constant.kelurahanPallangga
+                "Parangloe" -> kelurahan.value = Constant.kelurahanParangloe
+                "Somba Opu" -> kelurahan.value = Constant.kelurahanSombaOpu
+                "Tinggimoncong" -> kelurahan.value = Constant.kelurahanTinggimoncong
+                "Tompobulu" -> kelurahan.value = Constant.kelurahanTompobulu
+                "Tombolo Pao" -> kelurahan.value = Constant.kelurahanTomboloPao
+            }
         }
 
-        val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKelurahan)
-        dropdownKelurahan?.setAdapter(kelurahanAdapter)
-        dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
-            val getItem = adapterView.getItemAtPosition(i)
-            viewModel.kelurahan.value = getItem as String?
-        }
+        viewModel.kecamatan.observe(viewLifecycleOwner, {
+            binding.kelurahan.isEnabled = it != null
+
+        })
+
+        kelurahan.observe(viewLifecycleOwner, {
+            if (it != null) {
+                val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
+                dropdownKelurahan?.setAdapter(kelurahanAdapter)
+                dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
+                    val getItem = adapterView.getItemAtPosition(i)
+                    viewModel.kelurahan.value = getItem as String?
+                }
+            }
+
+        })
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

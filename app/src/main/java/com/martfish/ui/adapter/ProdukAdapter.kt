@@ -57,7 +57,7 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvTitle.text = produk.nama
         mtvHarga.text = "Rp. ${produk.harga}"
         mtvKategori.text = produk.kategori
-        mtvStok.text = "Stok tersedia : ${produk.stok}"
+        mtvStok.text = "Stok tersedia : ${produk.stok} ekor/kilo"
         mtvKecamatan.text = "${produk.kecamatan}"
         mtvKelurahan.text = "${produk.kelurahan}"
         mtvAlamat.text = "${produk.alamat}"

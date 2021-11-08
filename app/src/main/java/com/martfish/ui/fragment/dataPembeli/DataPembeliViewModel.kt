@@ -27,6 +27,7 @@ class DataPembeliViewModel(
     val kelurahan = MutableLiveData<String>()
     val alamat = MutableLiveData<String>()
     val jumlahBeli = MutableLiveData<String>()
+    val jumlahKilo = MutableLiveData<String>()
     val harga = MutableLiveData<String>()
     val totalBayar = MutableLiveData<String>()
     val namaProduk = MutableLiveData<String>()
@@ -70,7 +71,8 @@ class DataPembeliViewModel(
                 week = getOfWeeks(),
                 longitude = longitude.value,
                 latitude = latitude.value,
-                stok = dataProduk?.stok
+                stok = dataProduk?.stok,
+                jumlahKilo = jumlahKilo.value?.toInt()
             )
 
             if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {

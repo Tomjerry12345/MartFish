@@ -29,8 +29,10 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
     private lateinit var binding: DataPembeliFragmentBinding
     private lateinit var argument: ModelProduk
 
-    private val listKecamatan = listOf("Somba Opu", "Samata")
-    private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
+    private val kelurahan = MutableLiveData<List<String>>()
+
+//    private val listKecamatan = listOf("Somba Opu", "Samata")
+//    private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
 
     val dataUsers = SavedData.getDataUsers()
 
@@ -109,19 +111,38 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         val dropdownKecamatan =  (binding.kecamatan.editText as? AutoCompleteTextView)
         val dropdownKelurahan =  (binding.kelurahan.editText as? AutoCompleteTextView)
 
-        val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKecamatan)
+        val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listKecamatan)
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
         dropdownKecamatan?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.kecamatan.value = getItem as String?
+            when (viewModel.kecamatan.value) {
+                "Bajeng" -> kelurahan.value = Constant.kelurahanBajeng
+                "Barombong" -> kelurahan.value = Constant.kelurahanBarombong
+                "Biringbulu" -> kelurahan.value = Constant.kelurahanBiringbulu
+                "Bontomarannu" -> kelurahan.value = Constant.kelurahanBontomarannu
+                "Bontonompo" -> kelurahan.value = Constant.kelurahanBontonompo
+                "Bontonompo Selatan" -> kelurahan.value = Constant.kelurahanBontonompoSelatan
+                "Bungaya" -> kelurahan.value = Constant.kelurahanBungaya
+                "Pallangga" -> kelurahan.value = Constant.kelurahanPallangga
+                "Parangloe" -> kelurahan.value = Constant.kelurahanParangloe
+                "Somba Opu" -> kelurahan.value = Constant.kelurahanSombaOpu
+                "Tinggimoncong" -> kelurahan.value = Constant.kelurahanTinggimoncong
+                "Tompobulu" -> kelurahan.value = Constant.kelurahanTompobulu
+                "Tombolo Pao" -> kelurahan.value = Constant.kelurahanTomboloPao
+            }
         }
 
-        val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKelurahan)
-        dropdownKelurahan?.setAdapter(kelurahanAdapter)
-        dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
-            val getItem = adapterView.getItemAtPosition(i)
-            viewModel.kelurahan.value = getItem as String?
-        }
+        kelurahan.observe(viewLifecycleOwner, {
+            val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
+            dropdownKelurahan?.setAdapter(kelurahanAdapter)
+            dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
+                val getItem = adapterView.getItemAtPosition(i)
+                viewModel.kelurahan.value = getItem as String?
+            }
+        })
+
+
     }
 
     private fun radioMetodePembayaran() {

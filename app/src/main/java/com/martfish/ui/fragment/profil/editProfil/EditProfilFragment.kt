@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -22,10 +23,7 @@ import com.martfish.BuildConfig
 import com.martfish.R
 import com.martfish.database.FirestoreDatabase
 import com.martfish.databinding.EditProfilFragmentBinding
-import com.martfish.utils.Response
-import com.martfish.utils.SavedData
-import com.martfish.utils.showLogAssert
-import com.martfish.utils.showSnackbar
+import com.martfish.utils.*
 import java.io.File
 import java.io.IOException
 
@@ -36,6 +34,8 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
     }
 
     private lateinit var binding: EditProfilFragmentBinding
+
+    private val kelurahan = MutableLiveData<List<String>>()
 
     private val dataUsers = SavedData.getDataUsers()
 
@@ -122,19 +122,44 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
         val dropdownKecamatan = (binding.kecamatan.editText as? AutoCompleteTextView)
         val dropdownKelurahan = (binding.kelurahan.editText as? AutoCompleteTextView)
 
+        binding.kelurahan.isEnabled = false
+
         val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKecamatan)
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
         dropdownKecamatan?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.kecamatan.value = getItem as String?
+            when (viewModel.kecamatan.value) {
+                "Bajeng" -> kelurahan.value = Constant.kelurahanBajeng
+                "Barombong" -> kelurahan.value = Constant.kelurahanBarombong
+                "Biringbulu" -> kelurahan.value = Constant.kelurahanBiringbulu
+                "Bontomarannu" -> kelurahan.value = Constant.kelurahanBontomarannu
+                "Bontonompo" -> kelurahan.value = Constant.kelurahanBontonompo
+                "Bontonompo Selatan" -> kelurahan.value = Constant.kelurahanBontonompoSelatan
+                "Bungaya" -> kelurahan.value = Constant.kelurahanBungaya
+                "Pallangga" -> kelurahan.value = Constant.kelurahanPallangga
+                "Parangloe" -> kelurahan.value = Constant.kelurahanParangloe
+                "Somba Opu" -> kelurahan.value = Constant.kelurahanSombaOpu
+                "Tinggimoncong" -> kelurahan.value = Constant.kelurahanTinggimoncong
+                "Tompobulu" -> kelurahan.value = Constant.kelurahanTompobulu
+                "Tombolo Pao" -> kelurahan.value = Constant.kelurahanTomboloPao
+            }
         }
 
-        val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKelurahan)
-        dropdownKelurahan?.setAdapter(kelurahanAdapter)
-        dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
-            val getItem = adapterView.getItemAtPosition(i)
-            viewModel.kelurahan.value = getItem as String?
-        }
+        viewModel.kecamatan.observe(viewLifecycleOwner, {
+            binding.kelurahan.isEnabled = it != null
+        })
+
+        kelurahan.observe(viewLifecycleOwner, {
+            val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
+            dropdownKelurahan?.setAdapter(kelurahanAdapter)
+            dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
+                val getItem = adapterView.getItemAtPosition(i)
+                viewModel.kelurahan.value = getItem as String?
+            }
+        })
+
+
     }
 
     private fun response() {

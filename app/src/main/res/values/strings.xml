@@ -33,7 +33,7 @@
     <string name="data_pembeli">Data Pembeli</string>
     <string name="nama_penerima">Nama Penerima</string>
     <string name="konfirmasi">Konfirmasi</string>
-    <string name="jumlah_beli">Jumlah Beli</string>
+    <string name="jumlah_beli">Jumlah Beli per ekor</string>
     <string name="metode_pembayaran">Metode Pembayaran</string>
     <string name="cod">COD</string>
     <string name="transfer">Transfer</string>

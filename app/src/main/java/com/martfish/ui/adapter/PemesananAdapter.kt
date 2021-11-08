@@ -88,6 +88,9 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         if (dataUsers?.jenisAkun == "Pembeli") {
             mbPesananTerkirim.visibility = View.GONE
             mbLokasi.visibility = View.GONE
+            mbPesan.text = "Chat Nelayan"
+        } else {
+            mbPesan.text = "Chat Pembeli"
         }
 
         mbPesananTerkirim.setOnClickListener {

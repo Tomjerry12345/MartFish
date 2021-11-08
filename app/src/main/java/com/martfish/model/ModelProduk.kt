@@ -14,5 +14,6 @@ data class ModelProduk(
     val alamat: String? = null,
     var rating: Float? = null,
     val namaPenjual: String? = null,
-    val usernamePenjual: String? = null
+    val usernamePenjual: String? = null,
+    val kilo: Int? = null
 ): Serializable

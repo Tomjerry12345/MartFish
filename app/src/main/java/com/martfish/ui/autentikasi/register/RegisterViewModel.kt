@@ -70,10 +70,12 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
 
                         } else {
                             response.postValue(Response.Error("Username sudah terdaftar"))
+                            dialog.dismiss()
                         }
                     }
                     is Response.Error -> {
                         showLogAssert("error", getUsername.error)
+                        dialog.dismiss()
                     }
                     is Response.Success -> {
                     }
