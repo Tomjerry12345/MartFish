@@ -21,6 +21,7 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
     val namaProduk = MutableLiveData<String>()
     val hargaProduk = MutableLiveData<String>()
     val stok = MutableLiveData<String>()
+    val kilo = MutableLiveData<String>()
     val kategori = MutableLiveData<String>()
 
     val produk = MutableLiveData<ModelProduk>()
@@ -36,6 +37,7 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
             val namaProduk = namaProduk.value ?: throw Exception("Nama Produk tidak boleh kosong")
             val hargaProduk = hargaProduk.value ?: throw Exception("Harga tidak boleh kosong")
             val stok = stok.value ?: throw Exception("Stok tidak boleh kosong")
+            val kilo = kilo.value ?: throw Exception("Jumlah Kilo tidak boleh kosong")
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
 
             viewModelScope.launch {
@@ -52,7 +54,8 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
                         produk.value?.alamat,
                         0f,
                         produk.value?.namaPenjual,
-                        produk.value?.usernamePenjual
+                        produk.value?.usernamePenjual,
+                        kilo = kilo.toInt()
                     )
 
                     response.value = produk.value?.idProduk?.let {
@@ -80,7 +83,8 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
                                 produk.value?.alamat,
                                 0f,
                                 produk.value?.namaPenjual,
-                                produk.value?.usernamePenjual
+                                produk.value?.usernamePenjual,
+                                kilo = kilo.toInt()
                             )
 
                             response.value = produk.value?.idProduk?.let {

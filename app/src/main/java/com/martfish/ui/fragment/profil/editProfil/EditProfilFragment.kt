@@ -39,8 +39,8 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
 
     private val dataUsers = SavedData.getDataUsers()
 
-    private val listKecamatan = listOf("Somba Opu", "Samata")
-    private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
+//    private val listKecamatan = listOf("Somba Opu", "Samata")
+//    private val listKelurahan = listOf("Kelurahan 1", "Kelurahan 2")
 
     private val getFromGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         viewModel.imageUri.value = uri
@@ -124,7 +124,7 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
 
         binding.kelurahan.isEnabled = false
 
-        val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, listKecamatan)
+        val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listKecamatan)
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
         dropdownKecamatan?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)

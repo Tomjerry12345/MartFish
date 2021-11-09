@@ -35,6 +35,7 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvRating = view.findViewById<MaterialTextView>(R.id.mtvRating)
     private val ratingProduk = view.findViewById<AppCompatRatingBar>(R.id.ratingProduk)
     private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
+    private val mtvKilo = view.findViewById<MaterialTextView>(R.id.mtvKilo)
     private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
     private val mtvKategori = view.findViewById<MaterialTextView>(R.id.mtvKategori)
     private val mtvStok = view.findViewById<MaterialTextView>(R.id.mtvStok)
@@ -55,6 +56,7 @@ class ProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvRating.text = "(${produk.rating!!})"
         ratingProduk.rating = produk.rating!!
         mtvTitle.text = produk.nama
+        mtvKilo.text = "${produk.kilo} KG"
         mtvHarga.text = "Rp. ${produk.harga}"
         mtvKategori.text = produk.kategori
         mtvStok.text = "Stok tersedia : ${produk.stok} ekor/kilo"

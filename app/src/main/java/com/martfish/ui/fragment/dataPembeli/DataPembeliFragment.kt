@@ -111,8 +111,12 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         val dropdownKecamatan =  (binding.kecamatan.editText as? AutoCompleteTextView)
         val dropdownKelurahan =  (binding.kelurahan.editText as? AutoCompleteTextView)
 
+        binding.kelurahan.isEnabled = false
+
         val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listKecamatan)
+
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
+
         dropdownKecamatan?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.kecamatan.value = getItem as String?
@@ -132,6 +136,10 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
                 "Tombolo Pao" -> kelurahan.value = Constant.kelurahanTomboloPao
             }
         }
+
+        viewModel.kecamatan.observe(viewLifecycleOwner, {
+            binding.kelurahan.isEnabled = it != null
+        })
 
         kelurahan.observe(viewLifecycleOwner, {
             val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)

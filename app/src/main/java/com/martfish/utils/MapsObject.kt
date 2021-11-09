@@ -13,6 +13,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.martfish.BuildConfig
+import com.martfish.R
 
 object Maps {
     private lateinit var activity: ComponentActivity
@@ -24,7 +25,7 @@ object Maps {
 
     fun initMaps(activity: ComponentActivity){
         this.activity = activity
-        Places.initialize(activity, BuildConfig.MAPS_API_KEY)
+        Places.initialize(activity, activity.getString(R.string.maps_api_key))
         placesClient = Places.createClient(activity)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity)
