@@ -48,4 +48,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="total_bayar">Total Bayar</string>
     <string name="maps_api_key">AIzaSyCoXe13iF1J3DBpmdZ6JWlcBM1H0fksN9Y</string>
+    <string name="pengantaran">Pengantaran</string>
+    <string name="ambil_sendiri">Ambil sendiri</string>
+    <string name="kurir">Kurir</string>
+    <string name="metode_pembayaran_lainnya">Metode Pembayaran Lainnya</string>
+    <string name="tomboltambah">tombolTambah</string>
+    <string name="tombolkurang">tombolKurang</string>
 </resources>

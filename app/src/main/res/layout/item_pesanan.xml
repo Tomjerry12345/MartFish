@@ -111,6 +111,58 @@
             app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
             app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icPengantaran"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/icLocation"
+            app:layout_constraintTop_toBottomOf="@+id/mtvAlamat"
+            app:srcCompat="@drawable/ic_baseline_moped_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvMetodePengantaran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Metode pengantaran: di antarkan melalui kurir"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/icLocation"
+            app:layout_constraintTop_toTopOf="@+id/icPengantaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tanggalPengantaran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Tanggal pengantaran : 12-10-2022"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/mtvMetodePengantaran"
+            app:layout_constraintTop_toBottomOf="@+id/mtvMetodePengantaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/waktuPengantaran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waktu pengantaran : 12:00"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/tanggalPengantaran"
+            app:layout_constraintTop_toBottomOf="@+id/tanggalPengantaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvStatusPengantaran"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status pengantaran : Expired"
+            android:textSize="12sp"
+            android:background="@color/red"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/tanggalPengantaran"
+            app:layout_constraintTop_toBottomOf="@+id/waktuPengantaran" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvStatusPembayaran"
             android:layout_width="wrap_content"
@@ -129,7 +181,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imgProduk"
             app:layout_constraintStart_toStartOf="@+id/imgProduk"
-            app:layout_constraintTop_toBottomOf="@+id/mtvStatusPembayaran" />
+            app:layout_constraintTop_toBottomOf="@+id/mtvStatusPengantaran" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mbPesananTerkirim"
