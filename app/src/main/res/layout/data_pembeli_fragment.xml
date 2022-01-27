@@ -10,8 +10,8 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="462dp"
-        android:layout_height="986dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +28,7 @@
                 android:text="@string/data_pembeli"
                 android:textSize="24sp"
                 android:textStyle="bold"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -319,11 +320,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupPembayaran1" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton"
+                android:id="@+id/mbAturTanggal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Atur tanggal"
+                android:onClick="@{() -> viewModel.onTanggal()}"
                 app:layout_constraintStart_toStartOf="@+id/materialTextView4"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
 
@@ -332,18 +334,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Waktu"
+                android:onClick="@{() -> viewModel.onWaktu()}"
                 app:layout_constraintBottom_toBottomOf="@+id/materialTextView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/materialTextView4" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton1"
+                android:id="@+id/mbAturWaktu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Atur waktu"
-                app:layout_constraintBottom_toBottomOf="@+id/materialButton"
+                app:layout_constraintBottom_toBottomOf="@+id/mbAturTanggal"
                 app:layout_constraintEnd_toEndOf="@+id/materialTextView10"
-                app:layout_constraintTop_toTopOf="@+id/materialButton" />
+                app:layout_constraintTop_toTopOf="@+id/mbAturTanggal" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/mbTambah"
@@ -354,7 +357,7 @@
                 android:onClick="@{(view) -> viewModel.onKonfirmasi(view)}"
                 android:text="@string/konfirmasi"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialButton"
+                app:layout_constraintTop_toBottomOf="@+id/mbAturTanggal"
                 tools:layout_editor_absoluteX="8dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

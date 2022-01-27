@@ -26,5 +26,6 @@ data class ModelPemesanan(
     var latitude: Double? = null,
     var longitude: Double? = null,
     var stok: Int? = null,
-    var jumlahKilo: Int? = null
+    var jumlahKilo: Int? = null,
+    var waktu: String? = null
 ): Parcelable

@@ -1,6 +1,7 @@
 package com.martfish.ui.fragment.dataPembeli
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.FragmentActivity
@@ -8,6 +9,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.martfish.database.FirestoreDatabase
 import com.martfish.model.ModelPemesanan
 import com.martfish.ui.activity.pembayaran.PembayaranActivity
@@ -33,6 +38,8 @@ class DataPembeliViewModel(
     val namaProduk = MutableLiveData<String>()
     val longitude = MutableLiveData<Double>()
     val latitude = MutableLiveData<Double>()
+    val tanggal = MutableLiveData<String>()
+    val waktu = MutableLiveData<String>()
 
     var total = 0
     var hargaProduk = 0
@@ -53,26 +60,27 @@ class DataPembeliViewModel(
             val metodePembayaran1 = metodePembayaran ?: throw Exception("Metode pembayaran tidak boleh kosong")
 
             val pemesan = ModelPemesanan(
-                namaPenerima,
-                namaProduk.value,
-                jumlahBeli.value?.toInt(),
-                hargaProduk.toDouble(),
-                total.toDouble(),
-                kecamatan,
-                kelurahan,
-                alamat,
-                dataUser?.username,
-                usernamePenjual,
-                false,
-                image,
-                null,
-                idProduk,
-                null,
+                namaPemesan = namaPenerima,
+                namaProduk = namaProduk.value,
+                jumlah = jumlahBeli.value?.toInt(),
+                harga = hargaProduk.toDouble(),
+                totalBayar = total.toDouble(),
+                kecamatan = kecamatan,
+                kelurahan = kelurahan,
+                alamat = alamat,
+                usernamePemesan = dataUser?.username,
+                usernamePenjual = usernamePenjual,
+                statusPengiriman = false,
+                image = image,
+                idPemesan = null,
+                idProduk = idProduk,
+                idTransaction = null,
                 week = getOfWeeks(),
                 longitude = longitude.value,
                 latitude = latitude.value,
                 stok = dataProduk?.stok,
-                jumlahKilo = jumlahKilo.value?.toInt()
+                jumlahKilo = jumlahKilo.value?.toInt(),
+
             )
 
             if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {
@@ -136,6 +144,49 @@ class DataPembeliViewModel(
     fun onKurang() {
         if (jumlahBeli.value?.toInt()!! > 1)
             jumlahBeli.value = jumlahBeli.value?.toInt()?.minus(1).toString()
+    }
+
+    fun onWaktu() {
+        val picker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_12H)
+                .setHour(12)
+                .setMinute(10)
+                .setTitleText("Select Appointment time")
+                .build()
+        picker.show(activity.supportFragmentManager, "tag 1")
+
+//        picker.addOnPositiveButtonClickListener {
+//            // call back code
+//            showDialog(activity, "Jam : ${picker.hour}, Menit: ${picker.minute}")
+//        }
+
+    }
+
+    fun onTanggal() {
+        val today = MaterialDatePicker.todayInUtcMilliseconds()
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+
+        calendar.timeInMillis = today
+        calendar[Calendar.MONTH] = Calendar.JANUARY
+        val janThisYear = calendar.timeInMillis
+
+        calendar.timeInMillis = today
+        calendar[Calendar.MONTH] = Calendar.DECEMBER
+        val decThisYear = calendar.timeInMillis
+
+// Build constraints.
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setStart(janThisYear)
+                .setEnd(decThisYear)
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+        datePicker.show(activity.supportFragmentManager, "tag")
     }
 
     class Factory(
