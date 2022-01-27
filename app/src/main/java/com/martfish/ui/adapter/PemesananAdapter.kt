@@ -50,6 +50,10 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvKelurahan = view.findViewById<MaterialTextView>(R.id.mtvKelurahan)
     private val mtvStatusPembayaran = view.findViewById<MaterialTextView>(R.id.mtvStatusPembayaran)
     private val mtvAlamat = view.findViewById<MaterialTextView>(R.id.mtvAlamat)
+    private val mtvWaktuPengantaran = view.findViewById<MaterialTextView>(R.id.waktuPengantaran)
+    private val mtvWaktuExpired = view.findViewById<MaterialTextView>(R.id.waktuExpired)
+    private val mtvMetodePengantaran = view.findViewById<MaterialTextView>(R.id.mtvMetodePengantaran)
+    private val mtvStatusPengantaran = view.findViewById<MaterialTextView>(R.id.mtvStatusPengantaran)
     private val mbPesananTerkirim = view.findViewById<MaterialButton>(R.id.mbPesananTerkirim)
     private val mbPesan = view.findViewById<MaterialButton>(R.id.mbPesan)
     private val mbLokasi = view.findViewById<MaterialButton>(R.id.mbLokasi)
@@ -76,7 +80,17 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvKecamatan.text = "Kecamatan : ${pemesanan.kecamatan}"
         mtvKelurahan.text = "Kelurahan : ${pemesanan.kelurahan}"
         mtvAlamat.text = "Alamat : ${pemesanan.alamat}"
+        mtvWaktuPengantaran.text = "Waktu pengantaran : ${pemesanan.jam} : ${pemesanan.menit}"
+        mtvWaktuExpired.text = "Waktu expired : ${pemesanan.expiredJam} : ${pemesanan.menit}"
         mtvStatusPembayaran.text = pemesanan.statusPembayaran
+        mtvMetodePengantaran.text = "Metode pengantaran : ${pemesanan.metodePengantaran}"
+        mtvStatusPengantaran.text = "Status pengantaran : ${pemesanan.statusPengantaran}"
+
+        if(pemesanan.statusPengantaran == "expired") {
+            mtvStatusPengantaran.background = ContextCompat.getDrawable(view.context, R.color.red)
+        } else {
+            mtvStatusPengantaran.background = ContextCompat.getDrawable(view.context, R.color.green_light)
+        }
 
         when(pemesanan.statusPembayaran) {
             "pending" -> mtvStatusPembayaran.background = ContextCompat.getDrawable(view.context, R.drawable.rounded_bg_pending)

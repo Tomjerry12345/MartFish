@@ -130,15 +130,15 @@
             app:layout_constraintStart_toEndOf="@id/icLocation"
             app:layout_constraintTop_toTopOf="@+id/icPengantaran" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tanggalPengantaran"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Tanggal pengantaran : 12-10-2022"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/mtvMetodePengantaran"
-            app:layout_constraintTop_toBottomOf="@+id/mtvMetodePengantaran" />
+<!--        <com.google.android.material.textview.MaterialTextView-->
+<!--            android:id="@+id/tanggalPengantaran"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:text="Tanggal pengantaran : 12-10-2022"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/mtvMetodePengantaran"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/mtvMetodePengantaran" />-->
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/waktuPengantaran"
@@ -147,8 +147,18 @@
             android:text="Waktu pengantaran : 12:00"
             android:textSize="12sp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/tanggalPengantaran"
-            app:layout_constraintTop_toBottomOf="@+id/tanggalPengantaran" />
+            app:layout_constraintStart_toStartOf="@+id/mtvMetodePengantaran"
+            app:layout_constraintTop_toBottomOf="@+id/mtvMetodePengantaran" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/waktuExpired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='Waktu expired : 12:00'
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/waktuPengantaran"
+            app:layout_constraintTop_toBottomOf="@+id/waktuPengantaran" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvStatusPengantaran"
@@ -160,8 +170,8 @@
             android:padding="8dp"
             android:textColor="@color/white"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/tanggalPengantaran"
-            app:layout_constraintTop_toBottomOf="@+id/waktuPengantaran" />
+            app:layout_constraintStart_toStartOf="@+id/waktuExpired"
+            app:layout_constraintTop_toBottomOf="@+id/waktuExpired" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/mtvStatusPembayaran"

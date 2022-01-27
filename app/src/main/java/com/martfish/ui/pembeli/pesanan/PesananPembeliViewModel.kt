@@ -8,6 +8,7 @@ import com.martfish.model.ModelPemesanan
 import com.martfish.services.webServices
 import com.martfish.utils.Response
 import com.martfish.utils.SavedData
+import com.martfish.utils.Time
 import com.martfish.utils.showLogAssert
 import kotlinx.coroutines.launch
 
@@ -40,7 +41,7 @@ class PesananPembeliViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMo
                     val data = response.data as QuerySnapshot
                     val data1 = data.toObjects<ModelPemesanan>()
                     data1.forEach {
-                        updateStatusPembayaran(it.idTransaction, it.idPemesan)
+                        updateStatusPembayaran(it.idTransaction, it.idPemesan, it.expiredJam, it.menit, it.statusPengantaran)
                     }
                 }
                 is Response.Error -> {
@@ -52,11 +53,29 @@ class PesananPembeliViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMo
 
     }
 
-    private fun updateStatusPembayaran(idTransaction: String?, idPemesan: String?) {
+    private fun updateStatusPembayaran(
+        idTransaction: String?,
+        idPemesan: String?,
+        expiredJam: Int?,
+        menit: Int?,
+        statusPengantaran: String?
+    ) {
         viewModelScope.launch {
+            showLogAssert("hourOfDay", "${Time.hourOfDay}")
+            showLogAssert("minuteOfDay", "${Time.minuteOfDay}")
+            showLogAssert("statusPengantaran", "$statusPengantaran")
+            showLogAssert("expiredJam", "$expiredJam")
+            showLogAssert("menit", "$menit")
+            if (Time.hourOfDay >= expiredJam!! && Time.minuteOfDay >= menit!! && statusPengantaran != "expired") {
+
+                if (idPemesan != null) {
+                    firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPengantaran", "expired")
+                }
+            }
             if (idTransaction != null) {
                 val response = webServices.getStatusTransaction(idTransaction)
                 val transactionStatus = response.body()?.transactionStatus
+
                 showLogAssert("response status pembayaran", "$transactionStatus")
                 if (idPemesan != null) {
                     firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus!!)

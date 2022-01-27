@@ -26,6 +26,7 @@ fun showSnackbar(view: View, text: String, type: String) {
     else
         snackBarView.setBackgroundColor(Color.RED)
 
+    showLogAssert("message show snackbar", "success")
     snackBar.show()
 }
 

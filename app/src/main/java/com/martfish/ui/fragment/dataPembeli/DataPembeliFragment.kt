@@ -68,13 +68,14 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         dropdown()
         totalBayar()
         radioMetodePembayaran()
+        radioStatusPengantaran()
 
     }
 
     private fun getLokasi() {
-        permissionMaps.observe(viewLifecycleOwner, { permission ->
+        permissionMaps.observe(viewLifecycleOwner) { permission ->
             Maps.initMaps(requireActivity())
-            Maps.getDeviceLocation(permission).observe(viewLifecycleOwner, {
+            Maps.getDeviceLocation(permission).observe(viewLifecycleOwner) {
                 if (it != null) {
                     viewModel.latitude.value = it["latitude"]!!
                     viewModel.longitude.value = it["longitude"]!!
@@ -84,8 +85,8 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
                     showLogAssert("null maps.location", "null maps.location")
                     showSnackbar(binding.root, "Error lokasi tidak di temukan", "error")
                 }
-            })
-        })
+            }
+        }
     }
 
     private fun setInitValue() {
@@ -137,18 +138,18 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
             }
         }
 
-        viewModel.kecamatan.observe(viewLifecycleOwner, {
+        viewModel.kecamatan.observe(viewLifecycleOwner) {
             binding.kelurahan.isEnabled = it != null
-        })
+        }
 
-        kelurahan.observe(viewLifecycleOwner, {
+        kelurahan.observe(viewLifecycleOwner) {
             val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
             dropdownKelurahan?.setAdapter(kelurahanAdapter)
             dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
                 val getItem = adapterView.getItemAtPosition(i)
                 viewModel.kelurahan.value = getItem as String?
             }
-        })
+        }
 
 
     }
@@ -167,12 +168,26 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
         }
     }
 
+    private fun radioStatusPengantaran() {
+        binding.radioGroupStatusPembayaran.setOnCheckedChangeListener { radioGroup, i ->
+            when(i) {
+                R.id.ambilSendiri -> {
+                    viewModel.statusPengantaran = "ambil sendiri"
+                }
+
+                R.id.kurir -> {
+                    viewModel.statusPengantaran = "kurir"
+                }
+            }
+        }
+    }
+
     private fun totalBayar() {
-        viewModel.jumlahBeli.observe(viewLifecycleOwner, {
+        viewModel.jumlahBeli.observe(viewLifecycleOwner) {
             if (it != null) {
                 viewModel.total = (it.toInt() * argument.harga!!)
                 viewModel.totalBayar.value = "Total bayar : ${viewModel.total}"
             }
-        })
+        }
     }
 }

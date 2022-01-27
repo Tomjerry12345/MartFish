@@ -1,9 +1,9 @@
 package com.martfish.ui.fragment.dataPembeli
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,6 +19,7 @@ import com.martfish.ui.activity.pembayaran.PembayaranActivity
 import com.martfish.ui.activity.succes.SuccesActivity
 import com.martfish.utils.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
@@ -39,7 +40,8 @@ class DataPembeliViewModel(
     val longitude = MutableLiveData<Double>()
     val latitude = MutableLiveData<Double>()
     val tanggal = MutableLiveData<String>()
-    val waktu = MutableLiveData<String>()
+    val jam = MutableLiveData<String>()
+    val menit = MutableLiveData<String>()
 
     var total = 0
     var hargaProduk = 0
@@ -47,9 +49,16 @@ class DataPembeliViewModel(
     var metodePembayaran: String? = null
     var image = ""
     var idProduk = ""
+    var statusPengantaran: String? = null
+    var expiredJam = 0
 
     private val dataUser = SavedData.getDataUsers()
     private val dataProduk = SavedData.getDataProduk()
+
+    init {
+        jam.value = "00"
+        menit.value = "00"
+    }
 
     fun onKonfirmasi(view: View) {
         try {
@@ -58,6 +67,9 @@ class DataPembeliViewModel(
             val kelurahan = kelurahan.value ?: throw Exception("Kelurahan tidak boleh kosong")
             val alamat = alamat.value ?: throw Exception("ALamat tidak boleh kosong")
             val metodePembayaran1 = metodePembayaran ?: throw Exception("Metode pembayaran tidak boleh kosong")
+            val statusPengantaran1 = statusPengantaran ?: throw Exception("Status pengantaran tidak boleh kosong")
+            val jam = jam.value ?: throw Exception("Waktu tidak boleh kosong")
+            val menit = menit.value ?: throw Exception("Waktu tidak boleh kosong")
 
             val pemesan = ModelPemesanan(
                 namaPemesan = namaPenerima,
@@ -80,7 +92,11 @@ class DataPembeliViewModel(
                 latitude = latitude.value,
                 stok = dataProduk?.stok,
                 jumlahKilo = jumlahKilo.value?.toInt(),
-
+                jam = jam.toInt(),
+                menit = menit.toInt(),
+                metodePengantaran = statusPengantaran1,
+                statusPengantaran = "not expired",
+                expiredJam = expiredJam
             )
 
             if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {
@@ -147,19 +163,30 @@ class DataPembeliViewModel(
     }
 
     fun onWaktu() {
+
         val picker =
             MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setHour(12)
-                .setMinute(10)
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(Time.hourOfDay)
+                .setMinute(Time.minuteOfDay)
                 .setTitleText("Select Appointment time")
                 .build()
+
         picker.show(activity.supportFragmentManager, "tag 1")
 
-//        picker.addOnPositiveButtonClickListener {
-//            // call back code
-//            showDialog(activity, "Jam : ${picker.hour}, Menit: ${picker.minute}")
-//        }
+        picker.addOnPositiveButtonClickListener {
+            // call back code
+            showLogAssert("message", "${picker.hour} => ${Time.hourOfDay + 2}")
+            if (picker.hour > Time.hourOfDay + 5) {
+                Toast.makeText(it.context, "Batas maksimun waktu pengantaran : Jam ${Time.hourOfDay + 5}", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                jam.value = picker.hour.toString()
+                menit.value = if (picker.minute == 0) "00" else picker.minute.toString()
+                expiredJam = Time.hourOfDay + 2
+            }
+
+        }
 
     }
 

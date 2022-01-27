@@ -27,5 +27,9 @@ data class ModelPemesanan(
     var longitude: Double? = null,
     var stok: Int? = null,
     var jumlahKilo: Int? = null,
-    var waktu: String? = null
+    var jam: Int? = null,
+    var menit: Int? = null,
+    var metodePengantaran: String? = null,
+    var statusPengantaran: String? = null,
+    var expiredJam: Int? = null
 ): Parcelable
