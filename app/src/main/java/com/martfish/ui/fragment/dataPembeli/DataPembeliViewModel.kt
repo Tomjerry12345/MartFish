@@ -49,7 +49,7 @@ class DataPembeliViewModel(
     var metodePembayaran: String? = null
     var image = ""
     var idProduk = ""
-    var statusPengantaran: String? = null
+    var metodePengantaran: String? = null
     var expiredJam = 0
 
     private val dataUser = SavedData.getDataUsers()
@@ -67,9 +67,11 @@ class DataPembeliViewModel(
             val kelurahan = kelurahan.value ?: throw Exception("Kelurahan tidak boleh kosong")
             val alamat = alamat.value ?: throw Exception("ALamat tidak boleh kosong")
             val metodePembayaran1 = metodePembayaran ?: throw Exception("Metode pembayaran tidak boleh kosong")
-            val statusPengantaran1 = statusPengantaran ?: throw Exception("Status pengantaran tidak boleh kosong")
+            val metodePengantaran1 = metodePengantaran ?: throw Exception("Status pengantaran tidak boleh kosong")
             val jam = jam.value ?: throw Exception("Waktu tidak boleh kosong")
             val menit = menit.value ?: throw Exception("Waktu tidak boleh kosong")
+
+            showLogAssert("metodePengantaran1", metodePengantaran1)
 
             val pemesan = ModelPemesanan(
                 namaPemesan = namaPenerima,
@@ -94,7 +96,7 @@ class DataPembeliViewModel(
                 jumlahKilo = jumlahKilo.value?.toInt(),
                 jam = jam.toInt(),
                 menit = menit.toInt(),
-                metodePengantaran = statusPengantaran1,
+                metodePengantaran = metodePengantaran1,
                 statusPengantaran = "not expired",
                 expiredJam = expiredJam
             )
@@ -163,7 +165,6 @@ class DataPembeliViewModel(
     }
 
     fun onWaktu() {
-
         val picker =
             MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -177,8 +178,8 @@ class DataPembeliViewModel(
         picker.addOnPositiveButtonClickListener {
             // call back code
             showLogAssert("message", "${picker.hour} => ${Time.hourOfDay + 2}")
-            if (picker.hour > Time.hourOfDay + 5) {
-                Toast.makeText(it.context, "Batas maksimun waktu pengantaran : Jam ${Time.hourOfDay + 5}", Toast.LENGTH_SHORT).show()
+            if (picker.hour > Time.hourOfDay + 2) {
+                Toast.makeText(it.context, "Batas maksimun waktu pengantaran : Jam ${Time.hourOfDay + 2}", Toast.LENGTH_SHORT).show()
             }
             else {
                 jam.value = picker.hour.toString()

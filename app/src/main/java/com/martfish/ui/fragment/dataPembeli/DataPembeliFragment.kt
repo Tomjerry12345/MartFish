@@ -169,14 +169,14 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
     }
 
     private fun radioStatusPengantaran() {
-        binding.radioGroupStatusPembayaran.setOnCheckedChangeListener { radioGroup, i ->
+        binding.radioGroupMetodePengantaran.setOnCheckedChangeListener { radioGroup, i ->
             when(i) {
                 R.id.ambilSendiri -> {
-                    viewModel.statusPengantaran = "ambil sendiri"
+                    viewModel.metodePengantaran = "ambil sendiri"
                 }
 
                 R.id.kurir -> {
-                    viewModel.statusPengantaran = "kurir"
+                    viewModel.metodePengantaran = "kurir"
                 }
             }
         }

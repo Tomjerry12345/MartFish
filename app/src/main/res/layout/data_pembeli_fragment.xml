@@ -275,7 +275,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/black"
+                android:background="@drawable/ic_baseline_moped_24"
+
                 app:layout_constraintStart_toStartOf="@+id/radioGroupPembayaran"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupPembayaran" />
 
@@ -290,7 +291,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3" />
 
             <RadioGroup
-                android:id="@+id/radioGroupStatusPembayaran"
+                android:id="@+id/radioGroupMetodePengantaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView7"
@@ -316,8 +317,8 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_marginTop="16dp"-->
 <!--                android:text="Tanggal"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/radioGroupStatusPembayaran"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/radioGroupStatusPembayaran" />-->
+<!--                app:layout_constraintStart_toStartOf="@+id/radioGroupMetodePengantaran"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/radioGroupMetodePengantaran" />-->
 
 <!--            <com.google.android.material.button.MaterialButton-->
 <!--                android:id="@+id/mbAturTanggal"-->
@@ -335,8 +336,8 @@
                 android:layout_height="wrap_content"
                 android:text='@{"Waktu = " + viewModel.jam + " : " + viewModel.menit}'
                 android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="@+id/radioGroupStatusPembayaran"
-                app:layout_constraintTop_toBottomOf="@id/radioGroupStatusPembayaran" />
+                app:layout_constraintStart_toStartOf="@+id/radioGroupMetodePengantaran"
+                app:layout_constraintTop_toBottomOf="@id/radioGroupMetodePengantaran" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/mbAturWaktu"
