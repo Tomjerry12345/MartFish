@@ -54,6 +54,8 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvWaktuExpired = view.findViewById<MaterialTextView>(R.id.waktuExpired)
     private val mtvMetodePengantaran = view.findViewById<MaterialTextView>(R.id.mtvMetodePengantaran)
     private val mtvStatusPengantaran = view.findViewById<MaterialTextView>(R.id.mtvStatusPengantaran)
+    private val mtvVirtualAkun = view.findViewById<MaterialTextView>(R.id.mtvVirtualAkun)
+    private val mtvJenisBank = view.findViewById<MaterialTextView>(R.id.mtvJenisBank)
     private val mbPesananTerkirim = view.findViewById<MaterialButton>(R.id.mbPesananTerkirim)
     private val mbPesan = view.findViewById<MaterialButton>(R.id.mbPesan)
     private val mbLokasi = view.findViewById<MaterialButton>(R.id.mbLokasi)
@@ -80,11 +82,19 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvKecamatan.text = "Kecamatan : ${pemesanan.kecamatan}"
         mtvKelurahan.text = "Kelurahan : ${pemesanan.kelurahan}"
         mtvAlamat.text = "Alamat : ${pemesanan.alamat}"
-        mtvWaktuPengantaran.text = "Waktu pengantaran : ${pemesanan.jam} : ${pemesanan.menit}"
-        mtvWaktuExpired.text = "Waktu expired : ${pemesanan.expiredJam} : ${pemesanan.menit}"
+        mtvVirtualAkun.text = "No. virtual akun : ${pemesanan.virtualAkun}"
+        mtvJenisBank.text = "Jenis bank : ${pemesanan.jenisBankPemesan}"
         mtvStatusPembayaran.text = pemesanan.statusPembayaran
         mtvMetodePengantaran.text = "Metode pengantaran : ${pemesanan.metodePengantaran}"
-        mtvStatusPengantaran.text = "Status pengantaran : ${pemesanan.statusPengantaran}"
+
+        val txtStatus = if (pemesanan.metodePengantaran == "ambil sendiri")
+            "pengambilan"
+        else
+            "pengantaran"
+
+        mtvStatusPengantaran.text = "Status $txtStatus : ${pemesanan.statusPengantaran}"
+        mtvWaktuPengantaran.text = "Waktu $txtStatus : ${pemesanan.jam} : ${pemesanan.menit}"
+        mtvWaktuExpired.text = "Waktu expired : ${pemesanan.expiredJam} : ${pemesanan.menit}"
 
         if(pemesanan.statusPengantaran == "expired") {
             mtvStatusPengantaran.background = ContextCompat.getDrawable(view.context, R.color.red)

@@ -31,5 +31,7 @@ data class ModelPemesanan(
     var menit: Int? = null,
     var metodePengantaran: String? = null,
     var statusPengantaran: String? = null,
-    var expiredJam: Int? = null
+    var expiredJam: Int? = null,
+    var virtualAkun: String? = null,
+    var jenisBankPemesan: String? = null
 ): Parcelable

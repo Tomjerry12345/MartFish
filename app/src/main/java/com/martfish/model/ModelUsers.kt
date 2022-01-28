@@ -10,5 +10,7 @@ data class ModelUsers(
     val alamat: String? = null,
     val noHp: String? = null,
     val image: String? = null,
+    val noRekening: String? = null,
+    val jenisBank: String? = null,
     val idUsers: String? = null
 )

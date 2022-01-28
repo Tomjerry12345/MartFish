@@ -72,13 +72,33 @@
             app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
             app:layout_constraintTop_toBottomOf="@id/mtvHarga" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvVirtualAkun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:text="No. Virtual akun: 200"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvJumlahBayar" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvJenisBank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            android:text="Jenis bank: bni"
+            app:layout_constraintStart_toStartOf="@+id/mtvNamaPemesan"
+            app:layout_constraintTop_toBottomOf="@id/mtvVirtualAkun" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icLocation"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/mtvJumlahBayar"
-            app:layout_constraintTop_toBottomOf="@id/mtvJumlahBayar"
+            app:layout_constraintStart_toStartOf="@+id/mtvJenisBank"
+            app:layout_constraintTop_toBottomOf="@id/mtvJenisBank"
             app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -188,8 +208,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Pesan"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imgProduk"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imgProduk"
             app:layout_constraintTop_toBottomOf="@+id/mtvStatusPengantaran" />
 

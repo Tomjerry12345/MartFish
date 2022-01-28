@@ -90,6 +90,11 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
+        if (dataUsers?.jenisAkun == "Nelayan") {
+            binding.noRekening.visibility = View.VISIBLE
+            binding.jenisBank.visibility = View.VISIBLE
+        }
+
         activityResultLauncher.launch(Manifest.permission.CAMERA)
 
         initSetValue()
@@ -111,18 +116,29 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
         viewModel.namaLengkap.value = dataUsers?.namaLengkap
         binding.kecamatan.editText?.setText(dataUsers?.kecamatan)
         binding.kelurahan.editText?.setText(dataUsers?.kelurahan)
+        binding.jenisBank.editText?.setText(dataUsers?.jenisBank)
         viewModel.kecamatan.value = dataUsers?.kecamatan
         viewModel.kelurahan.value = dataUsers?.kelurahan
         viewModel.alamat.value = dataUsers?.alamat
         viewModel.noHp.value = dataUsers?.noHp
+        viewModel.noRekening.value = dataUsers?.noRekening
+        viewModel.jenisBank.value = dataUsers?.jenisBank
         viewModel.dataUsers.value = dataUsers
     }
 
     private fun dropdown() {
         val dropdownKecamatan = (binding.kecamatan.editText as? AutoCompleteTextView)
         val dropdownKelurahan = (binding.kelurahan.editText as? AutoCompleteTextView)
+        val dropdownJenisBank = (binding.kelurahan.editText as? AutoCompleteTextView)
 
         binding.kelurahan.isEnabled = false
+
+        val jenisBankAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listJenisBank)
+        dropdownJenisBank?.setAdapter(jenisBankAdapter)
+        dropdownJenisBank?.setOnItemClickListener { adapterView, view, i, l ->
+            val getItem = adapterView.getItemAtPosition(i)
+            viewModel.jenisBank.value = getItem as String?
+        }
 
         val kecamatanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listKecamatan)
         dropdownKecamatan?.setAdapter(kecamatanAdapter)
@@ -146,33 +162,32 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
             }
         }
 
-        viewModel.kecamatan.observe(viewLifecycleOwner, {
+        viewModel.kecamatan.observe(viewLifecycleOwner) {
             binding.kelurahan.isEnabled = it != null
-        })
+        }
 
-        kelurahan.observe(viewLifecycleOwner, {
+        kelurahan.observe(viewLifecycleOwner) {
             val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
             dropdownKelurahan?.setAdapter(kelurahanAdapter)
             dropdownKelurahan?.setOnItemClickListener { adapterView, view, i, l ->
                 val getItem = adapterView.getItemAtPosition(i)
                 viewModel.kelurahan.value = getItem as String?
             }
-        })
+        }
 
 
     }
 
     private fun response() {
-        viewModel.response.observe(viewLifecycleOwner, { result ->
-            when(result) {
+        viewModel.response.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is Response.Success -> {
                     showLogAssert("succes", result.succes)
 
                     if (dataUsers?.jenisAkun == "Nelayan") {
                         showLogAssert("msg", "Nelayan")
                         findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-                    }
-                    else {
+                    } else {
                         showLogAssert("msg", "Petani")
                         findNavController().navigate(R.id.action_editProfilFragment2_to_profileFragment)
                     }
@@ -184,7 +199,7 @@ class EditProfilFragment : Fragment(R.layout.edit_profil_fragment) {
                 is Response.Changed -> {
                 }
             }
-        })
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

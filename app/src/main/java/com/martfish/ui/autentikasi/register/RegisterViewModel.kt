@@ -25,6 +25,8 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
     val password = MutableLiveData<String>()
     val namaLengkap = MutableLiveData<String>()
     val jenisAkun = MutableLiveData<String>()
+    val noRekening = MutableLiveData<String>()
+    val jenisBank = MutableLiveData<String>()
     val kecamatan = MutableLiveData<String>()
     val kelurahan = MutableLiveData<String>()
     val alamat = MutableLiveData<String>()
@@ -43,6 +45,10 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
             val password = password.value ?: throw Exception("Password tidak boleh kosong")
             val namaLengkap = namaLengkap.value ?: throw Exception("Nama Lengkap tidak boleh kosong")
             val jenisAkun = jenisAkun.value ?: throw Exception("Jenis akun tidak boleh kosong")
+//            val noRekening = noRekening.value ?: throw Exception("No rekening tidak boleh kosong")
+            val noRekening = noRekening.value
+//            val jenisBank = jenisBank.value ?: throw Exception("Jenis bank tidak boleh kosong")
+            val jenisBank = jenisBank.value
             val kecamatan = kecamatan.value ?: throw Exception("Kecamatan tidak boleh kosong")
             val kelurahan = kelurahan.value ?: throw Exception("Kelurahan tidak boleh kosong")
             val alamat = alamat.value ?: throw Exception("ALamat tidak boleh kosong")
@@ -65,7 +71,9 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
                                 kecamatan,
                                 kelurahan,
                                 alamat,
-                                noHp
+                                noHp,
+                                noRekening,
+                                jenisBank
                             )
 
                         } else {
@@ -97,22 +105,27 @@ class RegisterViewModel(private val firestoreDatabase: FirestoreDatabase) : View
         kecamatan: String,
         kelurahan: String,
         alamat: String,
-        noHp: String
+        noHp: String,
+        noRekening: String?,
+        jenisBank: String?
     ) {
 
         when (val getUrlImage = firestoreDatabase.uploadPhoto(image, "images/users/")) {
             is Response.Changed -> {
                 val urlImage = getUrlImage.data as String
                 val users = ModelUsers(
-                    username,
-                    password,
-                    namaLengkap,
-                    jenisAkun,
-                    kecamatan,
-                    kelurahan,
-                    alamat,
-                    noHp,
-                    urlImage
+                    username = username,
+                    password = password,
+                    namaLengkap = namaLengkap,
+                    jenisAkun = jenisAkun,
+                    kecamatan = kecamatan,
+                    kelurahan = kelurahan,
+                    alamat = alamat,
+                    noHp = noHp,
+                    image = urlImage,
+                    noRekening = noRekening,
+                    jenisBank = jenisBank
+
                 )
                 saveUsers(users)
             }

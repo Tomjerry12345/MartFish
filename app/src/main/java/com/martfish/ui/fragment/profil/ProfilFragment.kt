@@ -41,6 +41,10 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
 
         getUsers()
 
+        if (dataUsers?.jenisAkun != "Nelayan") {
+            binding.icBank.visibility = View.GONE
+        }
+
         binding.btnEditUser.setOnClickListener {
             if (dataUsers?.jenisAkun == "Nelayan") {
                 showLogAssert("msg", "Nelayan")
@@ -61,9 +65,10 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
 
     @SuppressLint("SetTextI18n")
     private fun getUsers() {
-        viewModel.data.observe(viewLifecycleOwner, { result ->
-            when(result) {
-                is Response.Success -> {}
+        viewModel.data.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Response.Success -> {
+                }
                 is Response.Error -> {
                     showLogAssert("error", result.error)
                     showSnackbar(requireView(), result.error, "error")
@@ -87,9 +92,11 @@ class ProfilFragment : Fragment(R.layout.profil_fragment) {
                     binding.mtvKecamatan.text = users.kecamatan
                     binding.mtvKelurahan.text = users.kelurahan
                     binding.mtvAlamat.text = users.alamat
+                    binding.mtvNoRekening.text = users.noRekening
+                    binding.mtvJenisBank.text = users.jenisBank
                 }
             }
-        })
+        }
     }
 
 }

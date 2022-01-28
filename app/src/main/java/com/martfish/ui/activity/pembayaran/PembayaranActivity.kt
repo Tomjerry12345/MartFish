@@ -47,7 +47,8 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
     private val activityResultLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions())
+            ActivityResultContracts.RequestMultiplePermissions()
+        )
         { permissions ->
             permissions.entries.forEach {
                 val permissionName = it.key
@@ -63,8 +64,10 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
         super.onCreate(savedInstanceState)
 
         activityResultLauncher.launch(
-            arrayOf(Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+            arrayOf(
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
         )
 
         binding = ActivityPembayaranBinding.inflate(layoutInflater)
@@ -144,7 +147,8 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
         customerDetails.firstName = dataPemesan.namaPemesan
 
         val shippingAddress = ShippingAddress()
-        shippingAddress.address = "${dataPemesan.alamat} kel. ${dataPemesan.kelurahan} kec. ${dataPemesan.kecamatan}"
+        shippingAddress.address =
+            "${dataPemesan.alamat} kel. ${dataPemesan.kelurahan} kec. ${dataPemesan.kecamatan}"
         shippingAddress.city = "Gowa"
         customerDetails.shippingAddress = shippingAddress
 
@@ -162,7 +166,7 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
 
         val intent = Intent(this, SuccesActivity::class.java)
 
-        val intentTo: Intent = if(dataUser?.jenisAkun.equals("Nelayan"))
+        val intentTo: Intent = if (dataUser?.jenisAkun.equals("Nelayan"))
             Intent(this, NelayanActivity::class.java)
         else
             Intent(this, PembeliActivity::class.java)
@@ -171,17 +175,13 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
             when (result.status) {
                 TransactionResult.STATUS_SUCCESS -> {
                     showLogAssert("Transaction Finished. ID: ", result.response.transactionId)
-                    Toast.makeText(
-                        this,
-                        "Transaction Finished. ID: " + result.response.transactionId,
-                        Toast.LENGTH_LONG
-                    ).show()
-
                     lifecycleScope.launch {
                         withContext(Dispatchers.Default) {
                             dataPemesan.idTransaction = result.response.orderId
                             dataPemesan.statusPembayaran = result.response.transactionStatus
                             dataPemesan.transactionTime = result.response.transactionTime
+                            dataPemesan.virtualAkun = result.response.accountNumbers[0].accountNumber
+                            dataPemesan.jenisBankPemesan = result.response.accountNumbers[0].bank
                             dataPemesan.week = getOfWeeks()
 //                            dataPemesan.latitude = latitude
 //                            dataPemesan.longitude = longitude
@@ -196,18 +196,18 @@ class PembayaranActivity : AppCompatActivity(), TransactionFinishedCallback {
                 TransactionResult.STATUS_PENDING -> {
                     showLogAssert("Transaction Pending. orderId: ", result.response.orderId)
                     showLogAssert("Transaction Pending. ID: ", result.response.transactionId)
-                    showLogAssert("Transaction Pending. transactionTime: ", result.response.transactionTime)
-                    Toast.makeText(
-                        this,
-                        "Transaction Pending. ID: " + result.response.transactionId,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showLogAssert(
+                        "Transaction Pending. transactionTime: ",
+                        result.response.transactionTime
+                    )
 
                     lifecycleScope.launch {
                         withContext(Dispatchers.Default) {
                             dataPemesan.idTransaction = result.response.orderId
                             dataPemesan.statusPembayaran = result.response.transactionStatus
                             dataPemesan.transactionTime = result.response.transactionTime
+                            dataPemesan.virtualAkun = result.response.accountNumbers[0].accountNumber
+                            dataPemesan.jenisBankPemesan = result.response.accountNumbers[0].bank
                             dataPemesan.week = getOfWeeks()
 //                            dataPemesan.latitude = latitude
 //                            dataPemesan.longitude = longitude

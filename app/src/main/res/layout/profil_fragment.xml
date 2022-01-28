@@ -166,9 +166,42 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/mtvKelurahan"
                     app:layout_constraintTop_toBottomOf="@+id/mtvKelurahan" />
+
+<!--                -->
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_payment_24"
+                    app:layout_constraintStart_toStartOf="@+id/icLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvAlamat" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvNoRekening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No. rekening : Somba Opu"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@id/icBank"
+                    app:layout_constraintTop_toTopOf="@id/icBank"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvJenisBank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Jenis bank : Kelurahan 1"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/mtvNoRekening"
+                    app:layout_constraintTop_toBottomOf="@+id/mtvNoRekening" />
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLogout"

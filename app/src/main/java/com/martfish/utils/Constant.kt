@@ -38,6 +38,7 @@ object Constant {
     )
 
     val listJenisAkun = listOf("Pembeli", "Nelayan")
+    val listJenisBank = listOf("BNI", "BRI", "MANDIRI")
     val listKecamatan = listOf("Bajeng",  "Barombong", "Biringbulu",  "Bontomarannu", "Bontonompo",
         "Bontonompo Selatan", "Bungaya", "Pallangga", "Parangloe",  "Somba Opu", "Tinggimoncong", "Tompobulu", "Tombolo Pao")
 

@@ -24,6 +24,8 @@ class EditProfilViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel(
     val kelurahan = MutableLiveData<String>()
     val alamat = MutableLiveData<String>()
     val noHp = MutableLiveData<String>()
+    val noRekening = MutableLiveData<String>()
+    val jenisBank = MutableLiveData<String>()
     val imageUri = MutableLiveData<Uri>()
 
     val response = MutableLiveData<Response>()
@@ -40,6 +42,10 @@ class EditProfilViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel(
             val kecamatan = kecamatan.value ?: throw Exception("Kecamatan tidak boleh kosong")
             val kelurahan = kelurahan.value ?: throw Exception("Kelurahan tidak boleh kosong")
             val alamat = alamat.value ?: throw Exception("ALamat tidak boleh kosong")
+            val noRekening = noRekening.value
+            val jenisBank = jenisBank.value
+//            val noRekening = noRekening.value ?: throw Exception("No rekening tidak boleh kosong")
+//            val jenisBank = jenisBank.value ?: throw Exception("Jenis bank tidak boleh kosong")
             val noHp = noHp.value ?: throw Exception("Nomor Hp tidak boleh kosong")
 
             val dataUsers = dataUsers.value
@@ -49,16 +55,18 @@ class EditProfilViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel(
             viewModelScope.launch {
                 if (imageUri.value == null) {
                     val users = ModelUsers(
-                        dataUsers.username,
-                        dataUsers.password,
-                        namaLengkap,
-                        dataUsers.jenisAkun,
-                        kecamatan,
-                        kelurahan,
-                        alamat,
-                        noHp,
-                        dataUsers.image,
-                        dataUsers.idUsers,
+                        username = dataUsers.username,
+                        password = dataUsers.password,
+                        namaLengkap = namaLengkap,
+                        jenisAkun = dataUsers.jenisAkun,
+                        kecamatan = kecamatan,
+                        kelurahan = kelurahan,
+                        alamat = alamat,
+                        noHp = noHp,
+                        image = dataUsers.image,
+                        idUsers = dataUsers.idUsers,
+                        noRekening = noRekening,
+                        jenisBank = jenisBank
                     )
 
                     editUsers(users)

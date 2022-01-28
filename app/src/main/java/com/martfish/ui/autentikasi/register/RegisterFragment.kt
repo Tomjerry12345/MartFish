@@ -55,7 +55,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
             }
 
-    }
+        }
 
     private val takeImageResult =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
@@ -96,8 +96,8 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
 
         dropdown()
 
-        viewModel.response.observe(viewLifecycleOwner, { result ->
-            when(result) {
+        viewModel.response.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is Response.Success -> {
                     showLogAssert("succes", result.succes)
                     showSnackbar(view, result.succes, "succes")
@@ -111,11 +111,12 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
                     view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 }
             }
-        })
+        }
     }
 
     private fun dropdown() {
         val dropdownJenisAkun = (binding.jenisAkun.editText as? AutoCompleteTextView)
+        val dropdownJenisBank = (binding.jenisBank.editText as? AutoCompleteTextView)
         val dropdownKecamatan = (binding.kecamatan.editText as? AutoCompleteTextView)
         val dropdownKelurahan = (binding.kelurahan.editText as? AutoCompleteTextView)
 
@@ -127,6 +128,22 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
         dropdownJenisAkun?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
             viewModel.jenisAkun.value = getItem as String?
+
+            if (viewModel.jenisAkun.value == "Nelayan") {
+                binding.noRekening.visibility = View.VISIBLE
+                binding.jenisBank.visibility = View.VISIBLE
+            } else {
+                binding.noRekening.visibility = View.GONE
+                binding.jenisBank.visibility = View.GONE
+            }
+        }
+
+        val jenisBankAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_list, Constant.listJenisBank)
+        dropdownJenisBank?.setAdapter(jenisBankAdapter)
+        dropdownJenisBank?.setOnItemClickListener { adapterView, view, i, l ->
+            val getItem = adapterView.getItemAtPosition(i)
+            viewModel.jenisBank.value = getItem as String?
         }
 
         val kecamatanAdapter =
@@ -152,12 +169,12 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
             }
         }
 
-        viewModel.kecamatan.observe(viewLifecycleOwner, {
+        viewModel.kecamatan.observe(viewLifecycleOwner) {
             binding.kelurahan.isEnabled = it != null
 
-        })
+        }
 
-        kelurahan.observe(viewLifecycleOwner, {
+        kelurahan.observe(viewLifecycleOwner) {
             if (it != null) {
                 val kelurahanAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_list, it)
                 dropdownKelurahan?.setAdapter(kelurahanAdapter)
@@ -167,7 +184,7 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
                 }
             }
 
-        })
+        }
 
     }
 
@@ -197,12 +214,17 @@ class RegisterFragment : Fragment(R.layout.register_fragment) {
     }
 
     private fun getTmpFileUri(): Uri {
-        val tmpFile = File.createTempFile("tmp_image_file", ".png", requireContext().cacheDir).apply {
-            createNewFile()
-            deleteOnExit()
-        }
+        val tmpFile =
+            File.createTempFile("tmp_image_file", ".png", requireContext().cacheDir).apply {
+                createNewFile()
+                deleteOnExit()
+            }
 
-        return FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "${BuildConfig.APPLICATION_ID}.provider",
+            tmpFile
+        )
     }
 
     private fun getImageFromStorage() {
