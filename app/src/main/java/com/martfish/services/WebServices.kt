@@ -1,6 +1,7 @@
 package com.martfish.services
 
 import com.martfish.model.ModelTransaksi
+import com.martfish.utils.ConfigMidtrans.SERVER_KEY
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -14,7 +15,7 @@ interface WebServices {
 }
 
 private val client = OkHttpClient.Builder()
-    .addInterceptor(BasicAuthInterceptor("SB-Mid-server-v3SOA6yd2pYXsymdalJpmW2d", "")).build()
+    .addInterceptor(BasicAuthInterceptor(SERVER_KEY, "")).build()
 
 val webServices: WebServices by lazy {
     Retrofit.Builder()

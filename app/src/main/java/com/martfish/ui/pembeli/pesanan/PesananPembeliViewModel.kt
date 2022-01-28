@@ -77,8 +77,8 @@ class PesananPembeliViewModel(val firestoreDatabase: FirestoreDatabase) : ViewMo
                 val transactionStatus = response.body()?.transactionStatus
 
                 showLogAssert("response status pembayaran", "$transactionStatus")
-                if (idPemesan != null) {
-                    firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus!!)
+                if (idPemesan != null && transactionStatus != null) {
+                    firestoreDatabase.updateReferenceCollectionOne("pemesanan", idPemesan, "statusPembayaran", transactionStatus)
                 }
             }
 
