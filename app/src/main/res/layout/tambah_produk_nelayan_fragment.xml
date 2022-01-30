@@ -37,7 +37,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/kategori"
+                android:hint="@string/jenis_hasil_laut"
                 app:layout_constraintTop_toBottomOf="@id/materialTextView"
                 tools:layout_editor_absoluteX="8dp">
 

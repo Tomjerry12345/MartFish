@@ -17,7 +17,6 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
     val imageUri = MutableLiveData<Uri>()
     val hargaPerEkor = MutableLiveData<String>()
     val hargaPerGompo = MutableLiveData<String>()
-//    val stok = MutableLiveData<String>()
     val hargaPerKg = MutableLiveData<String>()
     val kategori = MutableLiveData<String>()
 

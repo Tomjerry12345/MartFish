@@ -32,9 +32,10 @@ class TerkirimFragment : Fragment(R.layout.terkirim_fragment) {
     }
 
     private fun getPemesanan() {
-        viewModel.data.observe(viewLifecycleOwner, { result ->
-            when(result) {
-                is Response.Success -> {}
+        viewModel.data.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Response.Success -> {
+                }
                 is Response.Error -> {
                     showLogAssert("error", result.error)
                     showSnackbar(requireView(), result.error, "error")
@@ -55,7 +56,7 @@ class TerkirimFragment : Fragment(R.layout.terkirim_fragment) {
                     }
                 }
             }
-        })
+        }
     }
 
 }

@@ -34,7 +34,9 @@ class DataPembeliViewModel(
     val alamat = MutableLiveData<String>()
     val jumlahBeli = MutableLiveData<String>()
     val jumlahKilo = MutableLiveData<String>()
-    val harga = MutableLiveData<String>()
+
+    val kategoriHarga = MutableLiveData<String>()
+
     val totalBayar = MutableLiveData<String>()
     val namaProduk = MutableLiveData<String>()
     val longitude = MutableLiveData<Double>()
@@ -92,7 +94,6 @@ class DataPembeliViewModel(
                 week = getOfWeeks(),
                 longitude = longitude.value,
                 latitude = latitude.value,
-                stok = dataProduk?.stok,
                 jumlahKilo = jumlahKilo.value?.toInt(),
                 jam = jam.toInt(),
                 menit = menit.toInt(),
@@ -101,22 +102,29 @@ class DataPembeliViewModel(
                 expiredJam = expiredJam
             )
 
-            if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {
-                showSnackbar(view, "Jumlah beli melebihi stok yang tersedia", "error")
-            } else {
-                if (metodePembayaran1 == "cod") {
-                    viewModelScope.launch {
-                        saveDataFirestore(pemesan)
-                    }
-                } else {
-                    val intent = Intent(activity, PembayaranActivity::class.java)
-                    intent.putExtra(Constant.listDataPembeliBundle, pemesan)
-                    activity.startActivity(intent)
+            if (metodePembayaran1 == "cod") {
+                viewModelScope.launch {
+                    saveDataFirestore(pemesan)
                 }
+            } else {
+                val intent = Intent(activity, PembayaranActivity::class.java)
+                intent.putExtra(Constant.listDataPembeliBundle, pemesan)
+                activity.startActivity(intent)
             }
 
-
-
+//            if (jumlahBeli.value?.toInt()!! > dataProduk?.stok!!) {
+//                showSnackbar(view, "Jumlah beli melebihi stok yang tersedia", "error")
+//            } else {
+//                if (metodePembayaran1 == "cod") {
+//                    viewModelScope.launch {
+//                        saveDataFirestore(pemesan)
+//                    }
+//                } else {
+//                    val intent = Intent(activity, PembayaranActivity::class.java)
+//                    intent.putExtra(Constant.listDataPembeliBundle, pemesan)
+//                    activity.startActivity(intent)
+//                }
+//            }
 
         } catch (e: Exception) {
             showSnackbar(view, "${e.message}", "error")

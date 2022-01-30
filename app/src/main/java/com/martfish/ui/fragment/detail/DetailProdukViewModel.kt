@@ -8,7 +8,9 @@ import com.martfish.utils.Response
 class DetailProdukViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
     val namaProduk = MutableLiveData<String>()
-    val hargaProduk = MutableLiveData<String>()
+    val hargaPerEkor = MutableLiveData<Int>()
+    val hargaPerGompo = MutableLiveData<Int>()
+    val hargaPerKg = MutableLiveData<Int>()
     val kecamatan = MutableLiveData<String>()
     val kelurahan = MutableLiveData<String>()
     val alamat = MutableLiveData<String>()

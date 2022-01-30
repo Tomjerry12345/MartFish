@@ -18,10 +18,9 @@ import kotlinx.coroutines.launch
 class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
     val imageUri = MutableLiveData<Uri>()
-    val namaProduk = MutableLiveData<String>()
-    val hargaProduk = MutableLiveData<String>()
-    val stok = MutableLiveData<String>()
-    val kilo = MutableLiveData<String>()
+    val hargaPerEkor = MutableLiveData<String>()
+    val hargaPerGompo = MutableLiveData<String>()
+    val hargaPerKg = MutableLiveData<String>()
     val kategori = MutableLiveData<String>()
 
     val produk = MutableLiveData<ModelProduk>()
@@ -34,28 +33,41 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
         dialog = showDialog(view.context, "Sedang di proses...")
         dialog.show()
         try {
-            val namaProduk = namaProduk.value ?: throw Exception("Nama Produk tidak boleh kosong")
-            val hargaProduk = hargaProduk.value ?: throw Exception("Harga tidak boleh kosong")
-            val stok = stok.value ?: throw Exception("Stok tidak boleh kosong")
-            val kilo = kilo.value ?: throw Exception("Jumlah Kilo tidak boleh kosong")
+            val imageProduk = imageUri.value ?: throw Exception("Image tidak boleh kosong")
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
+            val hargaPerEkor = hargaPerEkor.value ?: throw Exception("Harga/Ekor tidak boleh kosong")
+            val hargaPerGompo = hargaPerGompo.value ?: throw Exception("Harga/Gompo tidak boleh kosong")
+            val hargaPerKg = hargaPerKg.value ?: throw Exception("Harga/Gompo tidak boleh kosong")
 
             viewModelScope.launch {
                 if (imageUri.value == null) {
+//                    val produk = ModelProduk(
+//                        idProduk = "",
+//                        image = urlImage,
+//                        kategori = kategori,
+//                        hargaPerEkor = hargaPerEkor.toInt(),
+//                        hargaPerGompo = hargaPerGompo.toInt(),
+//                        hargaPerKg = hargaPerKg.toInt(),
+//                        kecamatan = dataUsers?.kecamatan,
+//                        kelurahan = dataUsers?.kelurahan,
+//                        alamat = dataUsers?.alamat,
+//                        rating = 0f,
+//                        namaPenjual = dataUsers?.namaLengkap,
+//                        usernamePenjual = dataUsers?.username,
+//                    )
                     val produk1 = ModelProduk(
-                        produk.value?.idProduk,
-                        produk.value?.image,
-                        namaProduk,
-                        hargaProduk.toInt(),
-                        stok.toInt(),
-                        kategori,
-                        produk.value?.kecamatan,
-                        produk.value?.kelurahan,
-                        produk.value?.alamat,
-                        0f,
-                        produk.value?.namaPenjual,
-                        produk.value?.usernamePenjual,
-                        kilo = kilo.toInt()
+                        idProduk = produk.value?.idProduk,
+                        image = produk.value?.image,
+                        kategori = kategori,
+                        hargaPerEkor = hargaPerEkor.toInt(),
+                        hargaPerGompo = hargaPerGompo.toInt(),
+                        hargaPerKg = hargaPerKg.toInt(),
+                        kecamatan = produk.value?.kecamatan,
+                        kelurahan = produk.value?.kelurahan,
+                        alamat = produk.value?.alamat,
+                        rating = produk.value?.rating,
+                        namaPenjual = produk.value?.namaPenjual,
+                        usernamePenjual = produk.value?.usernamePenjual
                     )
 
                     response.value = produk.value?.idProduk?.let {
@@ -72,20 +84,20 @@ class EditProdukNelayanViewModel(val firestoreDatabase: FirestoreDatabase) : Vie
                         is Response.Changed -> {
                             val urlImage = getUrlImage.data as String
                             val produk1 = ModelProduk(
-                                produk.value?.idProduk,
-                                urlImage,
-                                namaProduk,
-                                hargaProduk.toInt(),
-                                stok.toInt(),
-                                kategori,
-                                produk.value?.kecamatan,
-                                produk.value?.kelurahan,
-                                produk.value?.alamat,
-                                0f,
-                                produk.value?.namaPenjual,
-                                produk.value?.usernamePenjual,
-                                kilo = kilo.toInt()
+                                idProduk = produk.value?.idProduk,
+                                image = urlImage,
+                                kategori = kategori,
+                                hargaPerEkor = hargaPerEkor.toInt(),
+                                hargaPerGompo = hargaPerGompo.toInt(),
+                                hargaPerKg = hargaPerKg.toInt(),
+                                kecamatan = produk.value?.kecamatan,
+                                kelurahan = produk.value?.kelurahan,
+                                alamat = produk.value?.alamat,
+                                rating = produk.value?.rating,
+                                namaPenjual = produk.value?.namaPenjual,
+                                usernamePenjual = produk.value?.usernamePenjual
                             )
+
 
                             response.value = produk.value?.idProduk?.let {
                                 firestoreDatabase.updateReferenceCollectionOne(

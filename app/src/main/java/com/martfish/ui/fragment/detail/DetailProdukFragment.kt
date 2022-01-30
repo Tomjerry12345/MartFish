@@ -66,12 +66,13 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
     }
 
     private fun setInitValue(argument: ModelProduk) {
-        viewModel.namaProduk.value = argument.nama
-        viewModel.hargaProduk.value = argument.harga.toString()
+        viewModel.namaProduk.value = argument.kategori
+        viewModel.hargaPerEkor.value = argument.hargaPerEkor
+        viewModel.hargaPerGompo.value = argument.hargaPerGompo
+        viewModel.hargaPerKg.value = argument.hargaPerKg
         viewModel.kecamatan.value = argument.kecamatan
         viewModel.kelurahan.value = argument.kelurahan
         viewModel.alamat.value = argument.alamat
-        viewModel.stok.value = argument.stok.toString()
         viewModel.rating.value = "(${argument.rating})"
 
         binding.ratingProduk.rating = argument.rating!!
@@ -85,7 +86,7 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
     }
 
     private fun getKomentar() {
-        viewModel.getKomentar.observe(viewLifecycleOwner, { result ->
+        viewModel.getKomentar.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Response.Success -> {
                 }
@@ -106,7 +107,7 @@ class DetailProdukFragment : Fragment(R.layout.detail_produk_fragment) {
                     }
                 }
             }
-        })
+        }
     }
 
 }

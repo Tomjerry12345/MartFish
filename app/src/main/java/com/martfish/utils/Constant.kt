@@ -18,23 +18,18 @@ object Constant {
     val typeAccount = "typeAccount"
 
     val listKategori = listOf(
-        "Kakap/Ikan Merah/Bambangan/Kurisi",
-        "Layang",
-        "Banyara",
-        "Kembung",
-        "Peperek/Bete-bete",
-        "Tembang",
-        "Tawes",
-        "Gabus",
-        "Sepat Slam",
-        "Tambakan+Lele",
-        "Mas",
-        "Nila",
-        "Mujair",
-        "Betutu",
-        "Bandeng",
-        "Udang Windu",
-        "Udang Vannamae",
+        "Ikan Mairo/Teri",
+        "Ikan Merah",
+        "Ikan Bandeng/Bolu",
+        "Ikan layang",
+        "Ikan Mujair",
+        "Ikan Gabus",
+        "Ikan Nila",
+        "Ikan Cakalang",
+        "Ikan Sunu",
+        "Udang",
+        "Cumi-Cumi",
+        "Kepiting"
     )
 
     val listJenisAkun = listOf("Pembeli", "Nelayan")

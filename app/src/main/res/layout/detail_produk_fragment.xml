@@ -60,26 +60,46 @@
                 app:layout_constraintStart_toEndOf="@+id/ratingProduk"
                 app:layout_constraintTop_toBottomOf="@+id/labelRating" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mtvStok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{`Stok tersedia: ` + viewModel.stok}"
-                android:textSize="18sp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@id/mtvHarga"
-                app:layout_constraintTop_toBottomOf="@+id/mtvHarga" />
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/mtvStok"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@{`Stok tersedia: ` + viewModel.stok}"-->
+<!--                android:textSize="18sp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/mtvHarga"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/mtvHarga" />-->
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/mtvHarga"
+                android:id="@+id/mtvHargaPerEkor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{`Rp. ` + viewModel.hargaProduk}"
+                android:text='@{"Harga Per Ekor : Rp. " + viewModel.hargaPerEkor}'
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtvHargaPerGompo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text='@{"Harga Per Gompo : Rp. " + viewModel.hargaPerGompo}'
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mtvHargaPerEkor" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/mtvHargaPerKg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text='@{"Harga Per Kg : Rp. " + viewModel.hargaPerKg}'
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mtvHargaPerGompo" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icLocation"
@@ -87,7 +107,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mtvStok"
+                app:layout_constraintTop_toBottomOf="@id/mtvHargaPerKg"
                 app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
             <com.google.android.material.textview.MaterialTextView

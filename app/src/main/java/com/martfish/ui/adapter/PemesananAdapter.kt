@@ -1,6 +1,7 @@
 package com.martfish.ui.adapter
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,8 +83,15 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvKecamatan.text = "Kecamatan : ${pemesanan.kecamatan}"
         mtvKelurahan.text = "Kelurahan : ${pemesanan.kelurahan}"
         mtvAlamat.text = "Alamat : ${pemesanan.alamat}"
+
+        if (pemesanan.virtualAkun == null) {
+            mtvVirtualAkun.visibility = View.GONE
+            mtvJenisBank.visibility = View.GONE
+        }
+
         mtvVirtualAkun.text = "No. virtual akun : ${pemesanan.virtualAkun}"
         mtvJenisBank.text = "Jenis bank : ${pemesanan.jenisBankPemesan}"
+
         mtvStatusPembayaran.text = pemesanan.statusPembayaran
         mtvMetodePengantaran.text = "Metode pengantaran : ${pemesanan.metodePengantaran}"
 

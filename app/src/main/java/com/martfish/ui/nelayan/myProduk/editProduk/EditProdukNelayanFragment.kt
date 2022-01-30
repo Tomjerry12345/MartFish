@@ -103,10 +103,8 @@ class EditProdukNelayanFragment : Fragment(R.layout.edit_produk_nelayan_fragment
     }
 
     private fun setValueEditText(produk: ModelProduk) {
-        viewModel.namaProduk.value = produk.nama
-        viewModel.hargaProduk.value = produk.harga.toString()
-        viewModel.stok.value = produk.stok.toString()
         viewModel.kategori.value = produk.kategori
+        viewModel.hargaPerEkor.value = produk.hargaPerEkor.toString()
         viewModel.produk.value = produk
         binding.kategori.editText?.setText(viewModel.kategori.value)
 

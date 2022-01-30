@@ -40,10 +40,9 @@ class MyProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvRating = view.findViewById<MaterialTextView>(R.id.mtvRating)
     private val imgProduk = view.findViewById<AppCompatImageView>(R.id.imgProduk)
     private val mtvTitle = view.findViewById<MaterialTextView>(R.id.mtvTitle)
-    private val mtvKilo = view.findViewById<MaterialTextView>(R.id.mtvKilo)
-    private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
-    private val mtvKategori = view.findViewById<MaterialTextView>(R.id.mtvKategori)
-    private val mtvStok = view.findViewById<MaterialTextView>(R.id.mtvStok)
+    private val mtvHargaPerEkor = view.findViewById<MaterialTextView>(R.id.mtvHargaPerEkor)
+    private val mtvHargaPerGompo = view.findViewById<MaterialTextView>(R.id.mtvHargaPerGompo)
+    private val mtvHargaPerKg = view.findViewById<MaterialTextView>(R.id.mtvHargaPerKg)
     private val mtvKecamatan = view.findViewById<MaterialTextView>(R.id.mtvKecamatan)
     private val mtvKelurahan = view.findViewById<MaterialTextView>(R.id.mtvKelurahan)
     private val mtvAlamat = view.findViewById<MaterialTextView>(R.id.mtvAlamat)
@@ -61,11 +60,10 @@ class MyProdukHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .into(imgProduk)
         mtvRating.text = "(${produk.rating!!})"
         ratingProduk.rating = produk.rating!!
-        mtvTitle.text = produk.nama
-        mtvKilo.text = "${produk.kilo} KG"
-        mtvHarga.text = "Rp. ${produk.harga}"
-        mtvKategori.text = produk.kategori
-        mtvStok.text = "Stok tersedia : ${produk.stok}"
+        mtvTitle.text = produk.kategori
+        mtvHargaPerEkor.text = "Harga / ekor : Rp. ${produk.hargaPerEkor}"
+        mtvHargaPerGompo.text = "Harga / gompo : Rp. ${produk.hargaPerGompo}"
+        mtvHargaPerKg.text = "Harga / kg : Rp. ${produk.hargaPerKg}"
         mtvKecamatan.text = "${produk.kecamatan}"
         mtvKelurahan.text = "${produk.kelurahan}"
         mtvAlamat.text = "${produk.alamat}"

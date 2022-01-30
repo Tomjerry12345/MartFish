@@ -74,7 +74,10 @@
         <entry key="app/src/main/res/layout/detail_produk_fragment.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/edit_produk_nelayan_fragment.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/item_card_produk.xml" value="0.24170735677083335" />
+        <entry key="app/src/main/res/layout/item_my_produk.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/item_pesanan.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/tambah_produk_nelayan_fragment.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/terkirim_fragment.xml" value="0.19610507246376813" />
       </map>
     </option>
   </component>
