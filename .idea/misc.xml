@@ -69,7 +69,11 @@
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Andri/AndroidStudioProjects/MartFish/app/src/main/res/xml/provider_paths.xml" value="0.2509920634920635" />
+        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/data_pembeli_fragment.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/detail_produk_fragment.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/edit_produk_nelayan_fragment.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/item_card_produk.xml" value="0.24170735677083335" />
         <entry key="app/src/main/res/layout/tambah_produk_nelayan_fragment.xml" value="0.14583333333333334" />
       </map>
     </option>

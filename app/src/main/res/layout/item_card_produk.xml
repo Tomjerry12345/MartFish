@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="@+id/ratingProduk" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvTitle"
+            android:id="@+id/mtvNama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/examples_title_produk"
@@ -56,44 +56,45 @@
             app:layout_constraintTop_toBottomOf="@+id/imgProduk" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvKilo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/border_orange"
-            android:text="KG"
-            app:layout_constraintStart_toStartOf="@+id/mtvTitle"
-            app:layout_constraintTop_toBottomOf="@+id/mtvTitle" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvHarga"
+            android:id="@+id/mtvHargaPerEkor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/examples_harga"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/mtvKilo"
+            app:layout_constraintTop_toBottomOf="@id/mtvNama"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvKategori"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kategori 1"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mtvHarga" />
+<!--        <com.google.android.material.textview.MaterialTextView-->
+<!--            android:id="@+id/mtvKategori"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Kategori 1"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/mtvHarga" />-->
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mtvStok"
+            android:id="@+id/mtvHargaPerGompo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stok_tersedia_5"
+            android:text="@string/examples_harga"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/mtvKategori"
-            app:layout_constraintTop_toBottomOf="@+id/mtvKategori"
+            app:layout_constraintStart_toStartOf="@+id/mtvHargaPerEkor"
+            app:layout_constraintTop_toBottomOf="@+id/mtvHargaPerEkor"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mtvHargaPerKg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/examples_harga"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="@+id/mtvHargaPerGompo"
+            app:layout_constraintTop_toBottomOf="@+id/mtvHargaPerGompo"
             tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -102,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mtvStok"
+            app:layout_constraintTop_toBottomOf="@id/mtvHargaPerKg"
             app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
         <com.google.android.material.textview.MaterialTextView
