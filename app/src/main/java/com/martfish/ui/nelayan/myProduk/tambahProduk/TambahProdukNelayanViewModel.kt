@@ -15,10 +15,10 @@ import kotlinx.coroutines.launch
 class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatabase) : ViewModel() {
 
     val imageUri = MutableLiveData<Uri>()
-    val namaProduk = MutableLiveData<String>()
-    val hargaProduk = MutableLiveData<String>()
-    val stok = MutableLiveData<String>()
-    val kilo = MutableLiveData<String>()
+    val hargaPerEkor = MutableLiveData<String>()
+    val hargaPerGompo = MutableLiveData<String>()
+//    val stok = MutableLiveData<String>()
+    val hargaPerKg = MutableLiveData<String>()
     val kategori = MutableLiveData<String>()
 
     val dataUsers = SavedData.getDataUsers()
@@ -35,30 +35,28 @@ class TambahProdukNelayanViewModel(private val firestoreDatabase: FirestoreDatab
         dialog.show()
         try {
             val imageProduk = imageUri.value ?: throw Exception("Image tidak boleh kosong")
-            val namaProduk = namaProduk.value ?: throw Exception("Nama Produk tidak boleh kosong")
-            val hargaProduk = hargaProduk.value ?: throw Exception("Harga tidak boleh kosong")
-            val stok = stok.value ?: throw Exception("Stok tidak boleh kosong")
-            val kilo = kilo.value ?: throw Exception("Stok tidak boleh kosong")
             val kategori = kategori.value ?: throw Exception("Kategori tidak boleh kosong")
+            val hargaPerEkor = hargaPerEkor.value ?: throw Exception("Harga/Ekor tidak boleh kosong")
+            val hargaPerGompo = hargaPerGompo.value ?: throw Exception("Harga/Gompo tidak boleh kosong")
+            val hargaPerKg = hargaPerKg.value ?: throw Exception("Harga/Gompo tidak boleh kosong")
 
             viewModelScope.launch {
                 when (val getUrlImage = firestoreDatabase.uploadPhoto(imageProduk, "images/produk/")) {
                     is Response.Changed -> {
                         val urlImage = getUrlImage.data as String
                         val produk = ModelProduk(
-                            "",
-                            urlImage,
-                            namaProduk,
-                            hargaProduk.toInt(),
-                            stok.toInt(),
-                            kategori,
-                            dataUsers?.kecamatan,
-                            dataUsers?.kelurahan,
-                            dataUsers?.alamat,
-                            0f,
-                            dataUsers?.namaLengkap,
-                            dataUsers?.username,
-                            kilo.toInt()
+                            idProduk = "",
+                            image = urlImage,
+                            kategori = kategori,
+                            hargaPerEkor = hargaPerEkor.toInt(),
+                            hargaPerGompo = hargaPerGompo.toInt(),
+                            hargaPerKg = hargaPerKg.toInt(),
+                            kecamatan = dataUsers?.kecamatan,
+                            kelurahan = dataUsers?.kelurahan,
+                            alamat = dataUsers?.alamat,
+                            rating = 0f,
+                            namaPenjual = dataUsers?.namaLengkap,
+                            usernamePenjual = dataUsers?.username,
                         )
 
                         saveProduk(produk)
