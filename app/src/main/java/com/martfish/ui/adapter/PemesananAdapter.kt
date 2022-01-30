@@ -74,7 +74,7 @@ class PemesananHolder(val view: View) : RecyclerView.ViewHolder(view) {
             .load(pemesanan.image)
             .centerCrop()
             .placeholder(R.mipmap.ic_image_placeholder)
-            .into(imgProduk);
+            .into(imgProduk)
         mtvNamaPemesan.text = "Nama pemesan : ${pemesanan.namaPemesan}"
         mtvNamaProduk.text = "Nama produk : ${pemesanan.namaProduk}"
         mtvJumlahPesan.text = "Jumlah : ${pemesanan.jumlah.toString()}"
