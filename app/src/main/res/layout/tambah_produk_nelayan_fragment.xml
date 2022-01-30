@@ -15,139 +15,137 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
-        tools:context=".ui.nelayan.myProduk.tambahProduk.TambahProdukNelayanFragment">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/tambah_produk"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/viewImage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView"
-            app:srcCompat="@drawable/ic_baseline_image_24" />
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            tools:context=".ui.nelayan.myProduk.tambahProduk.TambahProdukNelayanFragment">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbTambahImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tambah_foto"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewImage" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/materialTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/tambah_produk"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tILNamaProduk"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="@string/nama_produk"
-            app:layout_constraintTop_toBottomOf="@+id/mbTambahImage">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/viewImage"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toBottomOf="@+id/kategori"
+                app:srcCompat="@drawable/ic_baseline_image_24"
+                tools:layout_editor_absoluteX="8dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mbTambahImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tambah_foto"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewImage" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tILNamaProduk"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.namaProduk}"/>
+                android:hint="@string/nama_produk"
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView"
+                tools:layout_editor_absoluteX="8dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.namaProduk}" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiLHarga"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/harga"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tILNamaProduk">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLHarga"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.hargaProduk}"
-                android:inputType="number"/>
+                android:hint="@string/harga"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tILNamaProduk">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.hargaProduk}"
+                    android:inputType="number"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiLStok"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/stok"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tiLHarga">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLStok"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.stok}"
-                android:inputType="number"/>
+                android:hint="@string/stok"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tiLHarga">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.stok}"
+                    android:inputType="number"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiLKilo"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Jumlah kilo"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tiLStok">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tiLKilo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.kilo}"
-                android:inputType="number"/>
+                android:hint="Jumlah kilo"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tiLStok">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.kilo}"
+                    android:inputType="number"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/kategori"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/kategori"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tiLKilo">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/kategori"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none"
-                tools:ignore="LabelFor" />
+                android:hint="@string/kategori"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tiLKilo">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbTambah"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:onClick="@{(view) -> viewModel.onTambahProduk(view)}"
-            android:text="@string/tambah_produk"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="70dp"
-            app:layout_constraintTop_toBottomOf="@+id/kategori"
-            app:layout_constraintVertical_bias="0.070"
-            tools:layout_editor_absoluteX="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mbTambah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+                android:onClick="@{(view) -> viewModel.onTambahProduk(view)}"
+                android:text="@string/tambah_produk"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mbTambahImage"
+                android:layout_marginTop="16dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

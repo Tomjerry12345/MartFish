@@ -35,9 +35,9 @@
                 android:id="@+id/viewImage"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/materialTextView"
-                app:srcCompat="@drawable/ic_baseline_image_24" />
+                app:layout_constraintTop_toBottomOf="@+id/kategori"
+                app:srcCompat="@drawable/ic_baseline_image_24"
+                android:layout_marginTop="16dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/mbTambahImage"
@@ -54,14 +54,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:hint="@string/nama_produk"
-                app:layout_constraintTop_toBottomOf="@+id/mbTambahImage">
+                app:layout_constraintTop_toBottomOf="@+id/materialTextView"
+                tools:layout_editor_absoluteX="8dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.namaProduk}"/>
+                    android:text="@={viewModel.namaProduk}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,14 +137,12 @@
                 android:id="@+id/mbEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_produk"
-                android:layout_marginTop="8dp"
-                android:onClick="@{(view) -> viewModel.onEditProduk(view)}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="70dp"
-                app:layout_constraintTop_toBottomOf="@+id/kategori"
-                app:layout_constraintVertical_bias="0.070"
-                tools:layout_editor_absoluteX="8dp" />
+                android:onClick="@{(view) -> viewModel.onEditProduk(view)}"
+                android:text="@string/edit_produk"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mbTambahImage"
+                android:layout_marginTop="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
