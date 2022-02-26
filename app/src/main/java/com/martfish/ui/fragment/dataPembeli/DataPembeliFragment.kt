@@ -171,14 +171,17 @@ class DataPembeliFragment : Fragment(R.layout.data_pembeli_fragment) {
             viewModel.kategoriHarga.value = getItem as String?
             when (viewModel.kategoriHarga.value) {
                 listHarga[0] -> {
+                    viewModel.hargaProduk = argument.hargaPerEkor!!
                     viewModel.totalBayar.value = "Total bayar : ${argument.hargaPerEkor}"
                     Toast.makeText(requireContext(), "hargaPerEkor", Toast.LENGTH_LONG).show()
                 }
                 listHarga[1] -> {
+                    viewModel.hargaProduk = argument.hargaPerGompo!!
                     viewModel.totalBayar.value = "Total bayar : ${argument.hargaPerGompo}"
                     Toast.makeText(requireContext(), "hargaPerGompo", Toast.LENGTH_LONG).show()
                 }
                 else -> {
+                    viewModel.hargaProduk = argument.hargaPerKg!!
                     viewModel.totalBayar.value = "Total bayar : ${argument.hargaPerKg}"
                     Toast.makeText(requireContext(), "hargaPerKg", Toast.LENGTH_LONG).show()
                 }

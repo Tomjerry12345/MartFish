@@ -31,7 +31,7 @@ class TransaksiChildAdapter(
 class TransaksiChildHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvNamaPemesan = view.findViewById<MaterialTextView>(R.id.mtvNamaPemesan)
     private val mtvNamaProduk = view.findViewById<MaterialTextView>(R.id.mtvNamaProduk)
-    private val mtvHarga = view.findViewById<MaterialTextView>(R.id.mtvHarga)
+    private val mtvTotal = view.findViewById<MaterialTextView>(R.id.mtvTotal)
 
     @SuppressLint("SetTextI18n")
     fun bindProduk(
@@ -39,6 +39,6 @@ class TransaksiChildHolder(val view: View) : RecyclerView.ViewHolder(view) {
     ) {
         mtvNamaPemesan.text = pemesanan.namaPemesan
         mtvNamaProduk.text = pemesanan.namaProduk
-        mtvHarga.text = pemesanan.harga.toString()
+        mtvTotal.text = pemesanan.totalBayar.toString()
     }
 }

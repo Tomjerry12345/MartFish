@@ -26,10 +26,6 @@ import com.github.mikephil.charting.data.BarDataSet
 
 import com.github.mikephil.charting.data.BarEntry
 
-
-
-
-
 class TransaksiNelayanFragment : Fragment(R.layout.transaksi_nelayan_fragment) {
 
     private val viewModel: TransaksiNelayanViewModel by viewModels {
@@ -45,8 +41,8 @@ class TransaksiNelayanFragment : Fragment(R.layout.transaksi_nelayan_fragment) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        viewModel.data.observe(viewLifecycleOwner, {
-            when(it) {
+        viewModel.data.observe(viewLifecycleOwner) {
+            when (it) {
                 is Response.Changed -> {
                     val snapshoot = it.data as QuerySnapshot
                     val dataPemesanan = snapshoot.toObjects<ModelPemesanan>()
@@ -63,22 +59,26 @@ class TransaksiNelayanFragment : Fragment(R.layout.transaksi_nelayan_fragment) {
                     var totalHarga4 = 0f
 
                     dataPemesanan.forEach { pemesanan ->
-                        when(pemesanan.week) {
+                        when (pemesanan.week) {
                             1 -> {
                                 listWeek1.add(pemesanan)
-                                totalHarga1 += pemesanan.harga!!.toFloat()
+                                totalHarga1 += pemesanan.totalBayar!!.toFloat()
                             }
                             2 -> {
                                 listWeek2.add(pemesanan)
-                                totalHarga2 += pemesanan.harga!!.toFloat()
+                                totalHarga2 += pemesanan.totalBayar!!.toFloat()
                             }
                             3 -> {
                                 listWeek3.add(pemesanan)
-                                totalHarga3 += pemesanan.harga!!.toFloat()
+                                totalHarga3 += pemesanan.totalBayar!!.toFloat()
                             }
                             4 -> {
                                 listWeek4.add(pemesanan)
-                                totalHarga4 += pemesanan.harga!!.toFloat()
+                                totalHarga4 += pemesanan.totalBayar!!.toFloat()
+                            }
+                            else -> {
+                                listWeek4.add(pemesanan)
+                                totalHarga4 += pemesanan.totalBayar!!.toFloat()
                             }
                         }
                     }
@@ -92,7 +92,7 @@ class TransaksiNelayanFragment : Fragment(R.layout.transaksi_nelayan_fragment) {
                         TransaksiChildAdapter(listWeek1),
                         TransaksiChildAdapter(listWeek2),
                         TransaksiChildAdapter(listWeek3),
-                        TransaksiChildAdapter(listWeek4),
+                        TransaksiChildAdapter(listWeek4)
                     )
 
                     val listTotalHarga = listOf(
@@ -106,10 +106,12 @@ class TransaksiNelayanFragment : Fragment(R.layout.transaksi_nelayan_fragment) {
                     setBarchartGrafik(listTotalHarga)
 
                 }
-                is Response.Error -> {}
-                is Response.Success -> {}
+                is Response.Error -> {
+                }
+                is Response.Success -> {
+                }
             }
-        })
+        }
 
     }
 

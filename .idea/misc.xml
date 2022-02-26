@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ARMAN/3D Objects/MartFish/app/src/main/res/layout/item_child_transaksi.xml" value="0.1" />
+        <entry key="..\:/Users/ARMAN/3D Objects/MartFish/app/src/main/res/layout/item_root_transaksi.xml" value="0.22" />
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MartFish/app/src/main/res/drawable/ic_baseline_payment_24.xml" value="0.1735" />
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MartFish/app/src/main/res/layout/data_pembeli_fragment.xml" value="0.18976279650436953" />
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MartFish/app/src/main/res/layout/edit_profil_fragment.xml" value="0.13632246376811594" />

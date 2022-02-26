@@ -26,21 +26,20 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="Nama pemesan" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="Nama produk" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:text="Harga" />
+                android:text="Total" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
